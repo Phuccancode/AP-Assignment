@@ -1,45 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hospital Management System</title>
-    <link rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to the Hospital Management System</h1>
-        <nav>
-            <ul>
+    <div class="main">
+        <div class="header">
+            <ul class="nav">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Admin</a></li>
+                <li><a href="#">Patient</a></li>
+                <li><a href="#">Healthcare</a></li>
             </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section>
-            <h2>About Us</h2>
-            <p>Add some information about your hospital management system here.</p>
-        </section>
-        
-        <section>
-            <h2>Services</h2>
-            <ul>
-                <li>Service 1</li>
-                <li>Service 2</li>
-                <li>Service 3</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Contact Us</h2>
-            <p>Add contact information for your hospital here.</p>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2022 Hospital Management System. All rights reserved.</p>
-    </footer>
+            <button class="log-in js-login">Log in</button>
+        </div>
+        <img src="./assets/img/hinh-bv.jpg" class="slider" alt="">
+
+    </div>
+    <div class="modal js-modal">
+        <div class="modal-container js-modal-container">
+            <div class="modal-close js-modal-close">
+                <i class="ti-close"></i>
+            </div>
+            <div class="modal-header">
+                Log in
+            </div>
+            <form action="">
+                <input type="text" required name="username" id="username" class="modal-input" placeholder="Username">
+                <input type="password" required name="password" id="password" class="modal-input" placeholder="Password">
+                <input type="submit" value="Log in" class="btn-login ">
+            </form>
+        </div>
+    </div>
 </body>
+<script>
+    const modalButton = document.querySelector('.js-login')
+    const modal = document.querySelector('.js-modal')
+    const modalClose = document.querySelector('.js-modal-close')
+    const modalContainer = document.querySelector('.js-modal-container')
+    function showBuyTickets(){
+        modal.classList.add('open')
+    }
+    function hideBuyTickets(){
+        modal.classList.remove('open')
+    }
+    modalButton.addEventListener('click', showBuyTickets)
+    modalClose.addEventListener('click', hideBuyTickets)
+    modal.addEventListener('click', hideBuyTickets)
+    modalContainer.addEventListener('click', function (event){
+        event.stopPropagation()
+    })
+    
+
+
+
+</script>
+
+
 </html>
