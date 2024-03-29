@@ -33,6 +33,7 @@ html{
     height: 600px;
     background-image: url(../img/backgound-landingpage.jpg);   
     background-position: right;
+    background-size: cover;
 }
 
 
