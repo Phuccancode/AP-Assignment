@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang dành cho nhân viên y tế</title>
+    <link rel="stylesheet" href="healthcare.css">
+    <script src="healthcare.js" type="module"></script>
+</head>
+<body>
+    <div id="message" style="font-size:larger; text-align:right">
+    </div>
+    <div id ="buttonlogout" style="text-align: right; display:none">
+        <button type="button" id="logout" name="logout">Đăng xuất</button>
+    </div>
+    <button type="button" id="updateaccount" name="updateaccount" style="display:none">Cập nhật thông tin tài khoản</button>
+    <button type="button" id="tracuutaikhoan" name="tracuutaikhoan" style="display:none">Tra cứu thông tin</button>
+    <button type="button" id="mypatient" name="mypatient" style="display:none">Tra cứu bệnh nhân của bạn</button>
+    <div style="font-size:larger">
+        <h1 id="danhsach"></h1>
+    </div>
+    <form id="formaccount">
+        <h1>Đăng nhập với vai trò nhân viên y tế </h1>
+        <label for="email">Email</label>
+        <div>
+        <input type="text" id="email" name="email" required>
+        </div>
+        <label for="password">Password</label>
+        <div>
+        <input type="password" id="password" name="password" required>
+        </div>
+        <button type="button" id="login" name="login">Đăng nhập</button>
+    </form>
+
+    <form id="formupdate" style="display:none">
+        <h1>Cập nhật thông tin tài khoản nhân viên y tế</h1>
+        <div>
+            <label for="name">Họ và tên: </label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <lable for="chuyenmon">Chuyên môn: </lable>
+            <select name="chuyenmon" id="chuyenmon" class="form-control">
+                <option value="">Chọn vai trò</option>
+                <option value="Bác sĩ">Bác sĩ</option>
+                <option value="Điều dưỡng">Điều dưỡng</option>
+                <option value="Kĩ thuật viên">Kĩ thuận viên</option>
+                <option value="Hộ sinh">Hộ sinh</option>
+            </select>
+        </div>
+
+        <div>
+            <lable for="hocvi">Học vị: </lable>
+            <select name="hocvi" id="hocvi" class="form-control">
+                <option value="">Chọn học vị</option>
+                <option value="Tiến sĩ">Tiến sĩ</option>
+                <option value="Thạc sĩ">Thạc sĩ</option>
+                <option value="Cử nhân">Cử nhân</option>
+                <option value="Kỹ sư">Kỹ sư</option>
+                <option value="Tiến sĩ khoa học">Tiến sĩ khoa học</option>
+                <option value="Bác sĩ chuyên khoa I">Bác sĩ chuyên khoa I</option>
+                <option value="Bác sĩ chuyên khoa II">Bác sĩ chuyên khoa II</option>
+                <option value="Bác sĩ">Bác sĩ</option>
+            </select>
+        
+        </div>
+        <div>
+            <label for="specialization">Chuyên khoa: </label>
+            <select name="specialization" id="specialization" class="form-control">
+                <option value="">Chọn chuyên khoa</option>
+                <option value="Khoa Sản phụ khoa">Khoa Sản phụ khoa</option>
+                <option value="Khoa Ngoại chung">Khoa Ngoại chung</option>
+                <option value="Khoa Nội chung">Khoa Nội chung</option>
+                <option value="Khoa Nhi">Khoa Nhi</option>
+                <option value="Khoa Mắt">Khoa Mắt</option>
+                <option value="Khoa Tim mạch">Khoa Tim mạch</option>
+                <option value="Khoa Da liễu">Khoa Da liễu</option>
+                <option value="Khoa Nội tiết">Khoa Nội tiết</option>
+                <option value="Khoa Ung bướu">Khoa Ung bướu</option>
+                <option value="Khoa Khám bệnh">Khoa Khám bệnh</option>
+                <option value="Khoa Hô Hấp">Khoa Hô Hấp</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="phone">Số điện thoại: </label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <div>
+            <label for="address">Địa chỉ: </label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div>
+            <label for="gender">Giới tính: </label>
+            <select name="gender" id="gender" class="form-control">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+        <div>
+            <label for="dateofbirth">Ngày sinh: </label>
+            <input type="date" id="dateofbirth" name="dateofbirth" required>
+        </div>
+        <button type="button" id="update" name="update">Cập nhật</button>
+    </form>
+
+    <form id="thongtintaikhoan" style="display:none">
+        <h1>Thông tin cá nhân</h1>
+        <div>
+            <label for="name">Họ và tên: </label>
+            <span id="name_tracuu"></span>
+        </div>
+        <div>
+            <label for="chuyenmon">Chuyên môn: </label>
+            <span id="chuyenmon_tracuu"></span>
+        </div>
+        <div>
+            <label for="hocvi">Học vị: </label>
+            <span id="hocvi_tracuu"></span>
+        </div>
+        <div>
+            <label for="specialization">Chuyên khoa: </label>
+            <span id="specialization_tracuu"></span>
+        </div>
+        <div>
+            <label for="phone">Số điện thoại: </label>
+            <span id="phone_tracuu"></span>
+        </div>
+        <div>
+            <label for="address">Địa chỉ: </label>
+            <span id="address_tracuu"></span>
+        </div>
+        <div>
+            <label for="gender">Giới tính</label>
+            <span id="gender_tracuu"></span>
+        </div>
+        <div>
+            <label for="dateofbirth">Ngày sinh: </label>
+            <span id="dateofbirth_tracuu"></span>
+        </div>
+    </form>
+    <form id="listpatient" style="display:none">
+        <h1>Danh sách bệnh nhân của bạn</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Chi tiết</th>
+            </tr>
+            </thead>
+            <tbody id="listpatienttable">
+            </tbody>
+        </table>
+        <button type="button" id="getdata" name="getdata">Hiện</button>
+        <button type="button" id="hidden" name="hidden">Ẩn</button>
+    </form>
+    
+    <div id="tracuu_thongtin" style="display:none">
+        <h1>Thông tin bệnh nhân</h1>
+            <div>
+                <label for="name">Họ và tên: </label>
+                <span id="name_patient"></span>
+            </div>
+            <div>
+                <label for="phone">Số điện thoại: </label>
+                <span id="phone_patient"></span>
+            </div>
+            <div>
+                <label for="dateofbirth">Ngày sinh: </label>
+                <span id="dateofbirth_patient"></span>
+            </div>
+            <div>
+                <label for="gender">Giới tính: </label>
+                <span id="gender_patient"></span>
+            </div>
+
+            <div>
+                <h1>
+                    Thông tin khám bệnh
+                </h1>
+            </div>
+
+            <div>
+                <label for="date">Ngày khám bệnh: </label>
+                <span id="date_patient"></span>
+            </div>
+            <div>
+                <label for="time">Giờ khám bệnh: </label>
+                <span id="time_patient"></span>
+            </div>
+            <div>
+                <label for="specialization">Khoa khám bệnh: </label>
+                <span id="specialization_patient"></span>
+            </div>
+            <div>
+                <label for="status">Trạng thái: </label>
+                <span id="status_patient"></span>
+            </div>
+            <div>
+                <label for="chandoan">Chẩn đoán: </label>
+                <b><span id="chandoan_patient"></span></b>
+                <div>
+                    <input id = "chandoan_input" name="chandoan" required>
+                </div>
+            </div>
+            <div>
+                <label for="dieutri">Phương pháp điều trị: </label>
+                <b><span id="dieutri_patient"></span></b>
+                <div>
+                    <input id = "dieutri_input" name="dieutri" required>
+                </div>
+            </div>
+            <div id = "userid" style="display:none"></div>
+            <div id = "capnhat_input">
+                <button type="button" id="capnhat" name="capnhat">Cập nhật</button>
+            </div>
+        </div>
+</body>
+</html>

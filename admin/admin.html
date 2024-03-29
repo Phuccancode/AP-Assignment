@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" type="module"></script>
+</head>
+<body>
+    <div id="message" style="text-align: right;">
+    </div>
+
+    <button type="button" id="createaccount" name="createaccount" style="display:none">Cấp tài khoản cho nhân viên y tế</button>
+    <button type="button" id="listhealthcare" name="listhealthcare" style="display:none">Danh sách các nhân viên y tế</button>
+    <button type="button" id="listpatient" name="listpatient" style="display:none">Danh sách bệnh nhân</button>
+    <form id="formaccount">
+        <h1>Đăng nhập với tư cách quản trị viên </h1>
+        <label for="email">Email</label>
+        <div>
+        <input type="text" id="email" name="email" required>
+        </div>
+        <label for="password">Password</label>
+        <div>
+        <input type="password" id="password" name="password" required>
+        </div>
+        <button type="button" id="login" name="login">Đăng nhập</button>
+    </form>
+
+    <form id="registerhealthcare" style="display:none">
+        <h1>Cấp tài khoản cho nhân viên y tế</h1>
+        <label for="email">Email (có định dạng hospital.username@gmail.com)</label>
+        <div>
+        <input type="text" id="email_hospital" name="email" required>
+        </div>
+        <label for="password">Password</label>
+        <div>
+        <input type="password" id="password_hospital" name="password" required>
+        </div>
+        <button type="button" id="register" name="register">Cấp tài khoản</button>
+    </form>
+    <form id="list_healthcare" style="display:none">
+        <h1>Danh sách nhân viên y tế</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Chuyên môn</th>
+                <th>Học vị</th>
+                <th>Chuyên khoa</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+
+            </tr>
+            </thead>
+            <tbody id="listhealthcaretable" style="text-align:center">
+            </tbody>
+        </table>
+        <button type="button" id="getdata_health" name="getdata">Hiện</button>
+        <button type="button" id="hidden_health" name="hidden">Ẩn</button>
+    </form>
+    <form id="list_patient" style="display:none">
+        <h1>Danh sách bệnh nhân</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Khoa khám bệnh</th>
+                <th>Nhân viên y tế phụ trách</th>
+                <th>Chẩn đoán</th>
+                <th>Ph/pháp điều trị</th>
+            </tr>
+            </thead>
+            <tbody id="listpatienttable" style="text-align:center">
+            </tbody>
+        </table>
+        <button type="button" id="getdata_patient" name="getdata">Hiện</button>
+        <button type="button" id="hidden_patient" name="hidden">Ẩn</button>
+    </form>
+</body>
+</html>
+
+
