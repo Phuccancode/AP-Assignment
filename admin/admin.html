@@ -7,21 +7,29 @@
     <script src="admin.js" type="module"></script>
 </head>
 <body>
+    <div id="message"></div>
     <button type="button" id="createaccount" name="createaccount" style="display:none">Cấp tài khoản cho nhân viên y tế</button>
     <button type="button" id="listhealthcare" name="listhealthcare" style="display:none">Danh sách các nhân viên y tế</button>
     <button type="button" id="listpatient" name="listpatient" style="display:none">Danh sách bệnh nhân</button>
-    <form id="formaccount">
-        <h1>Đăng nhập với tư cách quản trị viên </h1>
-        <label for="email">Email</label>
-        <div>
-        <input type="text" id="email" name="email" required>
+    <div id="container-ring">
+        <div class="ring">
+            <i style="--clr:#00ff0a;"></i>
+            <i style="--clr:#ff0057;"></i>
+            <i style="--clr:#fffd44;"></i>
+            <form id="formaccount" class="login">
+                <h1>Sign-in as Admin </h1>
+                <div class="inputBx">
+                <input type="email" placeholder="Email" id="email" name="email" required>
+                </div>
+                <div class="inputBx">
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                </div>
+                <div class="inputBx">
+                    <button type="button" id="login" name="login">Sign-in</button>
+                </div>
+            </form>
         </div>
-        <label for="password">Password</label>
-        <div>
-        <input type="password" id="password" name="password" required>
-        </div>
-        <button type="button" id="login" name="login">Đăng nhập</button>
-    </form>
+    </div>
 
     <form id="registerhealthcare" style="display:none">
         <h1>Cấp tài khoản cho nhân viên y tế</h1>

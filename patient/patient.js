@@ -39,7 +39,7 @@ const firebaseConfig = {
 		    const user = userCredential.user;
 			console.log(user);
 			alert("Đăng nhập thành công!!");
-			document.getElementById('formaccount').style.display = 'none';
+			document.getElementById('container-ring').style.display = 'none';
 			document.getElementById('buttonlogout').style.display = 'block';
 			get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {

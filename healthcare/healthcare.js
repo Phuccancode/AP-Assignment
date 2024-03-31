@@ -50,7 +50,7 @@ const firebaseConfig = {
 				}
 			})
 			document.getElementById('buttonlogout').style.display = 'block';
-			document.getElementById('formaccount').style.display = 'none';
+			document.getElementById('container-ring').style.display = 'none';
 			document.getElementById('updateaccount').style.display = 'block';
 			document.getElementById('mypatient').style.display = 'block';
 			document.getElementById('tracuutaikhoan').style.display = 'block';

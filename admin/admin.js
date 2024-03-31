@@ -35,7 +35,7 @@ const firebaseConfig = {
 		    // Signed in 
 		    const user = userCredential.user;
 			console.log(user);
-			document.getElementById('formaccount').style.display = 'none';
+			document.getElementById('container-ring').style.display = 'none';
 			//print on web page
 			alert("Bạn đã đăng nhập thành công với quyền quản trị viên")
 			document.getElementById("message").innerHTML = "Xin chào quản trị viên";

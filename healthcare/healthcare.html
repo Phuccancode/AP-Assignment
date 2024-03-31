@@ -18,7 +18,29 @@
     <div style="font-size:larger">
         <h1 id="danhsach"></h1>
     </div>
-    <form id="formaccount">
+
+    <div id="container-ring">
+        <div class="ring">
+            <i style="--clr:#00ff0a;"></i>
+            <i style="--clr:#ff0057;"></i>
+            <i style="--clr:#fffd44;"></i>
+            <form id="formaccount" class="login">
+                <h1>Sign-in as healthcare staff </h1>
+                <div class="inputBx">
+                <input type="email" placeholder="Email" id="email" name="email" required>
+                </div>
+                <div class="inputBx">
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                </div>
+                <div class="inputBx">
+                    <button type="button" id="login" name="login">Sign-in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- <form id="formaccount">
         <h1>Đăng nhập với vai trò nhân viên y tế </h1>
         <label for="email">Email</label>
         <div>
@@ -29,7 +51,7 @@
         <input type="password" id="password" name="password" required>
         </div>
         <button type="button" id="login" name="login">Đăng nhập</button>
-    </form>
+    </form> -->
 
     <form id="formupdate" style="display:none">
         <h1>Cập nhật thông tin tài khoản nhân viên y tế</h1>
