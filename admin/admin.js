@@ -39,6 +39,9 @@ const firebaseConfig = {
 			//print on web page
 			alert("Bạn đã đăng nhập thành công với quyền quản trị viên")
 			document.getElementById("message").innerHTML = "Xin chào quản trị viên";
+
+			document.getElementById('slide-menu').style.display = 'block';
+			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
 			document.getElementById('createaccount').style.display = 'block';
 			document.getElementById('listhealthcare').style.display = 'block';
 			document.getElementById('listpatient').style.display = 'block';

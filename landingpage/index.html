@@ -47,24 +47,5 @@
         </div>
     </div>
 </body>
-<script>
-    const modalButton = document.querySelector('.js-login')
-    const modal = document.querySelector('.js-modal')
-    const modalClose = document.querySelector('.js-modal-close')
-    const modalContainer = document.querySelector('.js-modal-container')
-    function showBuyTickets(){
-        modal.classList.add('open')
-    }
-    function hideBuyTickets(){
-        modal.classList.remove('open')
-    }
-    modalButton.addEventListener('click', showBuyTickets)
-    modalClose.addEventListener('click', hideBuyTickets)
-    modal.addEventListener('click', hideBuyTickets)
-    modalContainer.addEventListener('click', function (event){
-        event.stopPropagation()
-    }) 
-</script>
-
 
 </html>

@@ -7,10 +7,85 @@
     <script src="admin.js" type="module"></script>
 </head>
 <body>
-    <div id="message"></div>
-    <button type="button" id="createaccount" name="createaccount" style="display:none">Cấp tài khoản cho nhân viên y tế</button>
-    <button type="button" id="listhealthcare" name="listhealthcare" style="display:none">Danh sách các nhân viên y tế</button>
-    <button type="button" id="listpatient" name="listpatient" style="display:none">Danh sách bệnh nhân</button>
+    <!-- Menu -->
+    <nav id="slide-menu" style="display: none;">
+        <ul>
+            <li id="createaccount">Cấp tài khoản cho nhân viên y tế</li>
+            <li id="listhealthcare">Danh sách các nhân viên y tế</li>
+            <li id="listpatient">Danh sách bệnh nhân</li>
+            <li>Logout</li>
+        </ul>
+    </nav>
+    <!-- Content -->
+    <div id="content">
+        <div id="message"></div>
+        <div class="menu-trigger" style="display: none;"></div>
+        <form id="registerhealthcare" style="display:none">
+            <h1>Cấp tài khoản cho nhân viên y tế</h1>
+            <label for="email">Email (có định dạng hospital.username@gmail.com)</label>
+            <div>
+                <input type="text" id="email_hospital" name="email" required>
+            </div>
+            <label for="password">Password</label>
+            <div>
+                <input type="password" id="password_hospital" name="password" required>
+            </div>
+            <button type="button" id="register" name="register">Cấp tài khoản</button>
+        </form>
+        <form id="list_patient" style="display:none">
+            <h1>Danh sách bệnh nhân</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Khoa khám bệnh</th>
+                    <th>Nhân viên y tế phụ trách</th>
+                    <th>Chẩn đoán</th>
+                    <th>Ph/pháp điều trị</th>
+                </tr>
+                </thead>
+                <tbody id="listpatienttable" style="text-align:center">
+                </tbody>
+            </table>
+            <button type="button" id="getdata_patient" name="getdata">Hiện</button>
+            <button type="button" id="hidden_patient" name="hidden">Ẩn</button>
+        </form>
+
+        <form id="list_healthcare" style="display:none">
+            <h1>Danh sách nhân viên y tế</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Chuyên môn</th>
+                    <th>Học vị</th>
+                    <th>Chuyên khoa</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+    
+                </tr>
+                </thead>
+                <tbody id="listhealthcaretable" style="text-align:center">
+                </tbody>
+            </table>
+            <button type="button" id="getdata_health" name="getdata">Hiện</button>
+            <button type="button" id="hidden_health" name="hidden">Ẩn</button>
+        </form>
+    </div>
+
+
+
+    
+    
+
     <div id="container-ring">
         <div class="ring">
             <i style="--clr:#00ff0a;"></i>
@@ -31,65 +106,21 @@
         </div>
     </div>
 
-    <form id="registerhealthcare" style="display:none">
-        <h1>Cấp tài khoản cho nhân viên y tế</h1>
-        <label for="email">Email (có định dạng hospital.username@gmail.com)</label>
-        <div>
-        <input type="text" id="email_hospital" name="email" required>
-        </div>
-        <label for="password">Password</label>
-        <div>
-        <input type="password" id="password_hospital" name="password" required>
-        </div>
-        <button type="button" id="register" name="register">Cấp tài khoản</button>
-    </form>
-    <form id="list_healthcare" style="display:none">
-        <h1>Danh sách nhân viên y tế</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>STT</th>
-                <th>Họ và tên</th>
-                <th>Giới tính</th>
-                <th>Ngày sinh</th>
-                <th>Chuyên môn</th>
-                <th>Học vị</th>
-                <th>Chuyên khoa</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-
-            </tr>
-            </thead>
-            <tbody id="listhealthcaretable" style="text-align:center">
-            </tbody>
-        </table>
-        <button type="button" id="getdata_health" name="getdata">Hiện</button>
-        <button type="button" id="hidden_health" name="hidden">Ẩn</button>
-    </form>
-    <form id="list_patient" style="display:none">
-        <h1>Danh sách bệnh nhân</h1>
-        <table>
-            <thead>
-            <tr>
-                <th>STT</th>
-                <th>Họ và tên</th>
-                <th>Giới tính</th>
-                <th>Ngày sinh</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Khoa khám bệnh</th>
-                <th>Nhân viên y tế phụ trách</th>
-                <th>Chẩn đoán</th>
-                <th>Ph/pháp điều trị</th>
-            </tr>
-            </thead>
-            <tbody id="listpatienttable" style="text-align:center">
-            </tbody>
-        </table>
-        <button type="button" id="getdata_patient" name="getdata">Hiện</button>
-        <button type="button" id="hidden_patient" name="hidden">Ẩn</button>
-    </form>
+   
 </body>
+<script>
+    (function() {
+	var $body = document.body
+	, $menu_trigger = $body.getElementsByClassName('menu-trigger')[0];
+
+	if ( typeof $menu_trigger !== 'undefined' ) {
+		$menu_trigger.addEventListener('click', function() {
+			$body.className = ( $body.className == 'menu-active' )? '' : 'menu-active';
+		});
+	}
+
+}).call(this);
+</script>
 </html>
 
 
