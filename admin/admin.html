@@ -18,9 +18,28 @@
     </nav>
     <!-- Content -->
     <div id="content">
-        <div id="message"></div>
         <div class="menu-trigger" style="display: none;"></div>
-        <form id="registerhealthcare" style="display:none">
+        <div class="container-ring" id="registerhealthcare" style="display:none">
+            <div class="ring">
+                <i style="--clr:#00ff0a;"></i>
+                <i style="--clr:#ff0057;"></i>
+                <i style="--clr:#fffd44;"></i>
+                <form  class="login">
+                    <h1>Cấp tài khoản cho nhân viên y tế</h1>
+                    <h3>(có định dạng hospital.username@gmail.com)</h3>
+                    <div class="inputBx">
+                    <input type="email" placeholder="Email" id="email_hospital" name="email" required>
+                    </div>
+                    <div class="inputBx">
+                    <input type="password" placeholder="Password" id="password_hospital" name="password" required>
+                    </div>
+                    <div class="inputBx">
+                        <button type="button" id="register" name="register">Cấp tài khoản</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <form id="registerhealthcare" style="display:none">
             <h1>Cấp tài khoản cho nhân viên y tế</h1>
             <label for="email">Email (có định dạng hospital.username@gmail.com)</label>
             <div>
@@ -31,7 +50,7 @@
                 <input type="password" id="password_hospital" name="password" required>
             </div>
             <button type="button" id="register" name="register">Cấp tài khoản</button>
-        </form>
+        </form> -->
         <form id="list_patient" style="display:none">
             <h1>Danh sách bệnh nhân</h1>
             <table>
@@ -86,7 +105,7 @@
     
     
 
-    <div id="container-ring">
+    <div class="container-ring" id="login-admin">
         <div class="ring">
             <i style="--clr:#00ff0a;"></i>
             <i style="--clr:#ff0057;"></i>
