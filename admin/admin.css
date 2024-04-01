@@ -1,7 +1,45 @@
 table, th, td {
     border: 1px solid;
 }
+/* Style the table */
+.table-form table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
+/* Style the table headers */
+.table-form th {
+  background-color: #0303d5;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+/* Style the table rows */
+.table-form tr {
+  border-bottom: 1px solid white;
+}
+
+/* Style the table cells */
+.table-form td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Change the background color on hover */
+.table-form tr:hover {
+  background-color: #2100dc;
+}
+
+.table-form{
+  color: rgb(255, 255, 255);
+  display: flex;
+  height: 100%;
+}
+.table-form h1{
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 40px;
+}
 /* *CSS Login begin */
 
   @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
@@ -202,6 +240,8 @@ div#content {
   top: 0;
   left: 0;
   width: 100%;
+  padding: 40px;
+  background-color: #010824;
   height: 100%;
   overflow: scroll;
   border-radius: 0;

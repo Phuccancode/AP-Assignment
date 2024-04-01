@@ -100,6 +100,8 @@ const firebaseConfig = {
 				var address = document.getElementById("address").value;
 				var gender = document.getElementById("gender").value;
 				var dateofbirth = document.getElementById("dateofbirth").value;
+				var formattedDob = new Date(dateofbirth).toLocaleDateString('vi-VN');
+				
 
 				update(ref(database, 'users/' + user.uid), {
 					email: email,
@@ -107,7 +109,7 @@ const firebaseConfig = {
 					phone: phone,
 					address: address,
 					gender: gender,
-					dateofbirth: dateofbirth
+					dateofbirth: formattedDob
 				  });
 			  alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
 			  document.getElementById("formupdate").style.display = "none";
