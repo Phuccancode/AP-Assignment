@@ -50,25 +50,25 @@ const firebaseConfig = {
 				}
 				document.getElementById('updateaccount').style.display = 'block';
 				document.getElementById('tracuutaikhoan').style.display = 'block';
-				document.getElementById('scedule').style.display = 'block';
+				document.getElementById('schedule').style.display = 'block';
 			  }).catch((error) => {
 				console.error(error);
 			  });
 			document.getElementById("updateaccount").addEventListener("click", function() {
 			document.getElementById('formupdate').style.display = 'block';
-			document.getElementById('registerscedule').style.display = 'none';
+			document.getElementById('registerschedule').style.display = 'none';
 			document.getElementById('tracuu_thongtin').style.display = 'none';
 			});
 
-			document.getElementById("scedule").addEventListener("click", function() {
+			document.getElementById("schedule").addEventListener("click", function() {
 				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById('registerscedule').style.display = 'block';
+				document.getElementById('registerschedule').style.display = 'block';
 				document.getElementById('tracuu_thongtin').style.display = 'none';
 			});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
 				document.getElementById('tracuu_thongtin').style.display = 'contents';
 				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById('registerscedule').style.display = 'none';
+				document.getElementById('registerschedule').style.display = 'none';
 				get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 						document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
@@ -139,7 +139,7 @@ const firebaseConfig = {
 					}
 				})
 			  alert("Đăng ký lịch khám bệnh thành công!!");
-			  document.getElementById('registerscedule').style.display = 'none';
+			  document.getElementById('registerschedule').style.display = 'none';
 			  });
 
 			  

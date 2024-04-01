@@ -175,7 +175,14 @@ const firebaseConfig = {
 		}
 	  });
 
-	  
+	  document.getElementById("logout").addEventListener("click", function() {
+
+		signOut(auth).then(() => {
+			alert("Đăng xuất thành công!!");
+		});
+		location.reload();
+
+	});
 	
 	
 		
