@@ -33,13 +33,35 @@ table, th, td {
 .table-form{
   color: rgb(255, 255, 255);
   display: flex;
-  height: 100%;
 }
 .table-form h1{
   font-size: 2em;
   text-align: center;
   margin-bottom: 40px;
 }
+
+.container-button{
+  display:flex;
+  justify-content: flex-end;
+}
+
+.button-show-and-hide{
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 10px; 
+  border: none;
+  font-size: 15px;
+  border-radius:  3px;
+  margin-left: 5px;
+}
+
+.button-show-and-hide:hover{  
+  background-color: #0303d5;
+  color: white;
+  cursor: pointer;
+
+}
+
 /* *CSS Login begin */
 
   @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
@@ -167,7 +189,7 @@ table, th, td {
     color: rgba(255, 255, 255, 0.75);
   }
 
-  /* *CSS Login end */
+/* *CSS Login end */
 
 /* *CSS side bar begin */
 
@@ -191,7 +213,6 @@ nav#slide-menu {
 }
 nav#slide-menu > ul {
   display: block;
-  margin: 20px;
   padding: 0;
   list-style: none;
   opacity: 0.5;
@@ -200,11 +221,13 @@ nav#slide-menu > ul {
 nav#slide-menu > ul li {
   font-weight: 600;
   color: #257cd3;
-  padding: 6px 0;
+  padding: 25px 20px;
+
   cursor: pointer;
 }
 nav#slide-menu > ul li:hover {
-  color: #0e3570;
+  color: whitesmoke;
+  background-color: #010824;
 }
 nav#slide-menu > ul li:before {
   font-family: "ico";

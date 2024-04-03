@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="table-form" id="list_patient" style="display:none">
-            <form >
+            <form>
                 <h1>Danh sách bệnh nhân</h1>
                 <table>
                     <thead>
@@ -60,8 +60,12 @@
                     <tbody id="listpatienttable" style="text-align:center">
                     </tbody>
                 </table>
-                <button type="button" id="getdata_patient" name="getdata">Hiện</button>
-                <button type="button" id="hidden_patient" name="hidden">Ẩn</button>
+                <div class="container-button">
+                    <button type="button" id="getdata_patient"
+                    class="button-show-and-hide" name="getdata">Hiện</button>
+                    <button type="button" id="hidden_patient" 
+                    class="button-show-and-hide" name="hidden">Ẩn</button>
+                </div>
             </form>
         </div>
         
@@ -85,8 +89,10 @@
                     <tbody id="listhealthcaretable" style="text-align:center">
                     </tbody>
                 </table>
-                <button type="button" id="getdata_health" name="getdata">Hiện</button>
-                <button type="button" id="hidden_health" name="hidden">Ẩn</button>
+                <div class="container-button">
+                    <button type="button" class="button-show-and-hide" id="getdata_health" name="getdata">Hiện</button>
+                    <button type="button" class="button-show-and-hide" id="hidden_health" name="hidden">Ẩn</button>
+                </div>
             </form>
         </div>
     </div>
