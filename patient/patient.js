@@ -33,14 +33,12 @@ const firebaseConfig = {
 			alert("Vui lòng đăng nhập với tài khoản bệnh nhân!!");
 			return;
 		}
-		  signInWithEmailAndPassword(auth, email, password)
-		  .then((userCredential) => {
+		signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
 		    // Signed in 
 		    const user = userCredential.user;
 			console.log(user);
 			alert("Đăng nhập thành công!!");
-			document.getElementById('container-ring').style.display = 'none';
-			document.getElementById('buttonlogout').style.display = 'block';
 			get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {
 				  document.getElementById("message").innerHTML = "Xin chào " + snapshot.val().name;
@@ -48,27 +46,32 @@ const firebaseConfig = {
 				else {
 					document.getElementById("message").innerHTML = "Vui lòng cập nhật thông tin cá nhân";
 				}
-				document.getElementById('updateaccount').style.display = 'block';
-				document.getElementById('tracuutaikhoan').style.display = 'block';
-				document.getElementById('schedule').style.display = 'block';
-			  }).catch((error) => {
-				console.error(error);
-			  });
+			})
+
+			document.getElementById('container-ring').style.display = 'none';
+			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
+			document.getElementById('slide-menu').style.display = 'block';
+			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
+				
+			// document.getElementById('updateaccount').style.display = 'block';
+			// document.getElementById('tracuutaikhoan').style.display = 'block';
+			// document.getElementById('schedule').style.display = 'block';
+			
 			document.getElementById("updateaccount").addEventListener("click", function() {
-			document.getElementById('formupdate').style.display = 'block';
-			document.getElementById('registerschedule').style.display = 'none';
-			document.getElementById('tracuu_thongtin').style.display = 'none';
+			document.getElementById('form-container').style.display = 'block';
+			document.getElementById('info-container').style.display = 'none';
+			document.getElementById('schedule-container').style.display = 'none';
 			});
 
 			document.getElementById("schedule").addEventListener("click", function() {
-				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById('registerschedule').style.display = 'block';
-				document.getElementById('tracuu_thongtin').style.display = 'none';
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById('schedule-container').style.display = 'block';
 			});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
-				document.getElementById('tracuu_thongtin').style.display = 'contents';
-				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById('registerschedule').style.display = 'none';
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'block';
+				document.getElementById('schedule-container').style.display = 'none';
 				get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 						document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
@@ -112,7 +115,7 @@ const firebaseConfig = {
 					dateofbirth: formattedDob
 				  });
 			  alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
-			  document.getElementById("formupdate").style.display = "none";
+			  document.getElementById("form-container").style.display = "none";
 			  });
 			document.getElementById("register").addEventListener("click", function() {
 				var date = document.getElementById("date").value;
@@ -160,7 +163,7 @@ const firebaseConfig = {
 
 	});
 
-	
+
 	
 		
 

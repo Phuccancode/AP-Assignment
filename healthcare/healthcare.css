@@ -50,7 +50,7 @@ background-color: #d6f8fa;
 
 /* Change the background color on hover */
 .table-form tbody tr:hover {
-  background: linear-gradient(90deg, #126969, #3d4b88, #6b4985);
+  background: linear-gradient(90deg, #0c4b4b, #2c3764, #4a325c);
   color: white;
   border-left: 1px solid white;
   border-right: 1px solid white; 
@@ -79,11 +79,11 @@ font-size: 16px;
 font-weight: bold;
 border-radius:  3px;
 margin-left: 5px;
-background: linear-gradient(90deg, rgb(93, 252, 199), rgb(209, 99, 252));
+background: linear-gradient(90deg, rgb(96, 97, 156), rgb(120, 54, 133));
 }
 
 .button-show-and-hide:hover{  
-background: linear-gradient(90deg, rgb(67, 175, 161), rgb(146, 73, 175));
+background: linear-gradient(90deg, rgb(52, 52, 87), rgb(87, 39, 97));
 color: white;
 cursor: pointer;
 
@@ -109,8 +109,8 @@ cursor: pointer;
   }
   .ring {
     position: relative;
-    width: 450px;
-    height: 450px;
+    width: 530px;
+    height: 530px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -407,13 +407,13 @@ input:focus {
   padding: 1em;
   font-size: 16px;
   font-weight: bold;
-  background: linear-gradient(90deg, rgb(207, 134, 65), rgb(233, 229, 9));
+  background-color: #f0a500;
   border-radius: 5px;
   border: none;
 }
 
-#update:hover {
-  background: linear-gradient(90deg, rgb(170, 90, 16), rgb(180, 177, 6));
+#update:hover, #capnhat:hover {
+  background-color: #bd8200;;
   color: rgb(240, 240, 240);
 }
 
