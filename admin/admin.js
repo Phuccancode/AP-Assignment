@@ -40,9 +40,11 @@ const firebaseConfig = {
 			alert("Bạn đã đăng nhập thành công với quyền quản trị viên")
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-			document.getElementById('createaccount').style.display = 'block';
-			document.getElementById('listhealthcare').style.display = 'block';
-			document.getElementById('listpatient').style.display = 'block';
+			
+			// document.getElementById('createaccount').style.display = 'block';
+			// document.getElementById('listhealthcare').style.display = 'block';
+			// document.getElementById('listpatient').style.display = 'block';
+			
 			document.getElementById("createaccount").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'flex';
 				document.getElementById('list_healthcare').style.display = 'none';

@@ -49,28 +49,32 @@ const firebaseConfig = {
 					alert("Vui lòng cập nhật thông tin cá nhân!!");
 				}
 			})
-			document.getElementById('buttonlogout').style.display = 'block';
 			document.getElementById('container-ring').style.display = 'none';
-			document.getElementById('updateaccount').style.display = 'block';
-			document.getElementById('mypatient').style.display = 'block';
-			document.getElementById('tracuutaikhoan').style.display = 'block';
+			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
+			document.getElementById('slide-menu').style.display = 'block';
+			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
+			
+			// document.getElementById('updateaccount').style.display = 'block';
+			// document.getElementById('mypatient').style.display = 'block';
+			// document.getElementById('tracuutaikhoan').style.display = 'block';
+
 			document.getElementById("updateaccount").addEventListener("click", function() {
-				document.getElementById('formupdate').style.display = 'block';
-				document.getElementById('thongtintaikhoan').style.display = 'none';
+				document.getElementById('form-container').style.display = 'block';
+				document.getElementById('info-container').style.display = 'none';
 				document.getElementById("listpatient").style.display = "none";
-				document.getElementById("tracuu_thongtin").style.display = "none";
+				document.getElementById("patient-container").style.display = "none";
 			});
 			document.getElementById("mypatient").addEventListener("click", function() {
-				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById('thongtintaikhoan').style.display = 'none';
-				document.getElementById("listpatient").style.display = "none";
-				document.getElementById("tracuu_thongtin").style.display = "none";
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById("listpatient").style.display = "block";
+				document.getElementById("patient-container").style.display = "none";
 			});
 			document.getElementById("tracuutaikhoan").addEventListener("click", function() {
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'block';
 				document.getElementById("listpatient").style.display = "none";
-				document.getElementById('formupdate').style.display = 'none';
-				document.getElementById("tracuu_thongtin").style.display = "none";
-				document.getElementById('thongtintaikhoan').style.display = 'contents';
+				document.getElementById("patient-container").style.display = "none";
 				get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 					  document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
@@ -106,96 +110,102 @@ const firebaseConfig = {
 					specialization: specialization
 				  });
 			  alert("Cập nhật thông tin thành công!!");
-			  document.getElementById("formupdate").style.display = "none";
+			  document.getElementById("form-container").style.display = "none";
 			  });
+			  
+			var check = 0;
 
-
-			document.getElementById("mypatient").addEventListener("click", function() {
-				document.getElementById("listpatient").style.display = "block";
-				
-			  });
-			  var check = 0;
-			document.getElementById("getdata").addEventListener("click", function() {
-				if(check == 1) { return;}
-				var table = document.getElementById("listpatienttable");
-				get(ref(database, 'users/')).then((snapshot) => {
-					if (snapshot.exists()) {
-						console.log(snapshot.val());
-						var data = snapshot.val();
-						var i = 0;
-						for (var key in data) {
-							var flag = 0;
-							if(data[key].yourhealthcare == user.uid) {
-								var row = table.insertRow(i);
-								var cell0 = row.insertCell(0);
-								var cell1 = row.insertCell(1);
-								var cell2 = row.insertCell(2);
-								var cell3 = row.insertCell(3);
-								var cell4 = row.insertCell(4);
-								cell0.innerHTML = i+1;
-								cell1.innerHTML = data[key].name;
-								cell2.innerHTML = data[key].phone;
-								cell3.innerHTML = data[key].dateofbirth;
-							//create button
-								var button = document.createElement("button");
-								button.innerHTML = "Xem chi tiết";
-								button.type="button";
-								button.id = key;
-								cell4.appendChild(button);
-								i++;
+			document.getElementById("show-hide").addEventListener("click", function() {
+				if(check == 1) { 
+					var table = document.getElementById("listpatienttable");
+					var message = document.getElementById("name_patient");
+					document.getElementById("patient-container").style.display = "none";
+					table.innerHTML = "";
+					message.innerHTML = "";
+					check--;
+				}
+				else {
+					var table = document.getElementById("listpatienttable");
+					get(ref(database, 'users/')).then((snapshot) => {
+						if (snapshot.exists()) {
+							console.log(snapshot.val());
+							var data = snapshot.val();
+							var i = 0;
+							for (var key in data) {
+								var flag = 0;
+								if(data[key].yourhealthcare == user.uid) {
+									var row = table.insertRow(i);
+									var cell0 = row.insertCell(0);
+									var cell1 = row.insertCell(1);
+									var cell2 = row.insertCell(2);
+									var cell3 = row.insertCell(3);
+									var cell4 = row.insertCell(4);
+									cell0.innerHTML = i+1;
+									cell1.innerHTML = data[key].name;
+									cell2.innerHTML = data[key].phone;
+									cell3.innerHTML = data[key].dateofbirth;
+								//create button
+									var button = document.createElement("button");
+									button.innerHTML = "Xem chi tiết";
+									button.type="button";
+									button.id = key;
+									cell4.appendChild(button);
+									i++;
+								}
+							
+								document.getElementById(key).addEventListener("click", function() {
+									var id = this.id;
+									flag = 1;
+									get(ref(database, 'users/' + id)).then((snapshot) => {
+										if (snapshot.exists()) {
+											document.getElementById("patient-container").style.display = "block";
+											document.getElementById("name_patient").innerHTML = snapshot.val().name;
+											document.getElementById("phone_patient").innerHTML = snapshot.val().phone;
+											document.getElementById("dateofbirth_patient").innerHTML = snapshot.val().dateofbirth;
+											document.getElementById("gender_patient").innerHTML = snapshot.val().gender;
+											document.getElementById("date_patient").innerHTML = snapshot.val().date;
+											document.getElementById("time_patient").innerHTML = snapshot.val().time;
+											document.getElementById("specialization_patient").innerHTML = snapshot.val().specialization;
+											document.getElementById("status_patient").innerHTML = snapshot.val().status;
+											document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
+											document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
+											//create button
+											document.getElementById('capnhat_input').style.display = 'block';
+											document.getElementById('userid').innerHTML= id;
+											
+										}
+									})
+									
+								});
 							}
-						
-							document.getElementById(key).addEventListener("click", function() {
-								var id = this.id;
-								flag = 1;
-								get(ref(database, 'users/' + id)).then((snapshot) => {
-									if (snapshot.exists()) {
-										document.getElementById("tracuu_thongtin").style.display = "block";
-										document.getElementById("name_patient").innerHTML = snapshot.val().name;
-										document.getElementById("phone_patient").innerHTML = snapshot.val().phone;
-										document.getElementById("dateofbirth_patient").innerHTML = snapshot.val().dateofbirth;
-										document.getElementById("gender_patient").innerHTML = snapshot.val().gender;
-										document.getElementById("date_patient").innerHTML = snapshot.val().date;
-										document.getElementById("time_patient").innerHTML = snapshot.val().time;
-										document.getElementById("specialization_patient").innerHTML = snapshot.val().specialization;
-										document.getElementById("status_patient").innerHTML = snapshot.val().status;
-										document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
-										document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
-										//create button
-										document.getElementById('capnhat_input').style.display = 'block';
-										document.getElementById('userid').innerHTML= id;
-										
-									}
-								})
-								
-							});
+							document.getElementById("capnhat").addEventListener("click", function() {
+								var getid = document.getElementById('userid').innerHTML.valueOf();
+								var chandoan = document.getElementById("chandoan_input").value;
+								var dieutri = document.getElementById("dieutri_input").value;
+								update(ref(database, 'users/' + getid), {
+									status: "Đã khám",
+									chandoan: chandoan,
+									dieutri: dieutri
+								});
+								alert("Cập nhật thành công!!");
+								document.getElementById("chandoan_input").value = "";
+								document.getElementById("dieutri_input").value = "";
+								document.getElementById("patient-container").style.display = "none";
+							})
 						}
-						document.getElementById("capnhat").addEventListener("click", function() {
-							var getid = document.getElementById('userid').innerHTML.valueOf();
-							var chandoan = document.getElementById("chandoan_input").value;
-							var dieutri = document.getElementById("dieutri_input").value;
-							update(ref(database, 'users/' + getid), {
-								status: "Đã khám",
-								chandoan: chandoan,
-								dieutri: dieutri
-							});
-							alert("Cập nhật thành công!!");
-							document.getElementById("chandoan_input").value = "";
-							document.getElementById("dieutri_input").value = "";
-							document.getElementById("tracuu_thongtin").style.display = "none";
-						})
-					}
-				});
-				check++;
+					});
+					check++;
+				}
 			});
-			document.getElementById("hidden").addEventListener("click", function() {
-				var table = document.getElementById("listpatienttable");
-				var message = document.getElementById("name_patient");
-				document.getElementById("tracuu_thongtin").style.display = "none";
-				table.innerHTML = "";
-				message.innerHTML = "";
-				check--;
-			})
+
+			// document.getElementById("hidden").addEventListener("click", function() {
+			// 	var table = document.getElementById("listpatienttable");
+			// 	var message = document.getElementById("name_patient");
+			// 	document.getElementById("tracuu_thongtin").style.display = "none";
+			// 	table.innerHTML = "";
+			// 	message.innerHTML = "";
+			// 	check--;
+			// })
 			
 
 			  

@@ -7,7 +7,18 @@
     <script src="patient.js" type="module"></script>
 </head>
 <body>
-    <div id="message" style="text-align:right">
+
+    <nav id="slide-menu" style="display: none;">
+        <ul>
+            <li id="message"></li>
+            <li id="updateaccount">Cập nhật thông tin tài khoản</li>
+            <li id="tracuutaikhoan">Tra cứu thông tin</li>
+            <li id="schedule">Đăng kí khám bệnh</li>
+            <li id="logout">Đăng xuất</li>
+        </ul>
+    </nav>
+
+    <!-- <div id="message" style="text-align:right">
     </div>
     <div id ="buttonlogout" style="text-align: right; display:none">
         <button type="button" id="logout" name="logout">Đăng xuất</button>
@@ -16,7 +27,7 @@
 
     <button type="button" id="updateaccount" name="updateaccount" style="display:none">Cập nhật thông tin tài khoản</button>
     <button type="button" id="tracuutaikhoan" name="tracuutaikhoan" style="display:none">Tra cứu thông tin</button>
-    <button type="button" id="schedule" name="schedule" style="display:none">Đăng kí khám bệnh</button>
+    <button type="button" id="schedule" name="schedule" style="display:none">Đăng kí khám bệnh</button> -->
 
     <div id="container-ring">
         <div class="ring">
@@ -39,123 +50,128 @@
     </div>
 
 
-    <div id="tracuu_thongtin" style="display:none">
-        <h1>Thông tin cá nhân</h1>
+    <div id="content">
+        <div class="menu-trigger" style="display: none;"></div>
+        
+        <div id="tracuu_thongtin" style="display:none">
+            <h1>Thông tin cá nhân</h1>
+                <div>
+                    <label for="name">Họ và tên: </label>
+                    <span id="name_tracuu"></span>
+                </div>
+                <div>
+                    <label for="phone">Số điện thoại: </label>
+                    <span id="phone_tracuu"></span>
+                </div>
+                <div>
+                  <label for="address">Địa chỉ: </label>
+                   <span id="address_tracuu"></span>
+                </div>
+                <div>
+                    <label for="dateofbirth">Ngày sinh: </label>
+                    <span id="dateofbirth_tracuu"></span>
+                </div>
+                <div>
+                    <label for="gender">Giới tính: </label>
+                    <span id="gender_tracuu"></span>
+                </div>
+    
+                <div>
+                    <h1>
+                        Thông tin khám bệnh
+                    </h1>
+                </div>
+    
+                <div>
+                    <label for="date">Ngày khám bệnh: </label>
+                    <span id="date_tracuu"></span>
+                </div>
+                <div>
+                    <label for="time">Giờ khám bệnh: </label>
+                    <span id="time_tracuu"></span>
+                </div>
+                <div>
+                    <label for="specialization">Khoa khám bệnh: </label>
+                    <span id="specialization_tracuu"></span>
+                </div>
+                <div>
+                    <label for="yourhealthcare">Nhân viên y tế phụ trách: </label>
+                   <b><span id="yourhealthcare_tracuu"></span></b>
+                </div>
+                <div>
+                    <label for="status">Trạng thái: </label>
+                   <b><span id="status_tracuu"></span></b>
+                </div>
+                <div>
+                    <label for="chandoan">Chẩn đoán: </label>
+                   <b><span id="chandoan_tracuu"></span></b>
+                </div>
+                <div>
+                    <label for="dieutri">Phương pháp điều trị: </label>
+                   <b><span id="dieutri_tracuu"></span></b>
+                </div>
+    
+            </div>
+    
+        <form id="formupdate" style="display:none">
+            <h1>Cập nhật thông tin tài khoản dành cho bệnh nhân</h1>
             <div>
                 <label for="name">Họ và tên: </label>
-                <span id="name_tracuu"></span>
+                <input type="text" id="name" name="name" required>
             </div>
             <div>
                 <label for="phone">Số điện thoại: </label>
-                <span id="phone_tracuu"></span>
+                <input type="text" id="phone" name="phone" required>
             </div>
             <div>
-              <label for="address">Địa chỉ: </label>
-               <span id="address_tracuu"></span>
-            </div>
-            <div>
-                <label for="dateofbirth">Ngày sinh: </label>
-                <span id="dateofbirth_tracuu"></span>
+                <label for="address">Địa chỉ: </label>
+                <input type="text" id="address" name="address" required>
             </div>
             <div>
                 <label for="gender">Giới tính: </label>
-                <span id="gender_tracuu"></span>
+                <select name="gender" id="gender" class="form-control">
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                </select>
             </div>
+            <div>
+                <label for="dateofbirth">Ngày sinh: </label>
+                <input type="date" id="dateofbirth" name="dateofbirth" required>
+            </div>
+            <button type="button" id="update" name="update">Cập nhật</button>
+        </form>
+        <form id="registerschedule" style="display:none">
+            <h1>Đăng kí lịch khám bệnh </h1>
+            <div>
+                <label for="date">Ngày khám: </label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div>
+                <label for="time">Thời gian khám: </label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div>
+                <label for="specialization">Khoa khám: </label>
+                <select name="specialization" id="specialization" class="form-control">
+                    <option value="">Chọn chuyên khoa</option>
+                    <option value="Khoa Sản phụ khoa">Khoa Sản phụ khoa</option>
+                    <option value="Khoa Ngoại chung">Khoa Ngoại chung</option>
+                    <option value="Khoa Nội chung">Khoa Nội chung</option>
+                    <option value="Khoa Nhi">Khoa Nhi</option>
+                    <option value="Khoa Mắt">Khoa Mắt</option>
+                    <option value="Khoa Tim mạch">Khoa Tim mạch</option>
+                    <option value="Khoa Da liễu">Khoa Da liễu</option>
+                    <option value="Khoa Nội tiết">Khoa Nội tiết</option>
+                    <option value="Khoa Ung bướu">Khoa Ung bướu</option>
+                    <option value="Khoa Khám bệnh">Khoa Khám bệnh</option>
+                    <option value="Khoa Hô Hấp">Khoa Hô Hấp</option>
+                </select>
+            </div>
+            
+            <button type="button" id="register" name="register">Đăng kí lịch</button>
+        </form>
 
-            <div>
-                <h1>
-                    Thông tin khám bệnh
-                </h1>
-            </div>
-
-            <div>
-                <label for="date">Ngày khám bệnh: </label>
-                <span id="date_tracuu"></span>
-            </div>
-            <div>
-                <label for="time">Giờ khám bệnh: </label>
-                <span id="time_tracuu"></span>
-            </div>
-            <div>
-                <label for="specialization">Khoa khám bệnh: </label>
-                <span id="specialization_tracuu"></span>
-            </div>
-            <div>
-                <label for="yourhealthcare">Nhân viên y tế phụ trách: </label>
-               <b><span id="yourhealthcare_tracuu"></span></b>
-            </div>
-            <div>
-                <label for="status">Trạng thái: </label>
-               <b><span id="status_tracuu"></span></b>
-            </div>
-            <div>
-                <label for="chandoan">Chẩn đoán: </label>
-               <b><span id="chandoan_tracuu"></span></b>
-            </div>
-            <div>
-                <label for="dieutri">Phương pháp điều trị: </label>
-               <b><span id="dieutri_tracuu"></span></b>
-            </div>
-
-        </div>
-
-    <form id="formupdate" style="display:none">
-        <h1>Cập nhật thông tin tài khoản dành cho bệnh nhân</h1>
-        <div>
-            <label for="name">Họ và tên: </label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="phone">Số điện thoại: </label>
-            <input type="text" id="phone" name="phone" required>
-        </div>
-        <div>
-            <label for="address">Địa chỉ: </label>
-            <input type="text" id="address" name="address" required>
-        </div>
-        <div>
-            <label for="gender">Giới tính: </label>
-            <select name="gender" id="gender" class="form-control">
-                <option value="Nam">Nam</option>
-                <option value="Nữ">Nữ</option>
-            </select>
-        </div>
-        <div>
-            <label for="dateofbirth">Ngày sinh: </label>
-            <input type="date" id="dateofbirth" name="dateofbirth" required>
-        </div>
-        <button type="button" id="update" name="update">Cập nhật</button>
-    </form>
-    <form id="registerschedule" style="display:none">
-        <h1>Đăng kí lịch khám bệnh </h1>
-        <div>
-            <label for="date">Ngày khám: </label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div>
-            <label for="time">Thời gian khám: </label>
-            <input type="time" id="time" name="time" required>
-        </div>
-        <div>
-            <label for="specialization">Khoa khám: </label>
-            <select name="specialization" id="specialization" class="form-control">
-                <option value="">Chọn chuyên khoa</option>
-                <option value="Khoa Sản phụ khoa">Khoa Sản phụ khoa</option>
-                <option value="Khoa Ngoại chung">Khoa Ngoại chung</option>
-                <option value="Khoa Nội chung">Khoa Nội chung</option>
-                <option value="Khoa Nhi">Khoa Nhi</option>
-                <option value="Khoa Mắt">Khoa Mắt</option>
-                <option value="Khoa Tim mạch">Khoa Tim mạch</option>
-                <option value="Khoa Da liễu">Khoa Da liễu</option>
-                <option value="Khoa Nội tiết">Khoa Nội tiết</option>
-                <option value="Khoa Ung bướu">Khoa Ung bướu</option>
-                <option value="Khoa Khám bệnh">Khoa Khám bệnh</option>
-                <option value="Khoa Hô Hấp">Khoa Hô Hấp</option>
-            </select>
-        </div>
-        
-        <button type="button" id="register" name="register">Đăng kí lịch</button>
-    </form>
+    </div>
     
 </body>
 </html>
