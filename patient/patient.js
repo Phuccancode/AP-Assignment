@@ -52,7 +52,8 @@ const firebaseConfig = {
 			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-				
+			
+			
 			// document.getElementById('updateaccount').style.display = 'block';
 			// document.getElementById('tracuutaikhoan').style.display = 'block';
 			// document.getElementById('schedule').style.display = 'block';
@@ -61,14 +62,27 @@ const firebaseConfig = {
 			document.getElementById('form-container').style.display = 'block';
 			document.getElementById('info-container').style.display = 'none';
 			document.getElementById('schedule-container').style.display = 'none';
+			document.getElementById('lichsubenhan').style.display = 'none';
+			document.getElementById("ketquaxetnghiem").style.display = "none";
 			});
 
 			document.getElementById("schedule").addEventListener("click", function() {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'block';
+				document.getElementById('lichsubenhan').style.display = 'none';
+				document.getElementById("ketquaxetnghiem").style.display = "none";
 			});
+			document.getElementById("history").addEventListener("click", function() {
+				document.getElementById('lichsubenhan').style.display = 'block';
+				document.getElementById("ketquaxetnghiem").style.display = "block";
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById('schedule-container').style.display = 'none';
+		  	});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
+				document.getElementById('lichsubenhan').style.display = 'none';
+				document.getElementById("ketquaxetnghiem").style.display = "none";
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'block';
 				document.getElementById('schedule-container').style.display = 'none';
@@ -93,8 +107,32 @@ const firebaseConfig = {
 				
 					}
 				})
+				
 			});
-			
+
+			document.getElementById("get_xetnghiemmau").addEventListener("click", function() {
+				var date = document.getElementById("date_xetnghiem").value;
+				if(date!="") {
+					get(ref(database, 'users/' + user.uid+'/xetnghiemmau/'+date)).then((snapshot) => {
+						if(snapshot.val()){
+							var data = snapshot.val();
+							var i = 1;
+							document.getElementById("ngayxetnghiem").innerHTML = date;
+							for (var key in data) {
+								document.getElementById("xetnghiemmau"+i).innerHTML = data[key];
+								i++;
+							}
+							alert("Lấy kết quả thành công");
+						}
+						else {
+							alert("Không có kết quả xét nghiệm!!!");
+						}
+					});
+				}
+				else {
+					alert("Vui lòng nhập ngày tháng năm để tra cứu!!!")
+				}
+			})
 
 
 			document.getElementById("update").addEventListener("click", function() {
@@ -102,8 +140,7 @@ const firebaseConfig = {
 				var phone = document.getElementById("phone").value;
 				var address = document.getElementById("address").value;
 				var gender = document.getElementById("gender").value;
-				var dateofbirth = document.getElementById("dateofbirth").value;
-				var formattedDob = new Date(dateofbirth).toLocaleDateString('vi-VN');
+				var dateofbirth = new Date(document.getElementById("dateofbirth").value).toLocaleDateString('vi-VN');
 				
 
 				update(ref(database, 'users/' + user.uid), {
@@ -112,7 +149,7 @@ const firebaseConfig = {
 					phone: phone,
 					address: address,
 					gender: gender,
-					dateofbirth: formattedDob
+					dateofbirth: dateofbirth
 				  });
 			  alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
 			  document.getElementById("form-container").style.display = "none";
@@ -127,7 +164,8 @@ const firebaseConfig = {
 					specialization: specialization,
 					status: "Chưa khám bệnh",
 					chandoan: "Chưa có",
-					dieutri: "Chưa có"
+					dieutri: "Chưa có",
+					xetnghiem_mau: "Không"
 				  });
 				get(ref(database, 'healthcares/')).then((snapshot) => {
 					var data = snapshot.val();
@@ -137,15 +175,49 @@ const firebaseConfig = {
 								yourhealthcare: key,
 								yourhealthcare_name: data[key].name
 							});
-							return;
 						}
 					}
 				})
 			  alert("Đăng ký lịch khám bệnh thành công!!");
-			  document.getElementById('registerschedule').style.display = 'none';
+			  document.getElementById('schedule-container').style.display = 'none';
 			  });
 
 			  
+			  var check_history=0;
+			  document.getElementById("get_history").addEventListener("click", function() {
+				if(check_history==1) return;
+				var table = document.getElementById("table_history");
+				get(ref(database, 'users/' + user.uid+'/history/')).then((snapshot) => {
+					var data = snapshot.val();
+					var i = 0;
+					for (var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						var cell8 = row.insertCell(7);
+						cell1.innerHTML = data[key].date;
+						cell2.innerHTML = data[key].time;
+						cell3.innerHTML = data[key].specialization;
+						cell4.innerHTML = data[key].yourhealthcare;
+						cell5.innerHTML = data[key].status;
+						cell6.innerHTML = data[key].xetnghiem_mau;
+						cell7.innerHTML = data[key].chandoan;
+						cell8.innerHTML = data[key].dieutri;
+						i++;
+					}
+		  		});
+				check_history=1;
+			}); 
+			document.getElementById("hidden_history").addEventListener("click", function() {
+				var table = document.getElementById("table_history");
+				table.innerHTML=""; 
+				check_history=0;
+			})
 		  })
 		  .catch((error) => {
 		    const errorCode = error.code;

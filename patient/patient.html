@@ -14,6 +14,7 @@
             <li id="updateaccount">Cập nhật thông tin tài khoản</li>
             <li id="tracuutaikhoan">Tra cứu thông tin</li>
             <li id="schedule">Đăng kí khám bệnh</li>
+            <li id="history">Lịch sử bệnh án</li>
             <li id="logout">Đăng xuất</li>
         </ul>
     </nav>
@@ -114,6 +115,7 @@
         </div>
 
         
+        
         <div id="schedule-container" style="display:none">
             <form id="registerschedule">
                 <h1>Đăng kí lịch khám bệnh </h1>
@@ -140,12 +142,165 @@
                         <option value="Khoa Ung bướu">Khoa Ung bướu</option>
                         <option value="Khoa Khám bệnh">Khoa Khám bệnh</option>
                         <option value="Khoa Hô Hấp">Khoa Hô Hấp</option>
+                        <option value="Khoa Xét Nghiệm">Khoa Xét Nghiệm</option>
                     </select>
                 </div>
                 
                 <button type="button" id="register" name="register">Đăng kí lịch</button>
             </form>
-        </div>    
+        </div>
+        
+        <div id = "lichsubenhan" style="display:none">
+            <h1>Lịch sử bệnh án</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ngày khám</th>
+                        <th>Giờ khám</th>
+                        <th>Khoa khám</th>
+                        <th>Nhân viên y tế phụ trách</th>
+                        <th>Trạng thái</th>
+                        <th>Xét nghiệm máu</th>
+                        <th>Chẩn đoán</th>
+                        <th>Phương pháp điều trị</th>
+                    </tr>
+                </thead>
+                <tbody id="table_history">
+                </tbody>
+            </table>
+            <button type="button" id="get_history" name="get_history">Xem</button>
+            <button type="button" id="hidden_history" name="hidden_history">Ẩn</button>
+        </div>
+        <form id="ketquaxetnghiem" style="display:none">
+            <h1>Kết quả xét nghiệm máu</h1>
+            <div class="info-line">
+                <label for="dieutri">Ngày xét nghiệm: </label>
+                <b><span id="ngayxetnghiem"></span></b>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Yêu cầu xét nghiệm </th>
+                    <th>Kết quả xét nghiệm</th>
+                    <th>Trị số bình thường</th>
+                    <th>Đơn vị</th>
+                </tr>
+                </thead>
+                
+                <tbody id="table_xetnghiemmau">
+                    <tr>
+                        <th>Công thức máu</th>
+                    </tr>
+    
+                    <tr>
+                        <td>WBC</td>
+                        <td id="xetnghiemmau17">Đang chờ</td>
+                        <td>4.4-10.9</td>
+                        <td>K/uL</td>
+                    </tr>
+                    <tr>
+                        <td>NEU</td>
+                        <td id="xetnghiemmau11">Đang chờ</td>
+                        <td>37.0-80.0</td>
+                        <td>%N</td>
+                    </tr>
+                    <tr>
+                        <td>LYM</td>
+                        <td id="xetnghiemmau5">Đang chờ</td>
+                        <td>10.0-58.5</td>
+                        <td>%L</td>
+                    </tr>
+                    <tr>
+                        <td>MONO</td>
+                        <td id="xetnghiemmau9">Đang chờ</td>
+                        <td>0.0-12.0</td>
+                        <td>%M</td>
+                    </tr>
+                    <tr>
+                        <td>BASO</td>
+                        <td id="xetnghiemmau1">Đang chờ</td>
+                        <td>0.0-0.2</td>
+                        <td>%B</td>
+                    </tr>
+                    <tr>
+                        <td>EOS</td>
+                        <td id="xetnghiemmau2">Đang chờ</td>
+                        <td>0.0-7.0</td>
+                        <td>%E</td>
+                    </tr>
+                    <tr>
+                        <td>RBC</td>
+                        <td id="xetnghiemmau14">Đang chờ</td>
+                        <td>4.2-6.3</td>
+                        <td>M/uL</td>
+                    </tr>
+                    <tr>
+                        <td>HGB</td>
+                        <td id="xetnghiemmau4">Đang chờ</td>
+                        <td>12.0-18.0</td>
+                        <td>g/dL</td>
+                    </tr>
+                    <tr>
+                        <td>HCT</td>
+                        <td id="xetnghiemmau3">Đang chờ</td>
+                        <td>37.0-51.0</td>
+                        <td>%</td>
+                    </tr>
+                    <tr>
+                        <td>MCV</td>
+                        <td id="xetnghiemmau8">Đang chờ</td>
+                        <td>80.0-97.0</td>
+                        <td>fL</td>
+                    </tr>
+                    <tr>
+                        <td>MCH</td>
+                        <td id="xetnghiemmau6">Đang chờ</td>
+                        <td>26.0-32.0</td>
+                        <td>pg</td>
+                    </tr>
+                    <tr>
+                        <td>MCHC</td>
+                        <td id="xetnghiemmau7">Đang chờ</td>
+                        <td>31.0-36.0</td>
+                        <td>g/dL</td>
+                    </tr>
+                    <tr>
+                        <td>RDW</td>
+                        <td id="xetnghiemmau15">Đang chờ</td>
+                        <td>11.5-14.5</td>
+                        <td>%</td>
+                    </tr>
+                    <tr>
+                        <td>PLT</td>
+                        <td id="xetnghiemmau13">Đang chờ</td>
+                        <td>140-440</td>
+                        <td>K/uL</td>
+                    </tr>
+                    <tr>
+                        <td>MPV</td>
+                        <td id="xetnghiemmau10">Đang chờ</td>
+                        <td>0.0-99.8</td>
+                        <td>fL</td>
+                    </tr>
+                    <tr>
+                        <td>Nhóm máu</td>
+                        <td id="xetnghiemmau12">Đang chờ</td>
+                    </tr>
+                    <tr>
+                        <td>Rh</td>
+                        <td id ="xetnghiemmau16">Đang chờ</td>
+                    </tr>
+    
+                </tbody>
+            </table>
+            <div class="container-button">
+                <div>
+                    <label for="date_xetnghiem">Ngày xét nghiệm: </label>
+                    <input type="date" id="date_xetnghiem" name="date_xetnghiem" required>
+                </div>
+                <button type="button" id="get_xetnghiemmau">Lấy kết quả</button>
+            </div>
+        </form>
     
     </div>
 

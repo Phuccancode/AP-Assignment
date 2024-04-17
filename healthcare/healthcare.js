@@ -49,6 +49,9 @@ const firebaseConfig = {
 					alert("Vui lòng cập nhật thông tin cá nhân!!");
 				}
 			})
+			var check_vaitro=0;
+			if(email.includes("hospital.bs")==true){check_vaitro=1}
+			if(email.includes("hospital.yta")==true){check_vaitro=2}
 			document.getElementById('container-ring').style.display = 'none';
 			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
 			document.getElementById('slide-menu').style.display = 'block';
@@ -96,7 +99,7 @@ const firebaseConfig = {
 				var phone = document.getElementById("phone").value;
 				var address = document.getElementById("address").value;
 				var gender = document.getElementById("gender").value;
-				var dateofbirth = document.getElementById("dateofbirth").value;
+				var dateofbirth = new Date(document.getElementById("dateofbirth").value).toLocaleDateString('vi-VN');
 				var specialization = document.getElementById("specialization").value;
 				update(ref(database, 'healthcares/' + user.uid), {
 					email: email,
@@ -118,10 +121,12 @@ const firebaseConfig = {
 			document.getElementById("show-hide").addEventListener("click", function() {
 				if(check == 1) { 
 					var table = document.getElementById("listpatienttable");
-					var message = document.getElementById("name_patient");
+					// var message = document.getElementById("name_patient");
 					document.getElementById("patient-container").style.display = "none";
+					document.getElementById("update_xetnghiem").style.display = "none";
+					document.getElementById("show-hide").innerHTML = "Hiện";
 					table.innerHTML = "";
-					message.innerHTML = "";
+					// message.innerHTML = "";
 					check--;
 				}
 				else {
@@ -132,32 +137,43 @@ const firebaseConfig = {
 							var data = snapshot.val();
 							var i = 0;
 							for (var key in data) {
-								var flag = 0;
-								if(data[key].yourhealthcare == user.uid) {
+								if(data[key].yourhealthcare == user.uid || (data[key].xetnghiem_mau=="Có"&&check_vaitro==2)) {
 									var row = table.insertRow(i);
 									var cell0 = row.insertCell(0);
 									var cell1 = row.insertCell(1);
 									var cell2 = row.insertCell(2);
 									var cell3 = row.insertCell(3);
 									var cell4 = row.insertCell(4);
+									var cell5 = row.insertCell(5);
 									cell0.innerHTML = i+1;
 									cell1.innerHTML = data[key].name;
 									cell2.innerHTML = data[key].phone;
 									cell3.innerHTML = data[key].dateofbirth;
+									cell4.innerHTML = data[key].date;
 								//create button
 									var button = document.createElement("button");
-									button.innerHTML = "Xem chi tiết";
+									if(check_vaitro==1) button.innerHTML = "Xem chi tiết";
+									else if(check_vaitro==2) button.innerHTML = "Cập nhật xét nghiệm";
 									button.type="button";
 									button.id = key;
-									cell4.appendChild(button);
+									cell5.appendChild(button);
 									i++;
+									document.getElementById("show-hide").innerHTML = "Ẩn";
 								}
+								else continue;
 							
 								document.getElementById(key).addEventListener("click", function() {
+									var table = document.getElementById("table_history");
+									table.innerHTML=""; 
+									check_history=0;
+									document.getElementById("get_history").innerHTML = "Xem";
+									
 									var id = this.id;
-									flag = 1;
 									get(ref(database, 'users/' + id)).then((snapshot) => {
 										if (snapshot.exists()) {
+											document.getElementById('userid').innerHTML= id;
+											
+											if(check_vaitro==1){
 											document.getElementById("patient-container").style.display = "block";
 											document.getElementById("name_patient").innerHTML = snapshot.val().name;
 											document.getElementById("phone_patient").innerHTML = snapshot.val().phone;
@@ -169,29 +185,158 @@ const firebaseConfig = {
 											document.getElementById("status_patient").innerHTML = snapshot.val().status;
 											document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
 											document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
+											document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
 											//create button
 											document.getElementById('capnhat_input').style.display = 'block';
-											document.getElementById('userid').innerHTML= id;
-											
+											document.getElementById('lichsubenhan').style.display = 'block';
+											}
+											else if(check_vaitro==2) {
+												document.getElementById("update_xetnghiem").style.display = "block";
+												document.getElementById("name_xetnghiem").innerHTML = snapshot.val().name;
+											};
+											if(snapshot.val().xetnghiem_mau=="Có" && check_vaitro==1) {
+												document.getElementById("ketquaxetnghiem").style.display = "block";
+												document.getElementById("xetnghiem-header").style.borderBottom = "0.5px solid #8b5f00";
+												get(ref(database, 'users/' + id +'/xetnghiemmau/'+snapshot.val().date)).then((snapshot) => {
+													if(snapshot.val()){
+														var data_1 = snapshot.val();
+														var i = 1;
+														
+														
+														for (var key_1 in data_1) {
+															document.getElementById("xetnghiemmau"+i).innerHTML = data_1[key_1];
+															i++;
+														}
+													}
+													else {
+															alert("Chưa có kết quả xét nghiệm!!!");
+															//Reload data in table
+															var l = 1;
+    														while(document.getElementById("xetnghiemmau"+l)) {
+        													document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
+        													l++;
+    }
+														}
+												});
+											}
+											else {
+												document.getElementById("ketquaxetnghiem").style.display = "none";
+											}
+										
+										
 										}
+										
 									})
 									
+									
 								});
+								
 							}
+							
 							document.getElementById("capnhat").addEventListener("click", function() {
 								var getid = document.getElementById('userid').innerHTML.valueOf();
 								var chandoan = document.getElementById("chandoan_input").value;
 								var dieutri = document.getElementById("dieutri_input").value;
+								var trangthai = document.getElementById("status_input").value;
 								update(ref(database, 'users/' + getid), {
-									status: "Đã khám",
+									status: trangthai,
 									chandoan: chandoan,
-									dieutri: dieutri
+									dieutri: dieutri,
 								});
+								if(document.getElementById("xetnghiem_input").checked==true){
+									update(ref(database, 'users/' + getid), {
+										xetnghiem_mau: "Có"
+									});
+								}
+
+								get(ref(database, 'users/' + getid)).then((snapshot) => {
+									update(ref(database, 'users/' + getid+ '/history/'+snapshot.val().date), {
+										date: snapshot.val().date,
+										time: snapshot.val().time,
+										specialization: snapshot.val().specialization,
+										yourhealthcare: snapshot.val().yourhealthcare_name,
+										status: trangthai,
+										xetnghiem_mau: snapshot.val().xetnghiem_mau,
+										chandoan: chandoan,
+										dieutri: dieutri
+									});
+								})
 								alert("Cập nhật thành công!!");
 								document.getElementById("chandoan_input").value = "";
 								document.getElementById("dieutri_input").value = "";
 								document.getElementById("patient-container").style.display = "none";
 							})
+
+							var check_history=0;
+							document.getElementById("get_history").addEventListener("click", function() {
+						  		if(check_history==1) {
+									var table = document.getElementById("table_history");
+									table.innerHTML = "";
+									document.getElementById("history-header").style.borderBottom = "none";
+									document.getElementById("get_history").innerHTML = "Xem";
+									check_history--;
+								}
+								else {
+									var table = document.getElementById("table_history");
+						 			var getid = document.getElementById('userid').innerHTML.valueOf();
+						 			get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
+									var data = snapshot.val();
+									var i = 0;
+									for (var key in data) {
+										var row = table.insertRow(i);
+										var cell1 = row.insertCell(0);
+										var cell2 = row.insertCell(1);
+										var cell3 = row.insertCell(2);
+										var cell4 = row.insertCell(3);
+										var cell5 = row.insertCell(4);
+										var cell6 = row.insertCell(5);
+										var cell7 = row.insertCell(6);
+										var cell8 = row.insertCell(7);
+										cell1.innerHTML = data[key].date;
+										cell2.innerHTML = data[key].time;
+										cell3.innerHTML = data[key].specialization;
+										cell4.innerHTML = data[key].yourhealthcare;
+										cell5.innerHTML = data[key].status;
+										cell6.innerHTML = data[key].xetnghiem_mau;
+										cell7.innerHTML = data[key].chandoan;
+										cell8.innerHTML = data[key].dieutri;
+										i++;
+									}
+									document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+									document.getElementById("get_history").innerHTML = "Thu gọn";
+						  		});
+								check_history++;
+								}
+					  		}); 
+
+							document.getElementById("xetnghiemmau").addEventListener("click", function() {
+								var getid = document.getElementById('userid').innerHTML.valueOf();
+								get(ref(database, 'users/' + getid)).then((snapshot) => {
+									update(ref(database, 'users/' + getid + '/xetnghiemmau/'+snapshot.val().date), {
+										WBC: document.getElementById("WBC").value,
+										NEU: document.getElementById("NEU").value,
+										LYM: document.getElementById("LYM").value,
+										MONO: document.getElementById("MONO").value,
+										BASO: document.getElementById("BASO").value,
+										EOS: document.getElementById("EOS").value,
+										RBC: document.getElementById("RBC").value,
+										HGB: document.getElementById("HGB").value,
+										HCT: document.getElementById("HCT").value,
+										MCV: document.getElementById("MCV").value,
+										MCH: document.getElementById("MCH").value,
+										MCHC: document.getElementById("MCHC").value,
+										RDW: document.getElementById("RDW").value,
+										PLT: document.getElementById("PLT").value,
+										MPV: document.getElementById("MPV").value,
+										NhomMau: document.getElementById("NhomMau").value,
+										Rh: document.getElementById("Rh").value
+									});
+									document.getElementById("update_xetnghiem").reset();
+								})
+								alert("Cập nhật xét nghiệm máu thành công!!");
+								document.getElementById("update_xetnghiem").style.display = "none";
+								
+							});
 						}
 					});
 					check++;
