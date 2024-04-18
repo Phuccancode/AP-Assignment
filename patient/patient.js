@@ -52,18 +52,21 @@ const firebaseConfig = {
 			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-			
+			document.getElementById('banner').style.display = 'block';
+			document.getElementById('content').style.padding = '0px 0px';
 			
 			// document.getElementById('updateaccount').style.display = 'block';
 			// document.getElementById('tracuutaikhoan').style.display = 'block';
 			// document.getElementById('schedule').style.display = 'block';
 			
 			document.getElementById("updateaccount").addEventListener("click", function() {
-			document.getElementById('form-container').style.display = 'block';
-			document.getElementById('info-container').style.display = 'none';
-			document.getElementById('schedule-container').style.display = 'none';
-			document.getElementById('lichsubenhan').style.display = 'none';
-			document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('form-container').style.display = 'block';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById('schedule-container').style.display = 'none';
+				document.getElementById('lichsubenhan').style.display = 'none';
+				document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 
 			document.getElementById("schedule").addEventListener("click", function() {
@@ -72,6 +75,8 @@ const firebaseConfig = {
 				document.getElementById('schedule-container').style.display = 'block';
 				document.getElementById('lichsubenhan').style.display = 'none';
 				document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("history").addEventListener("click", function() {
 				document.getElementById('lichsubenhan').style.display = 'block';
@@ -79,6 +84,8 @@ const firebaseConfig = {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'none';
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 		  	});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
 				document.getElementById('lichsubenhan').style.display = 'none';
@@ -86,6 +93,8 @@ const firebaseConfig = {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'block';
 				document.getElementById('schedule-container').style.display = 'none';
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 				get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 						document.getElementById("name_tracuu").innerHTML = snapshot.val().name;

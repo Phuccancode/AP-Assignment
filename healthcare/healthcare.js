@@ -56,7 +56,8 @@ const firebaseConfig = {
 			document.getElementById('content').style.background = 'linear-gradient(135deg, #b3beeb, #bcc6e4)';
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-			
+			document.getElementById('banner').style.display = 'block';
+			document.getElementById('content').style.padding = '0px 0px';
 			// document.getElementById('updateaccount').style.display = 'block';
 			// document.getElementById('mypatient').style.display = 'block';
 			// document.getElementById('tracuutaikhoan').style.display = 'block';
@@ -66,18 +67,24 @@ const firebaseConfig = {
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById("listpatient").style.display = "none";
 				document.getElementById("patient-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("mypatient").addEventListener("click", function() {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById("listpatient").style.display = "block";
 				document.getElementById("patient-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("tracuutaikhoan").addEventListener("click", function() {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'block';
 				document.getElementById("listpatient").style.display = "none";
 				document.getElementById("patient-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 				get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 					  document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
