@@ -281,10 +281,11 @@ const firebaseConfig = {
 									table.innerHTML = "";
 									document.getElementById("history-header").style.borderBottom = "none";
 									document.getElementById("get_history").innerHTML = "Xem";
-									check_history--;
+									check_history=0;
 								}
 								else {
 									var table = document.getElementById("table_history");
+									table.innerHTML = "";
 						 			var getid = document.getElementById('userid').innerHTML.valueOf();
 						 			get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
 									var data = snapshot.val();
@@ -309,10 +310,15 @@ const firebaseConfig = {
 										cell8.innerHTML = data[key].dieutri;
 										i++;
 									}
-									document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
-									document.getElementById("get_history").innerHTML = "Thu gọn";
+									if (table.innerHTML == "") {
+										document.getElementById("get_history").innerHTML = "Không có";
+									}
+									else {
+										document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+										document.getElementById("get_history").innerHTML = "Thu gọn";
+									}
 						  		});
-								check_history++;
+								check_history=1;
 								}
 					  		}); 
 

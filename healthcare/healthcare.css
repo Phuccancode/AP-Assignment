@@ -154,7 +154,7 @@ cursor: pointer;
     }
   }
   #banner{
-    height: 100vh;  
+    height: 100%;  
     background: url(/admin/img/Home-Page-Banner.png) no-repeat center center;
   }
   #banner h1{
@@ -526,12 +526,12 @@ input:focus {
   font-weight: bold;
   border-radius:  3px;
   margin-left: 5px;
-  background: #f7ba36;
+  background: #f0a500;
   margin-right: -1.5em;
 }
 
 #get_history:hover {
-  background: #e09c0a;
+  background: #bd8200;
   color: white;
   cursor: pointer;
 }
@@ -544,7 +544,7 @@ input:focus {
   max-width: 38em;
   position: relative;
   border-radius: 4.2px;
-  border: 1px solid #8b5f00;
+  border: 1px solid hsl(41, 100%, 27%);
   margin: auto;
   margin-bottom: 1em;
 }

@@ -63,8 +63,7 @@ const firebaseConfig = {
 				document.getElementById('form-container').style.display = 'block';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'none';
-				document.getElementById('lichsubenhan').style.display = 'none';
-				document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('khambenh-container').style.display = 'none';
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
 			});
@@ -73,14 +72,12 @@ const firebaseConfig = {
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'block';
-				document.getElementById('lichsubenhan').style.display = 'none';
-				document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('khambenh-container').style.display = 'none';
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("history").addEventListener("click", function() {
-				document.getElementById('lichsubenhan').style.display = 'block';
-				document.getElementById("ketquaxetnghiem").style.display = "block";
+				document.getElementById('khambenh-container').style.display = 'block';
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'none';
@@ -88,8 +85,7 @@ const firebaseConfig = {
 				document.getElementById('content').style.padding = '40px';
 		  	});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
-				document.getElementById('lichsubenhan').style.display = 'none';
-				document.getElementById("ketquaxetnghiem").style.display = "none";
+				document.getElementById('khambenh-container').style.display = 'none';
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'block';
 				document.getElementById('schedule-container').style.display = 'none';
@@ -193,40 +189,52 @@ const firebaseConfig = {
 
 			  
 			  var check_history=0;
+
 			  document.getElementById("get_history").addEventListener("click", function() {
-				if(check_history==1) return;
-				var table = document.getElementById("table_history");
-				get(ref(database, 'users/' + user.uid+'/history/')).then((snapshot) => {
-					var data = snapshot.val();
-					var i = 0;
-					for (var key in data) {
-						var row = table.insertRow(i);
-						var cell1 = row.insertCell(0);
-						var cell2 = row.insertCell(1);
-						var cell3 = row.insertCell(2);
-						var cell4 = row.insertCell(3);
-						var cell5 = row.insertCell(4);
-						var cell6 = row.insertCell(5);
-						var cell7 = row.insertCell(6);
-						var cell8 = row.insertCell(7);
-						cell1.innerHTML = data[key].date;
-						cell2.innerHTML = data[key].time;
-						cell3.innerHTML = data[key].specialization;
-						cell4.innerHTML = data[key].yourhealthcare;
-						cell5.innerHTML = data[key].status;
-						cell6.innerHTML = data[key].xetnghiem_mau;
-						cell7.innerHTML = data[key].chandoan;
-						cell8.innerHTML = data[key].dieutri;
-						i++;
-					}
-		  		});
-				check_history=1;
-			}); 
-			document.getElementById("hidden_history").addEventListener("click", function() {
-				var table = document.getElementById("table_history");
-				table.innerHTML=""; 
-				check_history=0;
-			})
+				if(check_history==1) {
+					var table = document.getElementById("table_history");
+					table.innerHTML="";
+					document.getElementById("history-header").style.borderBottom = "none";
+					document.getElementById("get_history").innerHTML = "Xem";
+					check_history=0;
+				}
+				else {
+					var table = document.getElementById("table_history");
+					table.innerHTML="";
+					get(ref(database, 'users/' + user.uid+'/history/')).then((snapshot) => {
+						var data = snapshot.val();
+						var i = 0;
+						for (var key in data) {
+							var row = table.insertRow(i);
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							var cell5 = row.insertCell(4);
+							var cell6 = row.insertCell(5);
+							var cell7 = row.insertCell(6);
+							var cell8 = row.insertCell(7);
+							cell1.innerHTML = data[key].date;
+							cell2.innerHTML = data[key].time;
+							cell3.innerHTML = data[key].specialization;
+							cell4.innerHTML = data[key].yourhealthcare;
+							cell5.innerHTML = data[key].status;
+							cell6.innerHTML = data[key].xetnghiem_mau;
+							cell7.innerHTML = data[key].chandoan;
+							cell8.innerHTML = data[key].dieutri;
+							i++;
+						}
+						if (table.innerHTML == "") {
+							document.getElementById("get_history").innerHTML = "Không có";
+						}
+						else {
+							document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+							document.getElementById("get_history").innerHTML = "Thu gọn";
+						}
+		  			});
+					check_history++;
+				}
+			});
 		  })
 		  .catch((error) => {
 		    const errorCode = error.code;

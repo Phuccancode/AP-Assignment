@@ -152,11 +152,13 @@
             </form>
         </div>
         
-        <div id = "lichsubenhan" style="display:none">
+        <div id="khambenh-container" style="display:none">
+        <div id="lichsubenhan">
             <h1>Lịch sử bệnh án</h1>
+            <div id="history-container">
             <table>
                 <thead>
-                    <tr>
+                    <tr id="history-header">
                         <th>Ngày khám</th>
                         <th>Giờ khám</th>
                         <th>Khoa khám</th>
@@ -170,15 +172,18 @@
                 <tbody id="table_history">
                 </tbody>
             </table>
-            <button type="button" id="get_history" name="get_history">Xem</button>
-            <button type="button" id="hidden_history" name="hidden_history">Ẩn</button>
+            </div>
+            <div class="container-button">
+                <button type="button" id="get_history" name="get_history">Xem</button>
+            </div>
         </div>
-        <form id="ketquaxetnghiem" style="display:none">
+        <form id="ketquaxetnghiem">
             <h1>Kết quả xét nghiệm máu</h1>
             <div class="info-line">
                 <label for="dieutri">Ngày xét nghiệm: </label>
                 <b><span id="ngayxetnghiem"></span></b>
             </div>
+            <div id="xetnghiem-container">
             <table>
                 <thead>
                 <tr>
@@ -287,23 +292,28 @@
                     <tr>
                         <td>Nhóm máu</td>
                         <td id="xetnghiemmau12">Đang chờ</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Rh</td>
                         <td id ="xetnghiemmau16">Đang chờ</td>
+                        <td></td>
+                        <td></td>
                     </tr>
     
                 </tbody>
             </table>
-            <div class="container-button">
+            </div>
                 <div>
                     <label for="date_xetnghiem">Ngày xét nghiệm: </label>
                     <input type="date" id="date_xetnghiem" name="date_xetnghiem" required>
                 </div>
-                <button type="button" id="get_xetnghiemmau">Lấy kết quả</button>
+                <div class="container-button">
+                    <button type="button" id="get_xetnghiemmau">Lấy kết quả</button>
+                </div>
             </div>
         </form>
-    
     </div>
 
     <div id="container-ring">
