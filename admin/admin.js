@@ -40,7 +40,8 @@ const firebaseConfig = {
 			alert("Bạn đã đăng nhập thành công với quyền quản trị viên")
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-			
+			document.getElementById('banner').style.display = 'block';
+			document.getElementById('content').style.padding = '0px 0px';
 			// document.getElementById('createaccount').style.display = 'block';
 			// document.getElementById('listhealthcare').style.display = 'block';
 			// document.getElementById('listpatient').style.display = 'block';
@@ -55,6 +56,8 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("listhealthcare").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -66,6 +69,8 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("listpatient").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -78,7 +83,8 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
-
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("manager_med").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -90,6 +96,8 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("option_kho_button").addEventListener("click", function() {
 				if(document.getElementById('option_kho').value == "Input_Med") {

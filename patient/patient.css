@@ -62,6 +62,19 @@
       transform: rotate(0deg);
     }
   }
+
+  #banner{
+    height: 100vh;  
+    background: url(/admin/img/Home-Page-Banner.png) no-repeat center center;
+  }
+  #banner h1{
+    color: #fff;
+    font-size: 2.5em;
+    text-align: right;  
+    padding-top: 20%;
+    margin-right: 5%;
+  }
+  
   .login {
     position: absolute;
     width: 300px;
