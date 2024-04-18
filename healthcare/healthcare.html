@@ -142,7 +142,7 @@
                     <span id="address_tracuu"></span>
                 </div>
                 <div class="info-line">
-                    <label for="gender">Giới tính</label>
+                    <label for="gender">Giới tính: </label>
                     <span id="gender_tracuu"></span>
                 </div>
                 <div class="info-line">
@@ -366,21 +366,20 @@
                     <label for="specialization">Khoa khám bệnh: </label>
                     <span id="specialization_patient"></span>
                 </div>
-                <div class="info-line">
-                    <label for="status">Trạng thái: </label>
-                    <span id="status_patient"></span>
-                    <select id="status_input" name="status" required>
-                        <option value="" disabled selected hidden>Chọn trạng thái</option>
-                        <option value="Chưa khám">Chưa khám</option>
-                        <option value="Đã khám">Đã khám</option>
-                        <option value="Nhập viện">Nhập viện</option>
-                        <option value="Xuất viện">Xuất viện</option>
-                    </select>
-                </div>
+                <label for="status">Trạng thái: </label>
+                <span id="status_patient"></span>
+                <select id="status_input" name="status" required>
+                    <option value="" disabled selected hidden>Chọn trạng thái</option>
+                    <option value="Chưa khám">Chưa khám</option>
+                    <option value="Đã khám">Đã khám</option>
+                    <option value="Nhập viện">Nhập viện</option>
+                    <option value="Xuất viện">Xuất viện</option>
+                </select>
                 <div>
                     <div>
-                        <label for="xetngiemmau">Xét nghiệm máu:</label>
-                        <input type="checkbox" id="xetnghiem_input" name="tests" $CHECKED_XETNGHIEM$><br>
+                        <label for="xetngiemmau">
+                            <input type="checkbox" id="xetnghiem_input" name="tests" $CHECKED_XETNGHIEM$> Xét nghiệm máu
+                        </label>
                     </div>
                 </div>
                 <div>
