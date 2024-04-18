@@ -40,8 +40,7 @@ const firebaseConfig = {
 			alert("Bạn đã đăng nhập thành công với quyền quản trị viên")
 			document.getElementById('slide-menu').style.display = 'block';
 			document.getElementsByClassName('menu-trigger')[0].style.display = 'inline-block';
-			document.getElementById('banner').style.display = 'block';
-			document.getElementById('content').style.padding = '0px 0px';
+			
 			// document.getElementById('createaccount').style.display = 'block';
 			// document.getElementById('listhealthcare').style.display = 'block';
 			// document.getElementById('listpatient').style.display = 'block';
@@ -56,8 +55,6 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("listhealthcare").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -69,8 +66,37 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
+				if(check_health == 1) {return;}
+				get(ref(database, 'healthcares/')).then((snapshot) => {
+					if(snapshot.val()) {
+						var data = snapshot.val();
+						var table = document.getElementById("listhealthcaretable");
+						var i = 0;
+						for(var key in data) {
+							var row = table.insertRow(i);
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							var cell5 = row.insertCell(4);
+							var cell6 = row.insertCell(5);
+							var cell7 = row.insertCell(6);
+							var cell8 = row.insertCell(7);
+							var cell9 = row.insertCell(8);
+							cell1.innerHTML = i+1;
+							cell2.innerHTML = data[key].name;
+							cell3.innerHTML = data[key].gender;
+							cell4.innerHTML = data[key].dateofbirth;
+							cell5.innerHTML = data[key].chuyenmon
+							cell6.innerHTML = data[key].hocvi;
+							cell7.innerHTML = data[key].specialization;
+							cell8.innerHTML = data[key].phone;
+							cell9.innerHTML = data[key].address;
+							i++;
+						}
+					}
+				})
+				check_health = 1;
 			});
 			document.getElementById("listpatient").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -83,8 +109,79 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
+				if(check_patient == 1) {return;}
+				get(ref(database, 'users/')).then((snapshot) => {
+					if(snapshot.val()) {
+						var data = snapshot.val();
+						var table = document.getElementById("listpatienttable");
+						var i = 0;
+						var check_history=0;
+						for(var key in data) {
+							var row = table.insertRow(i);
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							var cell3 = row.insertCell(2);
+							var cell4 = row.insertCell(3);
+							var cell5 = row.insertCell(4);
+							var cell6 = row.insertCell(5);
+							var cell7 = row.insertCell(6);
+							cell1.innerHTML = i+1;
+							cell2.innerHTML = data[key].name;
+							cell3.innerHTML = data[key].gender;
+							cell4.innerHTML = data[key].dateofbirth;
+							cell5.innerHTML = data[key].phone;
+							cell6.innerHTML = data[key].address;
+							var button = document.createElement("button");
+							button.innerHTML = "Xem chi tiết";
+							button.type="button";
+							button.id = key;
+							cell7.appendChild(button);
+							i++;
+
+							document.getElementById(key).addEventListener("click", function() {
+								check_history=0;
+								var table = document.getElementById("table_history");
+								table.innerHTML=""; 
+								var id = this.id;
+								document.getElementById("lichsubenhan").style.display = "block";
+								get(ref(database, 'users/' + id)).then((snapshot) => {
+									document.getElementById("userid").innerHTML = id;
+									document.getElementById("name_lichsu").innerHTML = snapshot.val().name;
+								});
+								if(check_history==1) return;
+								var table = document.getElementById("table_history");
+								get(ref(database, 'users/' +id+'/history/')).then((snapshot) => {
+								var data = snapshot.val();
+								var i = 0;
+									for (var key in data) {
+										var row = table.insertRow(i);
+										var cell1 = row.insertCell(0);
+										var cell2 = row.insertCell(1);
+										var cell3 = row.insertCell(2);
+										var cell4 = row.insertCell(3);
+										var cell5 = row.insertCell(4);
+										var cell6 = row.insertCell(5);
+										var cell7 = row.insertCell(6);
+										var cell8 = row.insertCell(7);
+										cell1.innerHTML = data[key].date;
+										cell2.innerHTML = data[key].time;
+										cell3.innerHTML = data[key].specialization;
+										cell4.innerHTML = data[key].yourhealthcare;
+										cell5.innerHTML = data[key].status;
+										cell6.innerHTML = data[key].xetnghiem_mau;
+										cell7.innerHTML = data[key].chandoan;
+										cell8.innerHTML = data[key].dieutri;
+										i++;
+									}
+								});
+								check_history=1;
+								
+							});
+						}
+					}
+				})
+				check_patient=1;
+
 			});
 			document.getElementById("manager_med").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
@@ -96,8 +193,6 @@ const firebaseConfig = {
 				document.getElementById('tracuu_thuoc').style.display = 'none';
 				document.getElementById('tracuu_thietbi').style.display = 'none';
 				document.getElementById("lichsubenhan").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("option_kho_button").addEventListener("click", function() {
 				if(document.getElementById('option_kho').value == "Input_Med") {
@@ -105,12 +200,60 @@ const firebaseConfig = {
 					document.getElementById('Machine').style.display = 'none';
 					document.getElementById('tracuu_thuoc').style.display = 'block';
 					document.getElementById('tracuu_thietbi').style.display = 'none';
+					if(check_med==1) return;
+				 	get(ref(database, 'Medicines/')).then((snapshot) => {
+					 	check_med=1;
+					 	var data = snapshot.val();
+					 	var table = document.getElementById("tablemed");
+					 	var i = 0;
+					 	for(var key in data) {
+							var row = table.insertRow(i);
+							var cell1 = row.insertCell(0);
+						 	var cell2 = row.insertCell(1);
+						 	var cell3 = row.insertCell(2);
+						 	var cell4 = row.insertCell(3);
+						 	var cell5 = row.insertCell(4);
+						 	var cell6 = row.insertCell(5);
+						 	var cell7 = row.insertCell(6);
+						 	cell1.innerHTML = i+1;
+						 	cell2.innerHTML = key;
+						 	cell3.innerHTML = data[key].name;
+						 	cell4.innerHTML = data[key].quantity;
+						 	cell5.innerHTML = data[key].type;
+						 	cell6.innerHTML = data[key].shelf;
+							getExpire(data[key].expiry,cell7);
+						 	i++;
+					 	}
+				 	}); 
 				}
 				if(document.getElementById('option_kho').value == "Input_Machine") {
 					document.getElementById('Medsreg').style.display = 'none';
 					document.getElementById('Machine').style.display = 'block';
 					document.getElementById('tracuu_thuoc').style.display = 'none';
 					document.getElementById('tracuu_thietbi').style.display = 'block';
+					if(check_machine==1) return;
+				 	get(ref(database, 'Machines/')).then((snapshot) => {
+					 	check_machine=1;
+					 	var data = snapshot.val();
+					 	var table = document.getElementById("tablemachine");
+					 	var i = 0;
+					 	for(var key in data) {
+						 	var row = table.insertRow(i);
+						 	var cell1 = row.insertCell(0);
+						 	var cell2 = row.insertCell(1);
+						 	var cell3 = row.insertCell(2);
+						 	var cell4 = row.insertCell(3);
+						 	var cell5 = row.insertCell(4);
+						 	var cell6 = row.insertCell(5);
+						 	cell1.innerHTML = i+1;
+						 	cell2.innerHTML = key;
+						 	cell3.innerHTML = data[key].name;
+						 	cell4.innerHTML = data[key].quantity;;
+						 	cell5.innerHTML = data[key].shelf;
+						 	getExpire(data[key].expiry,cell6);
+						 	i++;
+					 	}
+				 	}); 
 				}
 			});
 
@@ -183,6 +326,7 @@ const firebaseConfig = {
 						var data = snapshot.val();
 						var table = document.getElementById("listpatienttable");
 						var i = 0;
+						var check_history=0;
 						for(var key in data) {
 							var row = table.insertRow(i);
 							var cell1 = row.insertCell(0);
@@ -206,15 +350,43 @@ const firebaseConfig = {
 							i++;
 
 							document.getElementById(key).addEventListener("click", function() {
+								check_history=0;
 								var table = document.getElementById("table_history");
 								table.innerHTML=""; 
-								check_history=0;
 								var id = this.id;
 								document.getElementById("lichsubenhan").style.display = "block";
 								get(ref(database, 'users/' + id)).then((snapshot) => {
 									document.getElementById("userid").innerHTML = id;
 									document.getElementById("name_lichsu").innerHTML = snapshot.val().name;
 								});
+								if(check_history==1) return;
+								var table = document.getElementById("table_history");
+								get(ref(database, 'users/' +id+'/history/')).then((snapshot) => {
+								var data = snapshot.val();
+								var i = 0;
+									for (var key in data) {
+										var row = table.insertRow(i);
+										var cell1 = row.insertCell(0);
+										var cell2 = row.insertCell(1);
+										var cell3 = row.insertCell(2);
+										var cell4 = row.insertCell(3);
+										var cell5 = row.insertCell(4);
+										var cell6 = row.insertCell(5);
+										var cell7 = row.insertCell(6);
+										var cell8 = row.insertCell(7);
+										cell1.innerHTML = data[key].date;
+										cell2.innerHTML = data[key].time;
+										cell3.innerHTML = data[key].specialization;
+										cell4.innerHTML = data[key].yourhealthcare;
+										cell5.innerHTML = data[key].status;
+										cell6.innerHTML = data[key].xetnghiem_mau;
+										cell7.innerHTML = data[key].chandoan;
+										cell8.innerHTML = data[key].dieutri;
+										i++;
+									}
+								});
+								check_history=1;
+								
 							});
 						}
 					}
@@ -226,40 +398,8 @@ const firebaseConfig = {
 				var table = document.getElementById("listpatienttable");
 				table.innerHTML = "";
 				check_patient = 0;
+				check_history=0;
 			})
-
-			var check_history=0;
-			document.getElementById("get_history").addEventListener("click", function() {
-				if(check_history==1) return;
-				var table = document.getElementById("table_history");
-				var getid = document.getElementById('userid').innerHTML.valueOf();
-				get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
-				var data = snapshot.val();
-				var i = 0;
-					for (var key in data) {
-						var row = table.insertRow(i);
-						var cell1 = row.insertCell(0);
-						var cell2 = row.insertCell(1);
-						var cell3 = row.insertCell(2);
-						var cell4 = row.insertCell(3);
-						var cell5 = row.insertCell(4);
-						var cell6 = row.insertCell(5);
-						var cell7 = row.insertCell(6);
-						var cell8 = row.insertCell(7);
-						cell1.innerHTML = data[key].date;
-						cell2.innerHTML = data[key].time;
-						cell3.innerHTML = data[key].specialization;
-						cell4.innerHTML = data[key].yourhealthcare;
-						cell5.innerHTML = data[key].status;
-						cell6.innerHTML = data[key].xetnghiem_mau;
-						cell7.innerHTML = data[key].chandoan;
-						cell8.innerHTML = data[key].dieutri;
-						i++;
-					}
-				});
-				check_history=1;
-			}); 
-
 			document.getElementById("MedUpdate").addEventListener("click", function() {
 				update(ref(database, 'Medicines/' + document.getElementById("MedID").value), {
 				 name: document.getElementById("MedName").value,
@@ -291,31 +431,31 @@ const firebaseConfig = {
 			 }
 			 var check_med = 0;
 			 document.getElementById("getMed").addEventListener("click", function() {
-			   if(check_med==1) return;
-				 get(ref(database, 'Medicines/')).then((snapshot) => {
-					 check_med=1;
-					 var data = snapshot.val();
-					 var table = document.getElementById("tablemed");
-					 var i = 0;
-					 for(var key in data) {
-						 var row = table.insertRow(i);
-						 var cell1 = row.insertCell(0);
-						 var cell2 = row.insertCell(1);
-						 var cell3 = row.insertCell(2);
-						 var cell4 = row.insertCell(3);
-						 var cell5 = row.insertCell(4);
-						 var cell6 = row.insertCell(5);
-						 var cell7 = row.insertCell(6);
-						 cell1.innerHTML = i+1;
-						 cell2.innerHTML = key;
-						 cell3.innerHTML = data[key].name;
-						 cell4.innerHTML = data[key].quantity;
-						 cell5.innerHTML = data[key].type;
-						 cell6.innerHTML = data[key].shelf;
-						 getExpire(data[key].expiry,cell7);
-						 i++;
-					 }
-				 }); 
+				if(check_med==1) return;
+				get(ref(database, 'Medicines/')).then((snapshot) => {
+					check_med=1;
+					var data = snapshot.val();
+					var table = document.getElementById("tablemed");
+					var i = 0;
+					for(var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						cell1.innerHTML = i+1;
+						cell2.innerHTML = key;
+						cell3.innerHTML = data[key].name;
+						cell4.innerHTML = data[key].quantity;
+						cell5.innerHTML = data[key].type;
+						cell6.innerHTML = data[key].shelf;
+						getExpire(data[key].expiry,cell7);
+						i++;
+					}
+				}); 
 			 });
 			 document.getElementById("hiddenMed").addEventListener("click", function() {
 			   check_med=0;
