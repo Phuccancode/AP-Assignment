@@ -274,20 +274,6 @@ div#content {
   box-shadow: -3px 0 6px #4a5562;
   transition: all 300ms;
 }
-
-#banner{
-  height: 100vh;  
-  background: url(/admin/img/Home-Page-Banner.png) no-repeat center center;
-}
-#banner h1{
-  color: #fff;
-  font-size: 2.5em;
-  text-align: right;  
-  padding-top: 20%;
-  margin-right: 5%;
-}
-
-
 div#content div.menu-trigger {
   position: fixed;
   top: 10px;
@@ -335,10 +321,3 @@ body.menu-active div#content .menu-trigger {
 
 
 /* *CSS Login end */
-
-
-/* *Khothuoc start */
-
-
-
-/* *Khothuoc end */

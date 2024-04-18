@@ -6,11 +6,11 @@ table, th, td {
 .table-form table {
 width: 100%;
 border-collapse: collapse;
-background: #684a80;
+background: linear-gradient(90deg, #516e6e, #545d88, #684a80);
 }
 
 .table-form thead {
-background: #583b6e;
+background: linear-gradient(90deg, #365353, #353d63, #583b6e);
 }
 
 /* Style the table headers */
@@ -50,7 +50,7 @@ background-color: #d6f8fa;
 
 /* Change the background color on hover */
 .table-form tbody tr:hover {
-  background: #4a325c;
+  background: linear-gradient(90deg, #0c4b4b, #2c3764, #4a325c);
   color: white;
   border-left: 1px solid white;
   border-right: 1px solid white; 
@@ -79,11 +79,11 @@ font-size: 16px;
 font-weight: bold;
 border-radius:  3px;
 margin-left: 5px;
-background: rgb(177, 112, 190);
+background: linear-gradient(90deg, rgb(96, 97, 156), rgb(120, 54, 133));
 }
 
 .button-show-and-hide:hover{  
-background: rgb(123, 56, 136);
+background: linear-gradient(90deg, rgb(52, 52, 87), rgb(87, 39, 97));
 color: white;
 cursor: pointer;
 
@@ -152,17 +152,6 @@ cursor: pointer;
     100% {
       transform: rotate(0deg);
     }
-  }
-  #banner{
-    height: 100vh;  
-    background: url(/admin/img/Home-Page-Banner.png) no-repeat center center;
-  }
-  #banner h1{
-    color: #fff;
-    font-size: 2.5em;
-    text-align: right;  
-    padding-top: 20%;
-    margin-right: 5%;
   }
   .login {
     position: absolute;
@@ -394,7 +383,7 @@ label {
 
 input, select {
   width: 100%;
-  padding: 0.5em;
+  padding: 1em;
   line-height: 1.4;
   background-color: #f9f9f9;
   border: 1px solid #e5e5e5;
@@ -451,9 +440,9 @@ input:focus {
 /* *Patient-Info start */
 
 #patient-container {
-  max-width: 56em;
+  max-width: 38em;
   padding: 1em 3em 5em 3em;
-  margin: 2em auto;
+  margin: 0em auto;
   background-color: #fff;
   border-radius: 4.2px;
   box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
@@ -472,105 +461,3 @@ input:focus {
 } */
 
 /* *Patient-Info end */
-
-/* *Lich_su_benh_an start */
-
-#history-container {
-  border-radius: 4.2px;
-  border: 1px solid #8b5f00;
-  margin: 0px -1.5em 0px -1.5em;
-}
-
-/* style table */
-#lichsubenhan table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-/* style header */
-#lichsubenhan table th {
-  padding: 5px 0px 5px 0px;
-  color: #f0a500;
-  font-size: 16px;
-}
-
-/* style cells */
-#lichsubenhan table td {
-  padding: 10px 0px 10px 0px;
-}
-
-#lichsubenhan table tbody tr:nth-child(odd) {
-  background-color: #eeca7c;  
-}
-
-#lichsubenhan table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 3.1px;
-}
-
-#lichsubenhan table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 3.1px;
-}
-
-#get_history {
-  display: inline-block;
-  padding: 8px 16px;
-  margin-top: 10px; 
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius:  3px;
-  margin-left: 5px;
-  background: #f7ba36;
-}
-
-#get_history:hover {
-  background: #e09c0a;
-  color: white;
-  cursor: pointer;
-}
-
-/* *Lich_su_benh_an end */
-
-/* *Ket_qua_xet_nghiem start */
-
-#xetnghiem-container {
-  max-width: 38em;
-  position: relative;
-  border-radius: 4.2px;
-  border: 1px solid #8b5f00;
-  margin: 0px -1.5em 0px -1.5em;
-}
-
-/* style table */
-#ketquaxetnghiem table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-/* style header */
-#ketquaxetnghiem table th {
-  padding: 5px 0px 5px 0px;
-  color: #f0a500;
-  font-size: 16px;
-}
-
-/* style cells */
-#ketquaxetnghiem table td {
-  padding: 10px 0px 10px 0px;
-}
-
-#ketquaxetnghiem table tbody tr:nth-child(even) {
-  background-color: #eeca7c;  
-}
-
-#ketquaxetnghiem table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 3.1px;
-}
-
-#ketquaxetnghiem table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 3.1px;
-}
-
-/* *Ket_qua_xet_nghiem end */

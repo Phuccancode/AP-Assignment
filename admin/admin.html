@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admins.css">
     <script src="admin.js" type="module"></script>
 </head>
 <body>
@@ -40,9 +40,6 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div id="banner" style="display:none">
-        <h1>Welcome you, Admin</h1>
         </div>
         <div class="table-form" id="list_patient" style="display:none">
             <form>
@@ -90,7 +87,6 @@
                 <tbody id="table_history">
                 </tbody>
             </table>
-            <button type="button" id="get_history" name="get_history">Xem</button>
         </div>
         
         <div class="table-form" id="list_healthcare" style="display:none">
@@ -119,15 +115,15 @@
                 </div>
             </form>
         </div>
+    </div>
 
-        <div id ="Nhapkho" style="display: none;">
-            <label for="option">Lựa chọn</label>
-            <select id="option_kho" name="option_kho">
-                <option value="Input_Med">Kho thuốc</option>
-                <option value="Input_Machine">Kho thiết bị</option>
-            </select>
-            <button type="button" id="option_kho_button">Chọn</button>
-        </div>
+    <div id ="Nhapkho" style="display: none;">
+        <label for="option">Lựa chọn</label>
+        <select id="option_kho" name="option_kho">
+            <option value="Input_Med">Kho thuốc</option>
+            <option value="Input_Machine">Kho thiết bị</option>
+        </select>
+        <button type="button" id="option_kho_button">Chọn</button>
     </div>
 
     <div id="Medsreg" style="display:none">
