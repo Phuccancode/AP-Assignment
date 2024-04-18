@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Account</title>
-    <link rel="stylesheet" href="patient.css">
+    <link rel="stylesheet" href="patients.css">
     <script src="patient.js" type="module"></script>
 </head>
 <body>
@@ -21,9 +21,7 @@
 
     <div id="content">
         <div class="menu-trigger" style="display: none;"></div>
-        <div id="banner" style="display:none">
-            <h1>Welcome you, Patient</h1>
-            </div>
+        
         <div id="form-container" style="display:none">
             <form id="formupdate">
                 <h2>Cập nhật thông tin tài khoản dành cho bệnh nhân</h2>
@@ -162,9 +160,10 @@
                         <th>Khoa khám</th>
                         <th>Nhân viên y tế phụ trách</th>
                         <th>Trạng thái</th>
-                        <th>Xét nghiệm máu</th>
                         <th>Chẩn đoán</th>
                         <th>Phương pháp điều trị</th>
+                        <th>Xét nghiệm</th>
+                        
                     </tr>
                 </thead>
                 <tbody id="table_history">
@@ -295,16 +294,25 @@
     
                 </tbody>
             </table>
-            <div class="container-button">
-                <div>
-                    <label for="date_xetnghiem">Ngày xét nghiệm: </label>
-                    <input type="date" id="date_xetnghiem" name="date_xetnghiem" required>
-                </div>
-                <button type="button" id="get_xetnghiemmau">Lấy kết quả</button>
+        </form>
+        <form id="xrayres" style="display: none;">
+            <h1>Kết quả chụp X-Quang</h1>
+            <div>
+                <label >Ngày chụp: </label>
+                <b><span id="ngaychupxquang">Chưa có</span></b>
+            </div>
+            <div>
+                <label>Mô tả: </label>
+                <span id="des">Chưa có</span>
+            </div>
+            <div>
+                <label>Ảnh chụp: </label>
+                <br>
+                <img id="pic" src="">
             </div>
         </form>
-    
     </div>
+    
 
     <div id="container-ring">
         <div class="ring">
