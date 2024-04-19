@@ -26,6 +26,9 @@ const firebaseConfig = {
 	  const database = getDatabase(app);
 	  console.log(app);
 
+	  var check_health = 0;
+	  var check_patient = 0;
+
 	  document.getElementById("login").addEventListener("click", function() {
 		var email =  document.getElementById("email").value;
 		var password = document.getElementById("password").value;
@@ -45,6 +48,80 @@ const firebaseConfig = {
 			// document.getElementById('createaccount').style.display = 'block';
 			// document.getElementById('listhealthcare').style.display = 'block';
 			// document.getElementById('listpatient').style.display = 'block';
+
+			get(ref(database, 'healthcares/')).then((snapshot) => {
+				if(snapshot.val()) {
+					var data = snapshot.val();
+					var table = document.getElementById("listhealthcaretable");
+					var i = 0;
+					for(var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						var cell8 = row.insertCell(7);
+						var cell9 = row.insertCell(8);
+						cell1.innerHTML = i+1;
+						cell2.innerHTML = data[key].name;
+						cell3.innerHTML = data[key].gender;
+						cell4.innerHTML = data[key].dateofbirth;
+						cell5.innerHTML = data[key].chuyenmon
+						cell6.innerHTML = data[key].hocvi;
+						cell7.innerHTML = data[key].specialization;
+						cell8.innerHTML = data[key].phone;
+						cell9.innerHTML = data[key].address;
+						i++;
+					}
+				}
+			})
+			check_health = 1;
+
+			get(ref(database, 'users/')).then((snapshot) => {
+				if(snapshot.val()) {
+					var data = snapshot.val();
+					var table = document.getElementById("listpatienttable");
+					var i = 0;
+					for(var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						cell1.innerHTML = i+1;
+						cell2.innerHTML = data[key].name;
+						cell3.innerHTML = data[key].gender;
+						cell4.innerHTML = data[key].dateofbirth;
+						cell5.innerHTML = data[key].phone;
+						cell6.innerHTML = data[key].address;
+						var button = document.createElement("button");
+						button.innerHTML = "Xem chi tiết";
+						button.type="button";
+						button.id = key;
+						cell7.appendChild(button);
+						i++;
+
+						document.getElementById(key).addEventListener("click", function() {
+							var table = document.getElementById("table_history");
+							table.innerHTML=""; 
+							check_history=0;
+							var id = this.id;
+							document.getElementById("lichsubenhan").style.display = "block";
+							get(ref(database, 'users/' + id)).then((snapshot) => {
+								document.getElementById("userid").innerHTML = id;
+								document.getElementById("name_lichsu").innerHTML = snapshot.val().name;
+							});
+						});
+					}
+				}
+			})
+			check_patient=1;
 			
 			document.getElementById("createaccount").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'flex';
@@ -135,8 +212,7 @@ const firebaseConfig = {
 					alert(error);
 				});
 			});
-			var check_health = 0;
-			var check_patient = 0;
+			
 			document.getElementById("getdata_health").addEventListener("click", function() {
 				if(check_health == 1) {return;}
 				get(ref(database, 'healthcares/')).then((snapshot) => {
