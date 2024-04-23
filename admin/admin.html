@@ -63,34 +63,39 @@
                     </tbody>
                 </table>
                 <div class="container-button">
-                    <button type="button" id="getdata_patient"
-                    class="button-show-and-hide" name="getdata">Hiện</button>
-                    <button type="button" id="hidden_patient" 
-                    class="button-show-and-hide" name="hidden">Ẩn</button>
+                    <button type="button" class="button-show-and-hide" id="show-hide-patient"></button>
                 </div>
             </form>
         </div>
         <div id = "userid" style="display:none"></div>
-        <div id = "lichsubenhan" style="display:none">
-            <h1><label for="name_lichsu">Lịch sử khám bệnh của </label>
-                <span id="name_lichsu"></span></h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ngày khám</th>
-                        <th>Giờ khám</th>
-                        <th>Khoa khám</th>
-                        <th>Nhân viên y tế phụ trách</th>
-                        <th>Trạng thái</th>
-                        <th>Xét nghiệm máu</th>
-                        <th>Chẩn đoán</th>
-                        <th>Phương pháp điều trị</th>
-                    </tr>
-                </thead>
-                <tbody id="table_history">
-                </tbody>
-            </table>
-            <button type="button" id="get_history" name="get_history">Xem</button>
+        
+        <div id="patient-container" style="display:none">
+            <div id = "lichsubenhan">
+                <h1><label for="name_lichsu">Lịch sử khám bệnh của </label>
+                    <span id="name_lichsu"></span></h1>
+                <div id="history-container">
+                <table>
+                    <thead>
+                        <tr id="history-header">
+                            <th style="width: 6.4em;">Ngày khám</th>
+                            <th>Giờ khám</th>
+                            <th>Khoa khám</th>
+                            <th style="width: 8.4em;">Nhân viên y tế phụ trách</th>
+                            <th>Trạng thái</th>
+                            <th style="width: 7em;">Xét nghiệm máu</th>
+                            <th style="width: 5em;">X-Quang</th>
+                            <th style="width: 7em;">Chẩn đoán</th>
+                            <th style="width: 7.4em;">Phương pháp điều trị</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_history">
+                    </tbody>
+                </table>
+                </div>
+                <div class="container-button">
+                    <button type="button" id="get_history" name="get_history">Xem</button>
+                </div>
+            </div>
         </div>
         
         <div class="table-form" id="list_healthcare" style="display:none">
@@ -114,146 +119,147 @@
                     </tbody>
                 </table>
                 <div class="container-button">
-                    <button type="button" class="button-show-and-hide" id="getdata_health" name="getdata">Hiện</button>
-                    <button type="button" class="button-show-and-hide" id="hidden_health" name="hidden">Ẩn</button>
+                    <button type="button" class="button-show-and-hide" id="show-hide-health"></button>
                 </div>
             </form>
         </div>
 
-        <div id ="Nhapkho" style="display: none;">
-            <label for="option">Lựa chọn</label>
-            <select id="option_kho" name="option_kho">
-                <option value="Input_Med">Kho thuốc</option>
-                <option value="Input_Machine">Kho thiết bị</option>
-            </select>
-            <button type="button" id="option_kho_button">Chọn</button>
-        </div>
-    </div>
+        <div id="khothuoc-container" style="display: none;">
+            <div id ="Nhapkho">
+                <label for="option">Lựa chọn </label>
+                <select id="option_kho" name="option_kho">
+                    <option value="Input_Med">Kho thuốc</option>
+                    <option value="Input_Machine">Kho thiết bị</option>
+                </select>
+                <button type="button" id="option_kho_button">Chọn</button>
+            </div>
 
-    <div id="Medsreg" style="display:none">
-        <form>
-            <h1> Nhập thông tin thuốc </h1>
-            <label for="MedID"> ID thuốc: </label>
-            <div>
-                <input type="text" id="MedID" name="MedID" required>
-            </div>
-            <label for="MedName"> Tên thuốc: </label>
-            <div>
-                <input type="text" id="MedName" name="MedName" required>
-            </div>
-            <label for="MedQuantity"> Số lượng: </label>
-            <div>
-                <input type="text" id="MedQuantity" name="MedQuantity" required>
-            </div>
-            <label for="MedType"> Loại: </label>
-            <div>
-                <input type="text" id="MedType" name="MedType" required>
-            </div>
-            <label for="MedShelf"> Kệ: </label>
-            <div>
-                <input type="text" id="MedShelf" name="MedShelf" required>
-            </div>
-            <label for="MedExpiry"> Hạn sử dụng: </label>
-            <div>
-                <input type="date" id="MedExpiry" name="MedExpiry" required>
-            </div>
-            <button id="MedUpdate" type ="button"> Nhập kho </button>
-        </form>
-    </div>
-    <div id="Machine" style="display:none">
-        <form>
-            <h1> Nhập thông tin thiết bị </h1>
-            <label for="MachineID"> ID thiết bị: </label>
-            <div>
-                <input type="text" id="MachineID" name="MachineID" required>
-            </div>
-            <label for="MedName"> Tên thiết bị: </label>
-            <div>
-                <input type="text" id="MachineName" name="MachineName" required>
-            </div>
-            <label for="MedQuantity"> Số lượng: </label>
-            <div>
-                <input type="text" id="MachineQuantity" name="MachineQuantity" required>
-            </div>
-            <label for="MedShelf"> Kho chứa: </label>
-            <div>
-                <input type="text" id="MachineShelf" name="MachineShelf" required>
-            </div>
-            <label for="MachineExpiry"> Hạn sử dụng: </label>
-            <div>
-                <input type="date" id="MachineExpiry" name="MachineExpiry" required>
-            </div>
-            <button id="MachineUpdate" type ="button"> Nhập kho </button>
-        </form>
-    </div>
-
-    <div id = "tracuu_thietbi" style="display: none;">
-        <form >
-            <h1>Danh sách thiết bị trong kho</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>ID thiết bị</th>
-                    <th>Tên thiết bị</th>
-                    <th>Số lượng</th>
-                    <th>Kho chứa</th>
-                    <th>Hạn sử dụng</th>
-                </tr>
-                </thead>
-                <tbody id="tablemachine" style="text-align:center">
-                </tbody>
-            </table>
-            <div class="container-button">
-                <button type="button" id="getMachine">Hiện</button>
-                <button type="button" id="hiddenMachine">Ẩn</button>
-            </div>
-        </form>
-        <div class="container-button">
-            <label for="MachineID_xoa"> ID thiết bị cần xóa: </label>
-                <div>
-                    <input type="text" id="MachineID_xoa" name="MachineID_xoa" required>
+            <div id="thuoc-container" style="display:none">
+                <div id="Medsreg">
+                    <form>
+                        <h1> Nhập thông tin thuốc </h1>
+                        <label for="MedID"> ID thuốc: </label>
+                        <div>
+                            <input type="text" id="MedID" name="MedID" required>
+                        </div>
+                        <label for="MedName"> Tên thuốc: </label>
+                        <div>
+                            <input type="text" id="MedName" name="MedName" required>
+                        </div>
+                        <label for="MedQuantity"> Số lượng: </label>
+                        <div>
+                            <input type="text" id="MedQuantity" name="MedQuantity" required>
+                        </div>
+                        <label for="MedType"> Loại: </label>
+                        <div>
+                            <input type="text" id="MedType" name="MedType" required>
+                        </div>
+                        <label for="MedShelf"> Kệ: </label>
+                        <div>
+                            <input type="text" id="MedShelf" name="MedShelf" required>
+                        </div>
+                        <label for="MedExpiry"> Hạn sử dụng: </label>
+                        <div>
+                            <input type="date" id="MedExpiry" name="MedExpiry" required>
+                        </div>
+                        <div class="container-button">
+                            <button id="MedUpdate" type ="button">Nhập kho</button>
+                        </div>
+                    </form>
                 </div>
-            <button type="button" id="delMachine">Xóa</button>
-        </div>
-    </div>
-
-    <div id = "tracuu_thuoc" style="display: none;">
-        <form >
-            <h1>Danh sách thuốc trong kho</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>ID thuốc</th>
-                    <th>Tên thuốc</th>
-                    <th>Số lượng</th>
-                    <th>Loại</th>
-                    <th>Kệ</th>
-                    <th>Hạn sử dụng</th>
-                </tr>
-                </thead>
-                <tbody id="tablemed" style="text-align:center">
-                </tbody>
-            </table>
-            <div class="container-button">
-                <button type="button" id="getMed">Hiện</button>
-                <button type="button" id="hiddenMed">Ẩn</button>
-            </div>
-        </form>
-        <div class="container-button">
-            <label for="MedID_xoa"> ID thuốc cần xóa: </label>
-                <div>
-                    <input type="text" id="MedID_xoa" name="MedID_xoa" required>
+        
+                <div id = "tracuu_thuoc">
+                    <form >
+                        <h1>Danh sách thuốc trong kho</h1>
+                        <div id = "bangthuoc">
+                            <table>
+                                <thead>
+                                <tr id = "thuoc-header">
+                                    <th>STT</th>
+                                    <th>ID thuốc</th>
+                                    <th>Tên thuốc</th>
+                                    <th>Số lượng</th>
+                                    <th>Loại</th>
+                                    <th>Kệ</th>
+                                    <th style="width: 18em;">Hạn sử dụng</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tablemed">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="delete-button">
+                            <label for="MedID_xoa"> ID thuốc cần xóa: </label>
+                            <input type="text" id="MedID_xoa" name="MedID_xoa" required>
+                            <button type="button" id="delMed">Xóa</button>
+                            <button type="button"  id="getMed"></button>
+                        </div>
+                    </form>
                 </div>
-            <button type="button" id="delMed">Xóa</button>
+            </div>
+
+            <div id="thietbi-container" style="display: none;">
+                <div id="Machine">
+                    <form>
+                        <h1> Nhập thông tin thiết bị </h1>
+                        <label for="MachineID"> ID thiết bị: </label>
+                        <div>
+                            <input type="text" id="MachineID" name="MachineID" required>
+                        </div>
+                        <label for="MedName"> Tên thiết bị: </label>
+                        <div>
+                            <input type="text" id="MachineName" name="MachineName" required>
+                        </div>
+                        <label for="MedQuantity"> Số lượng: </label>
+                        <div>
+                            <input type="text" id="MachineQuantity" name="MachineQuantity" required>
+                        </div>
+                        <label for="MedShelf"> Kho chứa: </label>
+                        <div>
+                            <input type="text" id="MachineShelf" name="MachineShelf" required>
+                        </div>
+                        <label for="MachineExpiry"> Hạn sử dụng: </label>
+                        <div>
+                            <input type="date" id="MachineExpiry" name="MachineExpiry" required>
+                        </div>
+                        <div class="container-button">
+                            <button id="MachineUpdate" type ="button">Nhập kho</button>
+                        </div>
+                    </form>
+                </div>
+            
+                <div id = "tracuu_thietbi">
+                    <form >
+                        <h1>Danh sách thiết bị trong kho</h1>
+                        <div id = "bangthietbi">
+                            <table>
+                                <thead>
+                                <tr id = "thietbi-header">
+                                    <th>STT</th>
+                                    <th>ID thiết bị</th>
+                                    <th>Tên thiết bị</th>
+                                    <th>Số lượng</th>
+                                    <th>Kho chứa</th>
+                                    <th style="width: 18em;">Hạn sử dụng</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tablemachine">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="delete-button">
+                            <label for="MachineID_xoa"> ID thiết bị cần xóa: </label>
+                            <input type="text" id="MachineID_xoa" name="MachineID_xoa" required>
+                            <button type="button" id="delMachine">Xóa</button>
+                            <button type="button" id="getMachine"></button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+
         </div>
     </div>
-
-
-
-    
-    
 
     <div class="container-ring" id="login-admin">
         <div class="ring">

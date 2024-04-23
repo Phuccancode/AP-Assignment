@@ -59,6 +59,47 @@ const firebaseConfig = {
 			// document.getElementById('tracuutaikhoan').style.display = 'block';
 			// document.getElementById('schedule').style.display = 'block';
 			
+			var check_history=0;
+
+			if (check_history == 0) {
+				var table = document.getElementById("table_history");
+				table.innerHTML = "";
+				get(ref(database, 'users/' + user.uid+'/history/')).then((snapshot) => {
+					var data = snapshot.val();
+					var i = 0;
+					for (var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						var cell8 = row.insertCell(7);
+						var cell9 = row.insertCell(8);
+						cell1.innerHTML = data[key].date;
+						cell2.innerHTML = data[key].time;
+						cell3.innerHTML = data[key].specialization;
+						cell4.innerHTML = data[key].yourhealthcare;
+						cell5.innerHTML = data[key].status;
+						cell6.innerHTML = data[key].xetnghiem_mau;
+						cell7.innerHTML = data[key].chup_xquang;
+						cell8.innerHTML = data[key].chandoan;
+						cell9.innerHTML = data[key].dieutri;
+						i++;
+					}
+					if (table.innerHTML == "") {
+						document.getElementById("get_history").innerHTML = "Không có";	
+					}
+					else {
+						document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+						document.getElementById("get_history").innerHTML = "Thu gọn";
+					}
+				});
+				check_history=1;
+			}
+
 			document.getElementById("updateaccount").addEventListener("click", function() {
 				document.getElementById('form-container').style.display = 'block';
 				document.getElementById('info-container').style.display = 'none';
@@ -77,12 +118,12 @@ const firebaseConfig = {
 				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("history").addEventListener("click", function() {
-				document.getElementById('khambenh-container').style.display = 'block';
 				document.getElementById('form-container').style.display = 'none';
 				document.getElementById('info-container').style.display = 'none';
 				document.getElementById('schedule-container').style.display = 'none';
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
+				document.getElementById('khambenh-container').style.display = 'block';				
 		  	});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
 				document.getElementById('khambenh-container').style.display = 'none';
@@ -115,31 +156,6 @@ const firebaseConfig = {
 				
 			});
 
-			document.getElementById("get_xetnghiemmau").addEventListener("click", function() {
-				var date = document.getElementById("date_xetnghiem").value;
-				if(date!="") {
-					get(ref(database, 'users/' + user.uid+'/xetnghiemmau/'+date)).then((snapshot) => {
-						if(snapshot.val()){
-							var data = snapshot.val();
-							var i = 1;
-							document.getElementById("ngayxetnghiem").innerHTML = date;
-							for (var key in data) {
-								document.getElementById("xetnghiemmau"+i).innerHTML = data[key];
-								i++;
-							}
-							alert("Lấy kết quả thành công");
-						}
-						else {
-							alert("Không có kết quả xét nghiệm!!!");
-						}
-					});
-				}
-				else {
-					alert("Vui lòng nhập ngày tháng năm để tra cứu!!!")
-				}
-			})
-
-
 			document.getElementById("update").addEventListener("click", function() {
 				var name = document.getElementById("name").value;
 				var phone = document.getElementById("phone").value;
@@ -158,7 +174,8 @@ const firebaseConfig = {
 				  });
 			  alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
 			  document.getElementById("form-container").style.display = "none";
-			  });
+			});
+
 			document.getElementById("register").addEventListener("click", function() {
 				var date = document.getElementById("date").value;
 				var time = document.getElementById("time").value;
@@ -187,53 +204,54 @@ const firebaseConfig = {
 			  document.getElementById('schedule-container').style.display = 'none';
 			  });
 
-			  
-			  var check_history=0;
-
 			  document.getElementById("get_history").addEventListener("click", function() {
 				if(check_history==1) {
+					if (document.getElementById("get_history").innerHTML == "Không có") {return;}
 					var table = document.getElementById("table_history");
-					table.innerHTML="";
+					table.innerHTML = "";
 					document.getElementById("history-header").style.borderBottom = "none";
 					document.getElementById("get_history").innerHTML = "Xem";
 					check_history=0;
 				}
 				else {
 					var table = document.getElementById("table_history");
-					table.innerHTML="";
+					table.innerHTML = "";
 					get(ref(database, 'users/' + user.uid+'/history/')).then((snapshot) => {
-						var data = snapshot.val();
-						var i = 0;
-						for (var key in data) {
-							var row = table.insertRow(i);
-							var cell1 = row.insertCell(0);
-							var cell2 = row.insertCell(1);
-							var cell3 = row.insertCell(2);
-							var cell4 = row.insertCell(3);
-							var cell5 = row.insertCell(4);
-							var cell6 = row.insertCell(5);
-							var cell7 = row.insertCell(6);
-							var cell8 = row.insertCell(7);
-							cell1.innerHTML = data[key].date;
-							cell2.innerHTML = data[key].time;
-							cell3.innerHTML = data[key].specialization;
-							cell4.innerHTML = data[key].yourhealthcare;
-							cell5.innerHTML = data[key].status;
-							cell6.innerHTML = data[key].xetnghiem_mau;
-							cell7.innerHTML = data[key].chandoan;
-							cell8.innerHTML = data[key].dieutri;
-							i++;
-						}
-						if (table.innerHTML == "") {
-							document.getElementById("get_history").innerHTML = "Không có";
-						}
-						else {
-							document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
-							document.getElementById("get_history").innerHTML = "Thu gọn";
-						}
-		  			});
-					check_history++;
+					var data = snapshot.val();
+					var i = 0;
+					for (var key in data) {
+						var row = table.insertRow(i);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var cell3 = row.insertCell(2);
+						var cell4 = row.insertCell(3);
+						var cell5 = row.insertCell(4);
+						var cell6 = row.insertCell(5);
+						var cell7 = row.insertCell(6);
+						var cell8 = row.insertCell(7);
+						var cell9 = row.insertCell(8);
+						cell1.innerHTML = data[key].date;
+						cell2.innerHTML = data[key].time;
+						cell3.innerHTML = data[key].specialization;
+						cell4.innerHTML = data[key].yourhealthcare;
+						cell5.innerHTML = data[key].status;
+						cell6.innerHTML = data[key].xetnghiem_mau;
+						cell7.innerHTML = data[key].chup_xquang;
+						cell8.innerHTML = data[key].chandoan;
+						cell9.innerHTML = data[key].dieutri;
+						i++;
+					}
+					if (table.innerHTML == "") {
+						document.getElementById("get_history").innerHTML = "Không có";	
+					}
+					else {
+						document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+						document.getElementById("get_history").innerHTML = "Thu gọn";
+					}
+				  });
+				  check_history=1;
 				}
+				
 			});
 		  })
 		  .catch((error) => {

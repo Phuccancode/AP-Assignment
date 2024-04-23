@@ -1,6 +1,13 @@
 table, th, td {
-    border: 1px solid;
+  border: none;
 }
+
+.table-form table,
+.table-form th,
+.table-form td {
+  border: 1px solid;
+}
+
 /* Style the table */
 .table-form table {
   width: 100%;
@@ -13,6 +20,7 @@ table, th, td {
   color: white;
   padding: 10px;
   text-align: center;
+
 }
 /* Style the table rows */
 .table-form tr {
@@ -25,10 +33,21 @@ table, th, td {
   text-align: center;
 }
 
+.table-form td:last-child button {
+  background: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
 /* Change the background color on hover */
 .table-form tr:hover {
   background-color: #2100dc;
 }
+
+
 
 .table-form{
   color: rgb(255, 255, 255);
@@ -203,7 +222,7 @@ nav#slide-menu {
   left: -30vw;
   bottom: 0;
   display: block;
-  background: linear-gradient(#b6caf7, #e3eeff);
+  background: 361d;
   float: left;  
   width: 100%;
   max-width: 294px;
@@ -218,8 +237,9 @@ nav#slide-menu > ul {
   transition: all 300ms;
 }
 nav#slide-menu > ul li {
-  font-weight: 600;
-  color: #257cd3;
+  color: #fac140;
+  font-size: 16px;
+  font-weight: bold;
   padding: 25px 20px;
 
   cursor: pointer;
@@ -335,9 +355,285 @@ body.menu-active div#content .menu-trigger {
 
 /* *CSS Login end */
 
+/* *Patient-Info start */
+
+#patient-container {
+  max-width: 56em;
+  padding: 1em 3em 2em 3em;
+  margin: 2em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+#patient-container h1 {
+  padding-bottom: 20px;
+}
+
+#patient-container .info-line {
+  padding-bottom: 20px;
+}
+
+/* #patient-info {
+  width: 100%;
+} */
+
+
+
+/* *Patient-Info end */
+
+/* *Lich_su_benh_an start */
+
+#history-container {
+  border-radius: 4.2px;
+  border: 1px solid #8b5f00;
+  margin: 0px -1.5em 0px -1.5em;
+}
+
+/* style table */
+#lichsubenhan table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* style header */
+#lichsubenhan table th {
+  padding: 5px 0px 5px 0px;
+  color: #f0a500;
+  font-size: 16px;
+}
+
+/* style cells */
+#lichsubenhan table td {
+  height: 46.5px;
+}
+
+#lichsubenhan table tbody tr:nth-child(odd) {
+  background-color: #eeca7c;  
+}
+
+#lichsubenhan table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3.1px;
+}
+
+#lichsubenhan table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3.1px;
+}
+
+#get_history {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 10px; 
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius:  3px;
+  background: #f0a500;
+  margin-right: -1.5em;
+}
+
+#get_history:hover {
+  background: #bd8200;
+  color: white;
+  cursor: pointer;
+}
+
+/* *Lich_su_benh_an end */
 
 /* *Khothuoc start */
 
+#khothuoc-container {
+  max-width: 56em;
+  padding: 1em 3em 2em 3em;
+  margin: 2em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
 
+#khothuoc-container h1 {
+  padding-bottom: 20px;
+}
+
+#khothuoc-container .info-line {
+  padding-bottom: 20px;
+}
+
+label {
+  color: #f0a500;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.5em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+input:focus {
+  outline: 0;
+  border-color: #bd8200;
+}
+
+#Nhapkho {
+  display: inline-block;
+  margin-left: 8em;
+}
+
+#Nhapkho #option_kho {
+  width: 30em;
+}
+
+#khothuoc-container button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius:  3px;
+  background: #f0a500;
+}
+
+#khothuoc-container button:hover {
+  background: #bd8200;
+  color: white;
+  cursor: pointer;
+}
+
+/* *Thuoc start */
+
+#bangthuoc {
+  max-width: 48em;
+  position: relative;
+  border-radius: 4.2px;
+  border: 1px solid hsl(41, 100%, 27%);
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+/* style table */
+#bangthuoc table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* style header */
+#bangthuoc table th {
+  padding: 5px;
+  color: #f0a500;
+  font-size: 16px;
+}
+
+/* style cells */
+#bangthuoc table td {
+  padding: 10px 0px 10px 0px;
+}
+
+#bangthuoc table tbody tr:nth-child(odd) {
+  background-color: #eeca7c;  
+}
+
+#bangthuoc table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3.1px;
+}
+
+#bangthuoc table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3.1px;
+}
+
+.delete-button {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.delete-button label {
+  margin-left: 1em;
+}
+
+.delete-button input {
+  width: 10em;
+}
+
+.delete-button {
+  width: 49em;
+}
+
+.delete-button button {
+  padding: 8px 16px;
+  margin-top: 5px; 
+  border: none;
+  font-size: 16px;
+  border-radius:  3px;
+  background: #f0a500;
+}
+
+.delete-button button:hover {
+  background-color: #bd8200;
+  color: white;
+  cursor: pointer;
+}
+
+#getMed, #getMachine {
+  float: right;
+}
+
+/* *Thuoc end */
+
+/* *Thiet_bi start */
+
+#bangthietbi {
+  max-width: 48em;
+  position: relative;
+  border-radius: 4.2px;
+  border: 1px solid hsl(41, 100%, 27%);
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+/* style table */
+#bangthietbi table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* style header */
+#bangthietbi table th {
+  padding: 5px;
+  color: #f0a500;
+  font-size: 16px;
+}
+
+/* style cells */
+#bangthietbi table td {
+  padding: 10px 0px 10px 0px;
+}
+
+#bangthietbi table tbody tr:nth-child(odd) {
+  background-color: #eeca7c;  
+}
+
+#bangthietbi table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3.1px;
+}
+
+#bangthietbi table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3.1px;
+}
+
+/* *Thiet_bi end */
 
 /* *Khothuoc end */

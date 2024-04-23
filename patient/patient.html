@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
+    <title>Trang dành cho bệnh nhân</title>
     <link rel="stylesheet" href="patient.css">
     <script src="patient.js" type="module"></script>
 </head>
@@ -159,14 +159,15 @@
             <table>
                 <thead>
                     <tr id="history-header">
-                        <th>Ngày khám</th>
+                        <th style="width: 6.4em;">Ngày khám</th>
                         <th>Giờ khám</th>
                         <th>Khoa khám</th>
-                        <th>Nhân viên y tế phụ trách</th>
+                        <th style="width: 8.4em;">Nhân viên y tế phụ trách</th>
                         <th>Trạng thái</th>
-                        <th>Xét nghiệm máu</th>
-                        <th>Chẩn đoán</th>
-                        <th>Phương pháp điều trị</th>
+                        <th style="width: 7em;">Xét nghiệm máu</th>
+                        <th style="width: 5em;">X-Quang</th>
+                        <th style="width: 7em;">Chẩn đoán</th>
+                        <th style="width: 7.4em;">Phương pháp điều trị</th>
                     </tr>
                 </thead>
                 <tbody id="table_history">
@@ -305,15 +306,27 @@
                 </tbody>
             </table>
             </div>
-                <div>
-                    <label for="date_xetnghiem">Ngày xét nghiệm: </label>
-                    <input type="date" id="date_xetnghiem" name="date_xetnghiem" required>
-                </div>
-                <div class="container-button">
-                    <button type="button" id="get_xetnghiemmau">Lấy kết quả</button>
-                </div>
+        </form>
+
+        <form id="xrayres">
+            <h1>Kết quả chụp X-Quang</h1>
+            <div class = "info-line">
+                <label >Ngày chụp: </label>
+                <b><span id="ngaychupxquang">Chưa có</span></b>
+            </div>
+            <div class = "info-line">
+                <label>Mô tả: </label>
+                <span id="des">Chưa có</span>
+            </div>
+            <div class = "info-line">
+                <label>Ảnh chụp: </label>
+                <br>
+                <img id="pic" src="">
             </div>
         </form>
+
+        </div>
+    
     </div>
 
     <div id="container-ring">
@@ -332,6 +345,7 @@
                 <div class="inputBx">
                     <button type="button" id="login" name="login">Sign-in</button>
                 </div>
+                <label>Chưa có tài khoản? <a href="../signup/signup.html">Đăng ký</a></label>
             </form>
         </div>
     </div>
