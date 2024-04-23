@@ -33,6 +33,8 @@ const firebaseConfig = {
 	  var check_med = 0;
 	  var check_machine = 0;
 
+	  document.getElementById('content').style.background = '#010824';
+
 	  document.getElementById("login").addEventListener("click", function() {
 		var email =  document.getElementById("email").value;
 		var password = document.getElementById("password").value;
@@ -236,6 +238,8 @@ const firebaseConfig = {
 				document.getElementById("patient-container").style.display = "none";
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.overflow = 'hidden';
+				document.getElementById('content').style.background = '#010824';
+				
 			});
 			document.getElementById("listhealthcare").addEventListener("click", function() {
 				document.getElementById('registerhealthcare').style.display = 'none';
