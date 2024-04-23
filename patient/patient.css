@@ -135,7 +135,8 @@
 
 .login label {
   color: rgb(247, 214, 107);
-  width: 16em;
+  width: 18em;
+
 }
 
 .login a {
@@ -161,7 +162,7 @@ nav#slide-menu {
   left: -30vw;
   bottom: 0;
   display: block;
-  background: linear-gradient(#b6caf7, #e3eeff);
+  background: #143a51;
   float: left;  
   width: 100%;
   max-width: 294px;
@@ -177,7 +178,7 @@ nav#slide-menu > ul {
 }
 nav#slide-menu > ul li {
   font-weight: 600;
-  color: #257cd3;
+  color: #fac140;
   padding: 25px 20px;
 
   cursor: pointer;
@@ -189,13 +190,13 @@ nav#slide-menu > ul li:hover {
 
 nav#slide-menu > ul li#message {
   font-weight: 600;
-  color: #031b33;
-  padding: 5px 10px;
+  color: #fac140;
+  padding: 20px 20px 10px 20px;
 
   cursor: default;
 }
 nav#slide-menu > ul li#message:hover {
-  color: #031b33;
+  color: #fac140;
   background: none;
 }
 
