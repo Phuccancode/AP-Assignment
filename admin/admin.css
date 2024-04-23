@@ -39,7 +39,11 @@ table, th, td {
   text-align: center;
   font-size: 16px;
   border: none;
+}
+
+.table-form td:last-child button:hover {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 /* Change the background color on hover */
@@ -300,7 +304,7 @@ div#content {
 #banner h1{
   color: #fff;
   font-size: 2.5em;
-  text-align: right;  
+  text-align: right;
   padding-top: 20%;
   margin-right: 5%;
 }

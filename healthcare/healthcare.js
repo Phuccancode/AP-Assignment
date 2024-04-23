@@ -26,6 +26,8 @@ const firebaseConfig = {
 	  const database = getDatabase(app);
 	  console.log(app);
 
+	  document.getElementById('content').style.background = '#010824';
+	
 	  //----- New Registration code start	  
 	  document.getElementById("login").addEventListener("click", function() {
 		var email =  document.getElementById("email").value;
@@ -44,6 +46,7 @@ const firebaseConfig = {
 			get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {
 				  document.getElementById("message").innerHTML = "Xin chào " +  snapshot.val().name;
+				  document.getElementById("welcome").innerHTML = "Welcome you, " + snapshot.val().name;
 				}
 				else{
 					alert("Vui lòng cập nhật thông tin cá nhân!!");
