@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
-    <link rel="stylesheet" href="patients.css">
+    <title>Trang dành cho bệnh nhân</title>
+    <link rel="stylesheet" href="patient.css">
     <script src="patient.js" type="module"></script>
 </head>
 <body>
@@ -21,7 +21,9 @@
 
     <div id="content">
         <div class="menu-trigger" style="display: none;"></div>
-        
+        <div id="banner" style="display:none">
+            <h1 id = "welcome"></h1>
+            </div>
         <div id="form-container" style="display:none">
             <form id="formupdate">
                 <h2>Cập nhật thông tin tài khoản dành cho bệnh nhân</h2>
@@ -150,34 +152,39 @@
             </form>
         </div>
         
-        <div id = "lichsubenhan" style="display:none">
+        <div id="khambenh-container" style="display:none">
+        <div id="lichsubenhan">
             <h1>Lịch sử bệnh án</h1>
+            <div id="history-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>Ngày khám</th>
+                    <tr id="history-header">
+                        <th style="width: 6.4em;">Ngày khám</th>
                         <th>Giờ khám</th>
                         <th>Khoa khám</th>
-                        <th>Nhân viên y tế phụ trách</th>
+                        <th style="width: 8.4em;">Nhân viên y tế phụ trách</th>
                         <th>Trạng thái</th>
-                        <th>Chẩn đoán</th>
-                        <th>Phương pháp điều trị</th>
-                        <th>Xét nghiệm</th>
-                        
+                        <th style="width: 7em;">Xét nghiệm máu</th>
+                        <th style="width: 5em;">X-Quang</th>
+                        <th style="width: 7em;">Chẩn đoán</th>
+                        <th style="width: 7.4em;">Phương pháp điều trị</th>
                     </tr>
                 </thead>
                 <tbody id="table_history">
                 </tbody>
             </table>
-            <button type="button" id="get_history" name="get_history">Xem</button>
-            <button type="button" id="hidden_history" name="hidden_history">Ẩn</button>
+            </div>
+            <div class="container-button">
+                <button type="button" id="get_history" name="get_history">Xem</button>
+            </div>
         </div>
-        <form id="ketquaxetnghiem" style="display:none">
+        <form id="ketquaxetnghiem">
             <h1>Kết quả xét nghiệm máu</h1>
             <div class="info-line">
                 <label for="dieutri">Ngày xét nghiệm: </label>
                 <b><span id="ngayxetnghiem"></span></b>
             </div>
+            <div id="xetnghiem-container">
             <table>
                 <thead>
                 <tr>
@@ -286,33 +293,41 @@
                     <tr>
                         <td>Nhóm máu</td>
                         <td id="xetnghiemmau12">Đang chờ</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Rh</td>
                         <td id ="xetnghiemmau16">Đang chờ</td>
+                        <td></td>
+                        <td></td>
                     </tr>
     
                 </tbody>
             </table>
+            </div>
         </form>
-        <form id="xrayres" style="display: none;">
+
+        <form id="xrayres">
             <h1>Kết quả chụp X-Quang</h1>
-            <div>
+            <div class = "info-line">
                 <label >Ngày chụp: </label>
                 <b><span id="ngaychupxquang">Chưa có</span></b>
             </div>
-            <div>
+            <div class = "info-line">
                 <label>Mô tả: </label>
                 <span id="des">Chưa có</span>
             </div>
-            <div>
+            <div class = "info-line">
                 <label>Ảnh chụp: </label>
                 <br>
                 <img id="pic" src="">
             </div>
         </form>
-    </div>
+
+        </div>
     
+    </div>
 
     <div id="container-ring">
         <div class="ring">
@@ -320,7 +335,7 @@
             <i style="--clr:#ff0057;"></i>
             <i style="--clr:#fffd44;"></i>
             <form id="formaccount" class="login">
-                <h1>Sign-in as Patient </h1>
+                <h1>Đăng nhập với tư cách bệnh nhân</h1>
                 <div class="inputBx">
                 <input type="email" placeholder="Email" id="email" name="email" required>
                 </div>
@@ -328,8 +343,9 @@
                 <input type="password" placeholder="Password" id="password" name="password" required>
                 </div>
                 <div class="inputBx">
-                    <button type="button" id="login" name="login">Sign-in</button>
+                    <button type="button" id="login" name="login">Đăng nhập</button>
                 </div>
+                <label>Chưa có tài khoản? <a href="../signup/signup.html">Đăng ký</a></label>
             </form>
         </div>
     </div>

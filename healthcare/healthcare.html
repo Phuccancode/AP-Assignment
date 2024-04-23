@@ -6,14 +6,6 @@
     <link rel="stylesheet" href="healthcare.css">
     <script src="healthcare.js" type="module"></script>
 </head>
-<style>
-    .div1{
-        float: left;
-    }
-    .div2{
-        float: left;
-    }
-</style>
 <body>
 
     <!-- Menu -->
@@ -42,7 +34,9 @@
 
     <div id="content">
         <div class="menu-trigger" style="display: none;"></div>
-        
+        <div id="banner" style="display:none">
+            <h1 id = "welcome"></h1>
+            </div>
         <div id="form-container" style="display:none">
 
             <form id="formupdate">
@@ -150,7 +144,7 @@
                     <span id="address_tracuu"></span>
                 </div>
                 <div class="info-line">
-                    <label for="gender">Giới tính</label>
+                    <label for="gender">Giới tính: </label>
                     <span id="gender_tracuu"></span>
                 </div>
                 <div class="info-line">
@@ -164,22 +158,14 @@
         <form class="table-form" id="listpatient" style="display:none">
             <h1>DANH SÁCH BỆNH NHÂN CỦA BẠN</h1>
             <table>
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Họ và tên</th>
-                    <th>Giới tính</th>
-                    <th>Ngày sinh</th>
-                    <th>Ngày khám bệnh</th>
-                    <th>Chi tiết</th>
-                </tr>
+                <thead id="listpatientheader">
                 </thead>
                 <tbody id="listpatienttable">
                 </tbody>
             </table>
             <div class="container-button">
                 <button type="button" id="show-hide"
-                class="button-show-and-hide" name="hiện/ẩn">Hiện / Ẩn</button>
+                class="button-show-and-hide" name="hiện/ẩn">Hiện</button>
             </div>
             
         </form>
@@ -203,36 +189,42 @@
                     <label for="gender">Giới tính: </label>
                     <span id="gender_patient"></span>
                 </div>
-                <div id = "lichsubenhan" style="display:none">
+                <div id = "lichsubenhan">
                     <h1>Lịch sử bệnh án</h1>
+                    <div id="history-container">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Ngày khám</th>
+                            <tr id="history-header">
+                                <th style="width: 6.4em;">Ngày khám</th>
                                 <th>Giờ khám</th>
                                 <th>Khoa khám</th>
-                                <th>Nhân viên y tế phụ trách</th>
+                                <th style="width: 8.4em;">Nhân viên y tế phụ trách</th>
                                 <th>Trạng thái</th>
-                                <th>Xét nghiệm máu</th>
-                                <th>X-Quang</th>
-                                <th>Chẩn đoán</th>
-                                <th>Phương pháp điều trị</th>
+                                <th style="width: 7em;">Xét nghiệm máu</th>
+                                <th style="width: 5em;">X-Quang</th>
+                                <th style="width: 7em;">Chẩn đoán</th>
+                                <th style="width: 7.4em;">Phương pháp điều trị</th>
                             </tr>
                         </thead>
                         <tbody id="table_history">
                         </tbody>
                     </table>
+                    </div>
+                    <div class="container-button">
+                        <button type="button" id="get_history" name="get_history"></button>
+                    </div>
                 </div>
-                <form id="ketquaxetnghiem" style="display: none;">
+                <form id="ketquaxetnghiem">
                     <h1>Kết quả xét nghiệm máu</h1>
                     <div class="info-line">
                         <label for="ngayxetnghiem">Ngày xét nghiệm: </label>
                         <b><span id="ngayxetnghiem"></span></b>
                     </div>
+                    <div id="xetnghiem-container">
                     <table>
                         <thead>
                         <tr>
-                            <th>Yêu cầu xét nghiệm </th>
+                            <th>Yêu cầu xét nghiệm</th>
                             <th>Kết quả xét nghiệm</th>
                             <th>Trị số bình thường</th>
                             <th>Đơn vị</th>
@@ -240,7 +232,7 @@
                         </thead>
                         
                         <tbody id="table_xetnghiemmau">
-                            <tr>
+                            <tr id="xetnghiem-header">
                                 <th>Công thức máu</th>
                             </tr>
             
@@ -337,30 +329,37 @@
                             <tr>
                                 <td>Nhóm máu</td>
                                 <td id="xetnghiemmau12">Đang chờ</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Rh</td>
                                 <td id ="xetnghiemmau16">Đang chờ</td>
+                                <td></td>
+                                <td></td>
                             </tr>
             
                         </tbody>
                     </table>
+                    </div>
                 </form>
-                <form id="xrayres" style="display: none;">
+
+                <form id="xrayres">
                     <h1> Kết Quả X-Quang </h1>
                     <div class="info-line">
                         <label for="xraydate">Ngày Chụp: </label>
                         <b><span id="xraydate"></span></b>
                     </div>
-                    <div>
+                    <div class="info-line">
                         <label for="Description">Mô tả: </label>
                         <b><span id="des"></span></b>
                     </div>
-                    <div>
+                    <div class="info-line">
                         <label for="xray">Ảnh chụp: </label><br>
                         <img id="pic" src="" alt="Ảnh chụp">
                     </div>
                 </form>
+
                 <div>
                     <h1>
                         Thông tin khám bệnh
@@ -378,27 +377,27 @@
                     <label for="specialization">Khoa khám bệnh: </label>
                     <span id="specialization_patient"></span>
                 </div>
-                <div class="info-line">
-                    <label for="status">Trạng thái: </label>
-                    <span id="status_patient"></span>
-                    <select id="status_input" name="status" required>
-                        <option value="">Chọn trạng thái</option>
-                        <option value="Chưa khám">Chưa khám</option>
-                        <option value="Đã khám">Đã khám</option>
-                        <option value="Nhập viện">Nhập viện</option>
-                        <option value="Xuất viện">Xuất viện</option>
-                    </select>
-                </div>
+                <label for="status">Trạng thái: </label>
+                <span id="status_patient"></span>
+                <select id="status_input" name="status" required>
+                    <option value="" disabled selected hidden>Chọn trạng thái</option>
+                    <option value="Chưa khám">Chưa khám</option>
+                    <option value="Đã khám">Đã khám</option>
+                    <option value="Nhập viện">Nhập viện</option>
+                    <option value="Xuất viện">Xuất viện</option>
+                </select>
                 <div>
                     <div>
-                        <label for="xetngiemmau">Xét nghiệm máu:</label>
-                        <input type="checkbox" id="xetnghiem_input" name="tests" $CHECKED_XETNGHIEM$><br>
+                        <label for="xetngiemmau">
+                            <input type="checkbox" id="xetnghiem_input" name="tests" $CHECKED_XETNGHIEM$> Xét nghiệm máu
+                        </label>
                     </div>
                 </div>
                 <div>
                     <div>
-                        <label for="xquang">X-Quang:</label>
-                        <input type="checkbox" id="xquang_input" name="xtests" $CHECKED_XETNGHIEM$><br>
+                        <label for="xquang">
+                            <input type="checkbox" id="xquang_input" name="xtests" $CHECKED_XETNGHIEM$> X-Quang
+                        </label>
                     </div>
                 </div>
                 <div>
@@ -421,109 +420,113 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class = "div1">
-        <div id ="luachon_xetnghiem" style="display: none;">
-            <h1><label for="name_xetnghiem">Cập nhật kết quả cho: </label>
-            <span id="name_xetnghiem"></span></h1>
-            <br>
-            <label for="option">Lựa chọn: </label>
-            <select id="optionxetnghiem" name="option_xetnghiem">
-                <option value="optionxetnghiemmau">Xét nghiệm máu</option>
-                <option value="optionchupxquang">Chụp X-Quang</option>
-            </select>
-            <button type="button" id="option_xetnghiem_button">Chọn</button>
+
+        <div id = "xetnghiem_xquang-container" style="display: none;">
+            <div id ="luachon_xetnghiem">
+                <h1><label for="name_xetnghiem">Cập nhật kết quả cho:</label><br>
+                <span id="name_xetnghiem"></span></h1>
+                <label for="option" class = "info-line">Lựa chọn: </label>
+                <div class = "opxetnghiem_xray">
+                    <select id="optionxetnghiem" name="option_xetnghiem">
+                        <option value="optionxetnghiemmau">Xét nghiệm máu</option>
+                        <option value="optionchupxquang">Chụp X-Quang</option>
+                    </select>
+                    <button type="button" id="option_xetnghiem_button">Chọn</button>
+                </div>
+            </div>
+            <form id="update_xetnghiem" style="display:none" >
+                <div>
+                    <label for="WBC">WBC:</label><br>
+                    <input type="text" id="WBC" name="WBC" required>
+                </div>
+                <div>
+                    <label for="NEU">NEU:</label><br>
+                    <input type="text" id="NEU" name="NEU" required>
+                </div>
+                <div>
+                    <label for="LYM">LYM:</label><br>
+                    <input type="text" id="LYM" name="LYM" required>
+                </div>
+                <div>
+                    <label for="MONO">MONO:</label><br>
+                    <input type="text" id="MONO" name="MONO" required>
+                </div>
+                <div>
+                    <label for="BASO">BASO:</label><br>
+                    <input type="text" id="BASO" name="BASO" required>
+                </div>
+                <div>
+                    <label for="EOS">EOS:</label><br>
+                    <input type="text" id="EOS" name="EOS" required>
+                </div>
+                <div>
+                    <label for="RBC">RBC:</label><br>
+                    <input type="text" id="RBC" name="RBC" required>
+                </div>
+                <div>
+                    <label for="HGB">HGB:</label><br>
+                    <input type="text" id="HGB" name="HGB" required>
+                </div>
+                <div>
+                    <label for="HCT">HCT:</label><br>
+                    <input type="text" id="HCT" name="HCT" required>
+                </div>
+                <div>
+                    <label for="MCV">MCV:</label><br>
+                    <input type="text" id="MCV" name="MCV" required>
+                </div>
+                <div>
+                    <label for="MCH">MCH:</label><br>
+                    <input type="text" id="MCH" name="MCH" required>
+                </div>
+                <div>
+                    <label for="MCHC">MCHC:</label><br>
+                    <input type="text" id="MCHC" name="MCHC" required>
+                </div>
+                <div>
+                    <label for="RDW">RDW:</label><br>
+                    <input type="text" id="RDW" name="RDW" required>
+                </div>
+                <div>
+                    <label for="PLT">PLT:</label><br>
+                    <input type="text" id="PLT" name="PLT" required>
+                </div>
+                <div>
+                    <label for="MPV">MPV:</label><br>
+                    <input type="text" id="MPV" name="MPV" required>
+                </div>
+                <div>
+                    <label for="Nhóm máu">Nhóm máu:</label><br>
+                    <input type="text" id="NhomMau" name="NhomMau" required>
+                </div>
+                <div>
+                    <label for="Rh">Rh:</label><br>
+                    <input type="text" id="Rh" name="Rh" required>
+                </div>
+                <button type="button" id="xetnghiemmau" name="xetnghiemmau">Cập nhật</button>
+            </form>
+            <form id="update_xquang" style="display:none" >
+                <div>
+                    <label for="Description">Mô tả:</label><br>
+                    <input type="text" id="Description" name="d" required>
+                </div>
+                <div>
+                    <label for="xray">Ảnh chụp:</label><br>
+                    <input type="text" id="xray" name="ảnh" required>
+                </div>
+                <button type="button" id="updatexray" name="uxr">Cập nhật</button>
+            </form>
         </div>
-        <form id="update_xetnghiem" style="display:none" >
-            <div>
-                <label for="WBC">WBC:</label><br>
-                <input type="text" id="WBC" name="WBC" required>
-            </div>
-            <div>
-                <label for="NEU">NEU:</label><br>
-                <input type="text" id="NEU" name="NEU" required>
-            </div>
-            <div>
-                <label for="LYM">LYM:</label><br>
-                <input type="text" id="LYM" name="LYM" required>
-            </div>
-            <div>
-                <label for="MONO">MONO:</label><br>
-                <input type="text" id="MONO" name="MONO" required>
-            </div>
-            <div>
-                <label for="BASO">BASO:</label><br>
-                <input type="text" id="BASO" name="BASO" required>
-            </div>
-            <div>
-                <label for="EOS">EOS:</label><br>
-                <input type="text" id="EOS" name="EOS" required>
-            </div>
-            <div>
-                <label for="RBC">RBC:</label><br>
-                <input type="text" id="RBC" name="RBC" required>
-            </div>
-            <div>
-                <label for="HGB">HGB:</label><br>
-                <input type="text" id="HGB" name="HGB" required>
-            </div>
-            <div>
-                <label for="HCT">HCT:</label><br>
-                <input type="text" id="HCT" name="HCT" required>
-            </div>
-            <div>
-                <label for="MCV">MCV:</label><br>
-                <input type="text" id="MCV" name="MCV" required>
-            </div>
-            <div>
-                <label for="MCH">MCH:</label><br>
-                <input type="text" id="MCH" name="MCH" required>
-            </div>
-            <div>
-                <label for="MCHC">MCHC:</label><br>
-                <input type="text" id="MCHC" name="MCHC" required>
-            </div>
-            <div>
-                <label for="RDW">RDW:</label><br>
-                <input type="text" id="RDW" name="RDW" required>
-            </div>
-            <div>
-                <label for="PLT">PLT:</label><br>
-                <input type="text" id="PLT" name="PLT" required>
-            </div>
-            <div>
-                <label for="MPV">MPV:</label><br>
-                <input type="text" id="MPV" name="MPV" required>
-            </div>
-            <div>
-                <label for="Nhóm máu">Nhóm máu:</label><br>
-                <input type="text" id="NhomMau" name="NhomMau" required>
-            </div>
-            <div>
-                <label for="Rh">Rh:</label><br>
-                <input type="text" id="Rh" name="Rh" required>
-            </div>
-            <button type="button" id="xetnghiemmau" name="xetnghiemmau">Cập nhật</button>
-        </form>
-        <form id="update_xquang" style="display:none" >
-            <div>
-                <label for="Description">Mô tả:</label><br>
-                <input type="text" id="Description" name="d" required>
-            </div>
-            <div>
-                <label for="xray">Ảnh chụp:</label><br>
-                <input type="text" id="xray" name="ảnh" required>
-            </div>
-            <button type="button" id="updatexray" name="uxr">Cập nhật</button>
-        </form>
-    </div>    
+
+    </div>
+
     <div id="container-ring">
         <div class="ring">
             <i style="--clr:#00ff0a;"></i>
             <i style="--clr:#ff0057;"></i>
             <i style="--clr:#fffd44;"></i>
             <form id="formaccount" class="login">
-                <h1>Sign-in as healthcare staff </h1>
+                <h1>Đăng nhập với tư cách nhân viên y tế</h1>
                 <div class="inputBx">
                 <input type="email" placeholder="Email" id="email" name="email" required>
                 </div>
@@ -531,7 +534,7 @@
                 <input type="password" placeholder="Password" id="password" name="password" required>
                 </div>
                 <div class="inputBx">
-                    <button type="button" id="login" name="login">Sign-in</button>
+                    <button type="button" id="login" name="login">Đăng nhập</button>
                 </div>
             </form>
         </div>

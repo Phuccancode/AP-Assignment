@@ -6,18 +6,13 @@ table, th, td {
 .table-form table {
 width: 100%;
 border-collapse: collapse;
-background: linear-gradient(90deg, #516e6e, #545d88, #684a80);
-}
-
-.table-form thead {
-background: linear-gradient(90deg, #365353, #353d63, #583b6e);
+background: #684a80;
 }
 
 /* Style the table headers */
-.table-form th {
-color: white;
-padding: 10px;
-text-align: center;
+.table-form thead tr {
+  background: #583b6e;
+  color: white;
 }
 
 /* Style the table rows */
@@ -27,9 +22,14 @@ text-align: center;
 }
 
 /* Style the table cells */
-.table-form td {
-padding: 10px;
-text-align: center;
+.table-form thead td {
+  font-weight: bold;
+  text-align: center;
+}
+
+.table-form tbody td {
+  padding: 10px;
+  text-align: center;
 }
 
 .table-form td button {
@@ -50,7 +50,7 @@ background-color: #d6f8fa;
 
 /* Change the background color on hover */
 .table-form tbody tr:hover {
-  background: linear-gradient(90deg, #0c4b4b, #2c3764, #4a325c);
+  background: #4a325c;
   color: white;
   border-left: 1px solid white;
   border-right: 1px solid white; 
@@ -79,11 +79,11 @@ font-size: 16px;
 font-weight: bold;
 border-radius:  3px;
 margin-left: 5px;
-background: linear-gradient(90deg, rgb(96, 97, 156), rgb(120, 54, 133));
+background: rgb(177, 112, 190);
 }
 
 .button-show-and-hide:hover{  
-background: linear-gradient(90deg, rgb(52, 52, 87), rgb(87, 39, 97));
+background: rgb(123, 56, 136);
 color: white;
 cursor: pointer;
 
@@ -152,6 +152,17 @@ cursor: pointer;
     100% {
       transform: rotate(0deg);
     }
+  }
+  #banner{
+    height: 100%;  
+    background: url(/admin/img/Home-Page-Banner.png) no-repeat center center;
+  }
+  #banner h1{
+    color: #fff;
+    font-size: 2.5em;
+    text-align: right;  
+    padding-top: 20%;
+    margin-right: 5%;
   }
   .login {
     position: absolute;
@@ -227,7 +238,7 @@ nav#slide-menu {
   left: -30vw;
   bottom: 0;
   display: block;
-  background: linear-gradient(#b6caf7, #e3eeff);
+  background: #143a51;
   float: left;  
   width: 100%;
   max-width: 294px;
@@ -243,7 +254,7 @@ nav#slide-menu > ul {
 }
 nav#slide-menu > ul li {
   font-weight: 600;
-  color: #257cd3;
+  color: #fac140;
   padding: 25px 20px;
 
   cursor: pointer;
@@ -255,13 +266,13 @@ nav#slide-menu > ul li:hover {
 
 nav#slide-menu > ul li#message {
   font-weight: 600;
-  color: #031b33;
-  padding: 5px 10px;
+  color: #fac140;
+  padding: 20px 20px 10px 20px;
 
   cursor: default;
 }
 nav#slide-menu > ul li#message:hover {
-  color: #031b33;
+  color: #fac140;
   background: none;
 }
 
@@ -383,7 +394,7 @@ label {
 
 input, select {
   width: 100%;
-  padding: 1em;
+  padding: 0.5em;
   line-height: 1.4;
   background-color: #f9f9f9;
   border: 1px solid #e5e5e5;
@@ -397,14 +408,27 @@ input, select {
   margin-bottom: 20px;
 }
 
+#xetnghiem_input {
+  width: fit-content;
+  margin-left: 0.5em;
+}
+
+#xquang_input {
+  width: fit-content;
+  margin-left: 0.5em;
+}
+
 input:focus {
   outline: 0;
   border-color: #bd8200;
 }
 
-#update, #capnhat {
+#update,
+#capnhat,
+#xetnghiemmau,
+#updatexray {
   float: right;
-  padding: 1em;
+  padding: 1em 0.5em;
   font-size: 16px;
   font-weight: bold;
   background-color: #f0a500;
@@ -412,7 +436,10 @@ input:focus {
   border: none;
 }
 
-#update:hover, #capnhat:hover {
+#update:hover,
+#capnhat:hover,
+#xetnghiemmau:hover,
+#updatexray:hover {
   background-color: #bd8200;;
   color: rgb(240, 240, 240);
 }
@@ -440,9 +467,9 @@ input:focus {
 /* *Patient-Info start */
 
 #patient-container {
-  max-width: 38em;
+  max-width: 56em;
   padding: 1em 3em 5em 3em;
-  margin: 0em auto;
+  margin: 2em auto;
   background-color: #fff;
   border-radius: 4.2px;
   box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
@@ -461,3 +488,155 @@ input:focus {
 } */
 
 /* *Patient-Info end */
+
+/* *Lich_su_benh_an start */
+
+#history-container {
+  border-radius: 4.2px;
+  border: 1px solid #8b5f00;
+  margin: 0px -1.5em 0px -1.5em;
+}
+
+/* style table */
+#lichsubenhan table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* style header */
+#lichsubenhan table th {
+  padding: 5px 0px 5px 0px;
+  color: #f0a500;
+  font-size: 16px;
+}
+
+/* style cells */
+#lichsubenhan table td {
+  height: 46.5px;
+}
+
+#lichsubenhan table tbody tr:nth-child(odd) {
+  background-color: #eeca7c;  
+}
+
+#lichsubenhan table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3.1px;
+}
+
+#lichsubenhan table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3.1px;
+}
+
+#get_history {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 10px; 
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius:  3px;
+  background: #f0a500;
+  margin-right: -1.5em;
+}
+
+#get_history:hover {
+  background: #bd8200;
+  color: white;
+  cursor: pointer;
+}
+
+/* *Lich_su_benh_an end */
+
+/* *Ket_qua_xet_nghiem start */
+
+#xetnghiem-container {
+  max-width: 38em;
+  position: relative;
+  border-radius: 4.2px;
+  border: 1px solid hsl(41, 100%, 27%);
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+/* style table */
+#ketquaxetnghiem table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* style header */
+#ketquaxetnghiem table th {
+  padding: 5px;
+  color: #f0a500;
+  font-size: 16px;
+}
+
+/* style cells */
+#ketquaxetnghiem table td {
+  padding: 10px 0px 10px 0px;
+}
+
+#ketquaxetnghiem table tbody tr:nth-child(even) {
+  background-color: #eeca7c;  
+}
+
+#ketquaxetnghiem table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 3.1px;
+}
+
+#ketquaxetnghiem table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 3.1px;
+}
+
+/* *Ket_qua_xet_nghiem end */
+
+/* *Cap_nhat_xet_nghiem_xquang start */
+
+#xetnghiem_xquang-container {
+  max-width: 38em;
+  padding: 1em 3em 5em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+#xetnghiem_xquang-container .info-line {
+  padding-bottom: 20px;
+}
+
+.opxetnghiem_xray {
+  display: inline-block;
+}
+
+.opxetnghiem_xray #optionxetnghiem {
+  width: 32em;
+}
+
+#option_xetnghiem_button {
+  display: inline-block;
+  width: 5em;
+  height: 2em;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius:  5px;
+  background: #f0a500;
+}
+
+#option_xetnghiem_button:hover {
+  background: #bd8200;
+  color: white;
+  cursor: pointer;
+}
+
+#xrayres img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+/* *Cap_nhat_xet_nghiem_xquang end */
