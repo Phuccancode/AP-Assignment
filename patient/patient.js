@@ -84,11 +84,44 @@ const firebaseConfig = {
 						cell3.innerHTML = data[key].specialization;
 						cell4.innerHTML = data[key].yourhealthcare;
 						cell5.innerHTML = data[key].status;
-						cell6.innerHTML = data[key].xetnghiem_mau;
-						cell7.innerHTML = data[key].chup_xquang;
-						cell8.innerHTML = data[key].chandoan;
-						cell9.innerHTML = data[key].dieutri;
+						cell6.innerHTML = data[key].chandoan;
+						cell7.innerHTML = data[key].dieutri;
+						if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có"){cell8.innerHTML="Có";}
+						else {cell8.innerHTML="Không";}
+						var button = document.createElement("button");
+						button.innerHTML = "Xem";
+						button.type="button";
+						button.id = key;
+						cell9.appendChild(button);
 						i++;
+						document.getElementById(key).addEventListener("click", function(){
+							get(ref(database, 'users/' + user.uid +'/xetnghiemmau/'+ this.id)).then((snapshot) => {
+								if(snapshot.val()){
+									document.getElementById("ketquaxetnghiem").style.display = "block";
+									var data_xn = snapshot.val();
+									var i = 1;
+									document.getElementById("ngayxetnghiem").innerHTML = this.id;
+									for (var key_xn in data_xn) {
+										document.getElementById("xetnghiemmau"+i).innerHTML = data_xn[key_xn];
+										i++;
+									}
+								}
+								else {
+									document.getElementById("ketquaxetnghiem").style.display = "none";
+								}
+							});
+							get(ref(database, 'users/' + user.uid +'/xquang/'+ this.id)).then((snapshot) => {
+								if(snapshot.val()){
+									document.getElementById("xrayres").style.display = "block";
+									document.getElementById("ngaychupxquang").innerHTML = this.id;
+									document.getElementById("des").innerHTML = snapshot.val().description;
+									document.getElementById("pic").src = snapshot.val().url;
+								}
+								else {
+									document.getElementById("xrayres").style.display = "none";
+								}
+							});
+						})
 					}
 					if (table.innerHTML == "") {
 						document.getElementById("get_history").innerHTML = "Không có";	
@@ -212,6 +245,8 @@ const firebaseConfig = {
 					table.innerHTML = "";
 					document.getElementById("history-header").style.borderBottom = "none";
 					document.getElementById("get_history").innerHTML = "Xem";
+					document.getElementById("ketquaxetnghiem").style.display = "none";
+					document.getElementById("xrayres").style.display = "none";
 					check_history=0;
 				}
 				else {
@@ -236,11 +271,44 @@ const firebaseConfig = {
 						cell3.innerHTML = data[key].specialization;
 						cell4.innerHTML = data[key].yourhealthcare;
 						cell5.innerHTML = data[key].status;
-						cell6.innerHTML = data[key].xetnghiem_mau;
-						cell7.innerHTML = data[key].chup_xquang;
-						cell8.innerHTML = data[key].chandoan;
-						cell9.innerHTML = data[key].dieutri;
+						cell6.innerHTML = data[key].chandoan;
+						cell7.innerHTML = data[key].dieutri;
+						if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có"){cell8.innerHTML="Có";}
+						else {cell8.innerHTML="Không";}
+						var button = document.createElement("button");
+						button.innerHTML = "Xem";
+						button.type="button";
+						button.id = key;
+						cell9.appendChild(button);
 						i++;
+						document.getElementById(key).addEventListener("click", function(){
+							get(ref(database, 'users/' + user.uid+'/xetnghiemmau/'+this.id)).then((snapshot) => {
+								if(snapshot.val()){
+									document.getElementById("ketquaxetnghiem").style.display = "block";
+									var data_xn = snapshot.val();
+									var i = 1;
+									document.getElementById("ngayxetnghiem").innerHTML = this.id;
+									for (var key_xn in data_xn) {
+										document.getElementById("xetnghiemmau"+i).innerHTML = data_xn[key_xn];
+										i++;
+									}
+								}
+								else {
+									document.getElementById("ketquaxetnghiem").style.display = "none";
+								}
+							});
+							get(ref(database, 'users/' + user.uid+'/xquang/'+this.id)).then((snapshot) => {
+								if(snapshot.val()){
+									document.getElementById("xrayres").style.display = "block";
+									document.getElementById("ngaychupxquang").innerHTML = this.id;
+									document.getElementById("des").innerHTML = snapshot.val().description;
+									document.getElementById("pic").src = snapshot.val().url;
+								}
+								else {
+									document.getElementById("xrayres").style.display = "none";
+								}
+							});
+						})
 					}
 					if (table.innerHTML == "") {
 						document.getElementById("get_history").innerHTML = "Không có";	

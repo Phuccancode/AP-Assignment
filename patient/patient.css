@@ -396,7 +396,7 @@ input:focus {
 
 #khambenh-container {
   max-width: 56em;
-  padding: 1em 3em 5em 3em;
+  padding: 1em 3em 2em 3em;
   margin: 2em auto;
   background-color: #fff;
   border-radius: 4.2px;
@@ -434,6 +434,20 @@ input:focus {
 /* style cells */
 #lichsubenhan table td {
   padding: 10px 0px 10px 0px;
+}
+
+#lichsubenhan table td:last-child button {
+  background: none;
+  color: rgb(32, 23, 6);
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+}
+
+#lichsubenhan table td:last-child button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 #lichsubenhan table tbody tr:nth-child(odd) {

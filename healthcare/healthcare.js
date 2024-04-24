@@ -211,8 +211,6 @@ const firebaseConfig = {
 											check_history=1;	
 										}
 										else if(check_vaitro==2) {
-											
-											document.getElementById("xetnghiem_xquang-container").style.display = "block";
 											document.getElementById("luachon_xetnghiem").style.display = "block";
 											document.getElementById("name_xetnghiem").innerHTML = snapshot.val().name;
 										};
@@ -561,47 +559,54 @@ const firebaseConfig = {
                                                 //create button
                                                 document.getElementById('capnhat_input').style.display = 'block';
                                                 document.getElementById('lichsubenhan').style.display = 'block';
-                                                if (check_history == 1) {return;}
-                                                var table = document.getElementById("table_history");
-                                                table.innerHTML = "";
-                                                var getid = document.getElementById('userid').innerHTML.valueOf();
-                                                get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
-                                                var data = snapshot.val();
-                                                var i = 0;
-                                                for (var key in data) {
-                                                    var row = table.insertRow(i);
-                                                    var cell1 = row.insertCell(0);
-                                                    var cell2 = row.insertCell(1);
-                                                    var cell3 = row.insertCell(2);
-                                                    var cell4 = row.insertCell(3);
-                                                    var cell5 = row.insertCell(4);
-                                                    var cell6 = row.insertCell(5);
-                                                    var cell7 = row.insertCell(6);
-                                                    var cell8 = row.insertCell(7);
-													var cell9 = row.insertCell(8);
-                                                    cell1.innerHTML = data[key].date;
-                                                    cell2.innerHTML = data[key].time;
-                                                    cell3.innerHTML = data[key].specialization;
-                                                    cell4.innerHTML = data[key].yourhealthcare;
-                                                    cell5.innerHTML = data[key].status;
-                                                    cell6.innerHTML = data[key].xetnghiem_mau;
-													cell7.innerHTML = data[key].chup_xquang;
-                                                    cell8.innerHTML = data[key].chandoan;
-                                                    cell9.innerHTML = data[key].dieutri;
-                                                    i++;
-                                                }
-                                                if (table.innerHTML == "") {
-                                                    document.getElementById("get_history").innerHTML = "Không có";	
-                                                }
-                                                else {
-                                                    document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
-                                                    document.getElementById("get_history").innerHTML = "Thu gọn";
-                                                }
-                                            });
-                                            check_history=1;    
-										}
-
-
+                                                if (check_history == 1) {
+													if (document.getElementById("get_history").innerHTML == "Không có") {return;}
+													var table = document.getElementById("table_history");
+                                                	table.innerHTML = "";
+													document.getElementById("history-header").style.borderBottom = "none";
+                                                    document.getElementById("get_history").innerHTML = "Hiện";
+												}
+												else {
+													var table = document.getElementById("table_history");
+													table.innerHTML = "";
+													var getid = document.getElementById('userid').innerHTML.valueOf();
+													get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
+													var data = snapshot.val();
+													var i = 0;
+													for (var key in data) {
+														var row = table.insertRow(i);
+														var cell1 = row.insertCell(0);
+														var cell2 = row.insertCell(1);
+														var cell3 = row.insertCell(2);
+														var cell4 = row.insertCell(3);
+														var cell5 = row.insertCell(4);
+														var cell6 = row.insertCell(5);
+														var cell7 = row.insertCell(6);
+														var cell8 = row.insertCell(7);
+														var cell9 = row.insertCell(8);
+														cell1.innerHTML = data[key].date;
+														cell2.innerHTML = data[key].time;
+														cell3.innerHTML = data[key].specialization;
+														cell4.innerHTML = data[key].yourhealthcare;
+														cell5.innerHTML = data[key].status;
+														cell6.innerHTML = data[key].xetnghiem_mau;
+														cell7.innerHTML = data[key].chup_xquang;
+														cell8.innerHTML = data[key].chandoan;
+														cell9.innerHTML = data[key].dieutri;
+														i++;
+													}
+													if (table.innerHTML == "") {
+														document.getElementById("get_history").innerHTML = "Không có";	
+													}
+													else {
+														document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+														document.getElementById("get_history").innerHTML = "Thu gọn";
+													}
+													});
+												check_history=1;
+												}
+                                                    
+											}
 											else if(check_vaitro==2) {
 												document.getElementById("luachon_xetnghiem").style.display = "block";
 												document.getElementById("name_xetnghiem").innerHTML = snapshot.val().name;
