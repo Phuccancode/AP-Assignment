@@ -41,14 +41,12 @@ const firebaseConfig = {
 			alert("Đăng nhập thành công!!");
 
 			var check_history = 0;
-			var getId;
 
 			get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {
 					document.getElementById("message").innerHTML = "Xin chào " + snapshot.val().name;
 					document.getElementById("welcome").innerHTML = "Welcome you, " + snapshot.val().name;
 					document.getElementById('userid').innerHTML = user.uid;
-					getId = snapshot.val();
 					document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
 					var table = document.getElementById("table_history");
 					table.innerHTML = "";
@@ -83,10 +81,10 @@ const firebaseConfig = {
 							i++;
 							document.getElementById(key).addEventListener("click", function(){
 								var id = document.getElementById('userid').innerHTML;
-								if(getId.xetnghiem_mau=="Có") {
+								if(data[key].xetnghiem_mau=="Có") {
 									document.getElementById("ketquaxetnghiem").style.display = "block";
 									document.getElementById("xetnghiem-header").style.borderBottom = "0.5px solid #8b5f00";
-									get(ref(database, 'users/' + id +'/xetnghiemmau/'+ getId.date)).then((snapshot) => {
+									get(ref(database, 'users/' + id +'/xetnghiemmau/'+ data[key].date)).then((snapshot) => {
 										if(snapshot.val()){
 											var data_1 = snapshot.val();
 											var i = 1;
@@ -112,9 +110,9 @@ const firebaseConfig = {
 									document.getElementById("ketquaxetnghiem").style.display = "none";
 								}
 							
-								if(getId.chup_xquang=="Có") {
+								if(data[key].chup_xquang=="Có") {
 									document.getElementById("xrayres").style.display = "block";
-									get(ref(database, 'users/' + id +'/xquang/'+ getId.date)).then((snapshot) => {
+									get(ref(database, 'users/' + id +'/xquang/'+ data[key].date)).then((snapshot) => {
 										if(snapshot.val()){
 												document.getElementById("des").innerHTML = snapshot.val().description;
 												document.getElementById("pic").src = snapshot.val().url;
@@ -136,8 +134,8 @@ const firebaseConfig = {
 							document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
 							document.getElementById("get_history").innerHTML = "Thu gọn";
 						}
+						check_history=1;
 					});
-					check_history=1;
 				}
 				else {
 					document.getElementById("message").innerHTML = "Vui lòng cập nhật thông tin cá nhân";
@@ -190,8 +188,8 @@ const firebaseConfig = {
 						cell5.innerHTML = data[key].status;
 						cell6.innerHTML = data[key].chandoan;
 						cell7.innerHTML = data[key].dieutri;
-						if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có") cell8.innerHTML="Có";
-						else cell8.innerHTML="Không";
+						if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có"){cell8.innerHTML="Có";}
+						else {cell8.innerHTML="Không";}
 						var button = document.createElement("button");
 						button.innerHTML = "Xem";
 						button.type="button";
@@ -254,9 +252,8 @@ const firebaseConfig = {
 					}
 				  });
 				  check_history=1;
-				}
-				
-			});
+				}	
+			});			
 
 			document.getElementById("updateaccount").addEventListener("click", function() {
 				document.getElementById('form-container').style.display = 'block';
@@ -361,6 +358,7 @@ const firebaseConfig = {
 			  alert("Đăng ký lịch khám bệnh thành công!!");
 			  document.getElementById('schedule-container').style.display = 'none';
 			  });
+
 		  })
 		  .catch((error) => {
 		    const errorCode = error.code;
