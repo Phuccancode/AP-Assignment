@@ -516,6 +516,21 @@ input:focus {
   height: 46.5px;
 }
 
+/* xem button in lichsubenhan */
+#lichsubenhan td:last-child button {
+  background: none;
+  border: none;
+  color: rgb(124, 56, 0);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#lichsubenhan td:last-child button:hover {
+  color: rgb(51, 24, 3);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #lichsubenhan table tbody tr:nth-child(odd) {
   background-color: #eeca7c;  
 }
