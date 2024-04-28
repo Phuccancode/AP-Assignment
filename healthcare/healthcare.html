@@ -200,10 +200,10 @@
                                 <th>Khoa khám</th>
                                 <th style="width: 8.4em;">Nhân viên y tế phụ trách</th>
                                 <th>Trạng thái</th>
-                                <th style="width: 7em;">Xét nghiệm máu</th>
-                                <th style="width: 5em;">X-Quang</th>
                                 <th style="width: 7em;">Chẩn đoán</th>
                                 <th style="width: 7.4em;">Phương pháp điều trị</th>
+                                <th style="width: 6em;">Loại xét nghiệm</th>
+                                <th>Xét nghiệm</th>
                             </tr>
                         </thead>
                         <tbody id="table_history">
@@ -214,7 +214,7 @@
                         <button type="button" id="get_history" name="get_history"></button>
                     </div>
                 </div>
-                <form id="ketquaxetnghiem">
+                <form id="ketquaxetnghiem" style = "display: none;">
                     <h1>Kết quả xét nghiệm máu</h1>
                     <div class="info-line">
                         <label for="ngayxetnghiem">Ngày xét nghiệm: </label>
@@ -344,7 +344,7 @@
                     </div>
                 </form>
 
-                <form id="xrayres">
+                <form id="xrayres" style = "display: none;">
                     <h1> Kết Quả X-Quang </h1>
                     <div class="info-line">
                         <label for="xraydate">Ngày Chụp: </label>

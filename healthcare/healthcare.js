@@ -151,7 +151,8 @@ const firebaseConfig = {
 								var id = this.id;
 								get(ref(database, 'users/' + id)).then((snapshot) => {
 									if (snapshot.exists()) {
-										document.getElementById('userid').innerHTML= id;
+										document.getElementById('userid').innerHTML = id;
+										var getId = snapshot.val();
 										
 										if(check_vaitro==1){
 											document.getElementById("patient-container").style.display = "block";
@@ -175,7 +176,7 @@ const firebaseConfig = {
 											var table = document.getElementById("table_history");
 											table.innerHTML = "";
 											var getid = document.getElementById('userid').innerHTML.valueOf();
-											get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
+											get(ref(database, 'users/' + getid +'/history/')).then((snapshot) => {
 												var data = snapshot.val();
 												var i = 0;
 												for (var key in data) {
@@ -194,11 +195,62 @@ const firebaseConfig = {
 													cell3.innerHTML = data[key].specialization;
 													cell4.innerHTML = data[key].yourhealthcare;
 													cell5.innerHTML = data[key].status;
-													cell6.innerHTML = data[key].xetnghiem_mau;
-													cell7.innerHTML = data[key].chup_xquang;
-													cell8.innerHTML = data[key].chandoan;
-													cell9.innerHTML = data[key].dieutri;
-													i++;
+													cell6.innerHTML = data[key].chandoan;
+													cell7.innerHTML = data[key].dieutri;
+													if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có") cell8.innerHTML="Có";
+													else cell8.innerHTML="Không";
+													var button = document.createElement("button");
+													button.innerHTML = "Xem";
+													button.type="button";
+													button.id = key;
+													cell9.appendChild(button);
+													i++;;
+													document.getElementById(key).addEventListener("click", function(){
+														id = document.getElementById('userid').innerHTML;
+														if(getId.xetnghiem_mau=="Có" && check_vaitro==1) {
+															document.getElementById("ketquaxetnghiem").style.display = "block";
+															document.getElementById("xetnghiem-header").style.borderBottom = "0.5px solid #8b5f00";
+															get(ref(database, 'users/' + id +'/xetnghiemmau/'+ getId.date)).then((snapshot) => {
+																if(snapshot.val()){
+																	var data_1 = snapshot.val();
+																	var i = 1;
+																	
+																	for (var key_1 in data_1) {
+																		document.getElementById("xetnghiemmau"+i).innerHTML = data_1[key_1];
+																		i++;
+																	}
+																}
+																else {
+																	alert("Chưa có kết quả xét nghiệm!!!");
+																	//Reload data in table
+																	var l = 1;
+																	while(document.getElementById("xetnghiemmau"+l)) {
+																	document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
+																	l++;
+																	}
+																}
+															});
+														}
+														else {
+															document.getElementById("ketquaxetnghiem").style.display = "none";
+														}
+													
+														if(getId.chup_xquang=="Có"&&check_vaitro==1) {
+															document.getElementById("xrayres").style.display = "block";
+															get(ref(database, 'users/' + id +'/xquang/'+ getId.date)).then((snapshot) => {
+																if(snapshot.val()){
+																		document.getElementById("des").innerHTML = snapshot.val().description;
+																		document.getElementById("pic").src = snapshot.val().url;
+																}
+																else {
+																		alert("Chưa có kết quả chụp!!!");
+																	}
+															});
+														}
+														else {
+															document.getElementById("xrayres").style.display = "none";
+														}
+													});
 												}
 												if (table.innerHTML == "") {
 													document.getElementById("get_history").innerHTML = "Không có";	
@@ -208,7 +260,110 @@ const firebaseConfig = {
 													document.getElementById("get_history").innerHTML = "Thu gọn";
 												}
 											});
-											check_history=1;	
+											check_history=1;
+											
+											document.getElementById("get_history").addEventListener("click", function() {
+												if(check_history==1) {
+													if (document.getElementById("get_history").innerHTML == "Không có") {return;}
+													var table = document.getElementById("table_history");
+													table.innerHTML = "";
+													document.getElementById("history-header").style.borderBottom = "none";
+													document.getElementById("get_history").innerHTML = "Xem";
+													document.getElementById("ketquaxetnghiem").style.display = "none";
+													document.getElementById("xrayres").style.display = "none";
+													check_history=0;
+												}
+												else {
+													var table = document.getElementById("table_history");
+													table.innerHTML = "";
+													var getid = document.getElementById('userid').innerHTML.valueOf();
+													get(ref(database, 'users/' + getid +'/history/')).then((snapshot) => {
+													var data = snapshot.val();
+													var i = 0;
+													for (var key in data) {
+														var row = table.insertRow(i);
+														var cell1 = row.insertCell(0);
+														var cell2 = row.insertCell(1);
+														var cell3 = row.insertCell(2);
+														var cell4 = row.insertCell(3);
+														var cell5 = row.insertCell(4);
+														var cell6 = row.insertCell(5);
+														var cell7 = row.insertCell(6);
+														var cell8 = row.insertCell(7);
+														var cell9 = row.insertCell(8);
+														cell1.innerHTML = data[key].date;
+														cell2.innerHTML = data[key].time;
+														cell3.innerHTML = data[key].specialization;
+														cell4.innerHTML = data[key].yourhealthcare;
+														cell5.innerHTML = data[key].status;
+														cell6.innerHTML = data[key].chandoan;
+														cell7.innerHTML = data[key].dieutri;
+														if(data[key].xetnghiem_mau=="Có"||data[key].chup_xquang=="Có") cell8.innerHTML="Có";
+														else cell8.innerHTML="Không";
+														var button = document.createElement("button");
+														button.innerHTML = "Xem";
+														button.type="button";
+														button.id = key;
+														cell9.appendChild(button);
+														i++;
+														document.getElementById(key).addEventListener("click", function(){
+															id = document.getElementById('userid').innerHTML;
+															if(getId.xetnghiem_mau=="Có" && check_vaitro==1) {
+																document.getElementById("ketquaxetnghiem").style.display = "block";
+																document.getElementById("xetnghiem-header").style.borderBottom = "0.5px solid #8b5f00";
+																get(ref(database, 'users/' + id +'/xetnghiemmau/'+ getId.date)).then((snapshot) => {
+																	if(snapshot.val()){
+																		var data_1 = snapshot.val();
+																		var i = 1;
+																		
+																		for (var key_1 in data_1) {
+																			document.getElementById("xetnghiemmau"+i).innerHTML = data_1[key_1];
+																			i++;
+																		}
+																	}
+																	else {
+																		alert("Chưa có kết quả xét nghiệm!!!");
+																		//Reload data in table
+																		var l = 1;
+																		while(document.getElementById("xetnghiemmau"+l)) {
+																		document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
+																		l++;
+																		}
+																	}
+																});
+															}
+															else {
+																document.getElementById("ketquaxetnghiem").style.display = "none";
+															}
+														
+															if(getId.chup_xquang=="Có"&&check_vaitro==1) {
+																document.getElementById("xrayres").style.display = "block";
+																get(ref(database, 'users/' + id +'/xquang/'+ getId.date)).then((snapshot) => {
+																	if(snapshot.val()){
+																			document.getElementById("des").innerHTML = snapshot.val().description;
+																			document.getElementById("pic").src = snapshot.val().url;
+																	}
+																	else {
+																			alert("Chưa có kết quả chụp!!!");
+																		}
+																});
+															}
+															else {
+																document.getElementById("xrayres").style.display = "none";
+															}
+														});
+													}
+													if (table.innerHTML == "") {
+														document.getElementById("get_history").innerHTML = "Không có";	
+													}
+													else {
+														document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
+														document.getElementById("get_history").innerHTML = "Thu gọn";
+													}
+												  });
+												  check_history=1;
+												}
+											});
 										}
 										else if(check_vaitro==2) {
 											
@@ -216,49 +371,6 @@ const firebaseConfig = {
 											document.getElementById("luachon_xetnghiem").style.display = "block";
 											document.getElementById("name_xetnghiem").innerHTML = snapshot.val().name;
 										};
-										if(snapshot.val().xetnghiem_mau=="Có" && check_vaitro==1) {
-											document.getElementById("ketquaxetnghiem").style.display = "block";
-											document.getElementById("xetnghiem-header").style.borderBottom = "0.5px solid #8b5f00";
-											get(ref(database, 'users/' + id +'/xetnghiemmau/'+snapshot.val().date)).then((snapshot) => {
-												if(snapshot.val()){
-													var data_1 = snapshot.val();
-													var i = 1;
-													
-													for (var key_1 in data_1) {
-														document.getElementById("xetnghiemmau"+i).innerHTML = data_1[key_1];
-														i++;
-													}
-												}
-												else {
-														alert("Chưa có kết quả xét nghiệm!!!");
-														//Reload data in table
-														var l = 1;
-														while(document.getElementById("xetnghiemmau"+l)) {
-														document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
-														l++;
-														}
-													}
-											});
-										}
-										else {
-											document.getElementById("ketquaxetnghiem").style.display = "none";
-										}
-									
-										if(snapshot.val().chup_xquang=="Có"&&check_vaitro==1) {
-											document.getElementById("xrayres").style.display = "block";
-											get(ref(database, 'users/' + id +'/xquang/'+snapshot.val().date)).then((snapshot) => {
-												if(snapshot.val()){
-														document.getElementById("des").innerHTML = snapshot.val().description;
-														document.getElementById("pic").src = snapshot.val().url;
-												}
-												else {
-														alert("Chưa có kết quả chụp!!!");
-													}
-											});
-										}
-										else {
-											document.getElementById("xrayres").style.display = "none";
-										}
 									}
 									
 								})
@@ -307,57 +419,6 @@ const firebaseConfig = {
 							document.getElementById("dieutri_input").value = "";
 							document.getElementById("patient-container").style.display = "none";
 						})
-						
-						document.getElementById("get_history").addEventListener("click", function() {
-							if(check_history==1) {
-								if (document.getElementById("get_history").innerHTML == "Không có") {return;}
-								var table = document.getElementById("table_history");
-								table.innerHTML = "";
-								document.getElementById("history-header").style.borderBottom = "none";
-								document.getElementById("get_history").innerHTML = "Xem";
-								check_history=0;
-							}
-							else {
-								var table = document.getElementById("table_history");
-								table.innerHTML = "";
-								 var getid = document.getElementById('userid').innerHTML.valueOf();
-								 get(ref(database, 'users/' + getid+'/history/')).then((snapshot) => {
-								var data = snapshot.val();
-								var i = 0;
-								for (var key in data) {
-									var row = table.insertRow(i);
-									var cell1 = row.insertCell(0);
-									var cell2 = row.insertCell(1);
-									var cell3 = row.insertCell(2);
-									var cell4 = row.insertCell(3);
-									var cell5 = row.insertCell(4);
-									var cell6 = row.insertCell(5);
-									var cell7 = row.insertCell(6);
-									var cell8 = row.insertCell(7);
-									var cell9 = row.insertCell(8);
-									cell1.innerHTML = data[key].date;
-									cell2.innerHTML = data[key].time;
-									cell3.innerHTML = data[key].specialization;
-									cell4.innerHTML = data[key].yourhealthcare;
-									cell5.innerHTML = data[key].status;
-									cell6.innerHTML = data[key].xetnghiem_mau;
-									cell7.innerHTML = data[key].chup_xquang;
-									cell8.innerHTML = data[key].chandoan;
-									cell9.innerHTML = data[key].dieutri;
-									i++;
-								}
-								if (table.innerHTML == "") {
-									document.getElementById("get_history").innerHTML = "Không có";	
-								}
-								else {
-									document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
-									document.getElementById("get_history").innerHTML = "Thu gọn";
-								}
-							  });
-							  check_history=1;
-							}
-							
-						});
 						
 						document.getElementById("option_xetnghiem_button").addEventListener("click", function() {
 							if(document.getElementById("optionxetnghiem").value=="optionxetnghiemmau"){
