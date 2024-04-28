@@ -398,7 +398,8 @@ const firebaseConfig = {
 							
 								document.getElementById(key).addEventListener("click", function() {
 									var table = document.getElementById("table_history");
-									table.innerHTML=""; 
+									table.innerHTML="";
+									document.getElementById("history-header").style.borderBottom = "none";
 									var id = this.id;
 									get(ref(database, 'users/' + id)).then((snapshot) => {
 										if (snapshot.exists()) {
@@ -422,7 +423,6 @@ const firebaseConfig = {
                                                 document.getElementById('capnhat_input').style.display = 'block';
                                                 document.getElementById('lichsubenhan').style.display = 'block';
 												
-												if (check_history == 1) {return;}
 												var table = document.getElementById("table_history");
 												table.innerHTML = "";
 												var getid = document.getElementById('userid').innerHTML.valueOf();
