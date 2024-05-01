@@ -644,3 +644,239 @@ input:focus {
 /* *Thiet_bi end */
 
 /* *Khothuoc end */
+
+
+/* *Phan cong lich truc */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.container{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h1 {
+  margin-bottom: 10px;
+}
+
+.controls{
+  margin-bottom: 20px;
+}
+#Done{
+  margin: 3px;
+  background-color: rgb(114, 116, 247);
+  border-radius: 3px;
+  border: none;
+  height: 25px;
+  width: 100px;
+  bottom: 0%;
+  left: 60%;
+  position: absolute;
+}
+#xoa_schedule{
+  margin: 3px;
+  background-color: rgb(114, 116, 247);
+  border-radius: 3px;
+  border: none;
+  height: 25px;
+  width: 100px;
+  bottom: 0%;
+  left: 20%;
+  position: absolute;
+}
+#Edit{
+  margin: 3px;
+  background-color:rgb(252, 252, 157);
+  border-radius: 3px;
+  border:  solid white 1px;
+  height: 25px;
+  width: 60px;
+}
+/* Input form */
+.form_container{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(243, 227, 199);
+  width: 500px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.selections{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+#select-type{
+  margin: 5px;
+  text-align: center;
+}
+#select-doctor{
+  margin: 5px;
+}
+#select-patient{
+  margin: 5px;
+
+}
+.info{
+  position: absolute;
+  top: 20%;
+  left: 30px;
+}
+#task_info{
+  margin: 20px;
+}
+#doctor_info{
+  margin: 20px;
+}
+#patient_info{
+  margin: 20px;
+}
+.form_container .close_but{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 25px;
+  height: 25px;
+  background-color: black;
+  color:white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+#title{
+  font-style: oblique;
+}
+/*Delete pop-up*/
+.del_pop{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(255, 153, 0);
+  width: 240px;
+  height: 80px;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  border: black solid 2px;
+  border-radius: 2px;
+}
+.choice{
+  margin-top: 15px;
+}
+#yes{
+  margin-right: 45px;
+  background: red;
+}
+#cancel{
+  background: rgb(161, 130, 238);
+}
+/*Schedule table*/
+.schedule_container{
+  background-color: gainsboro;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.days_container{
+  display: flex;
+
+}
+
+.corner{
+  width: 60px;
+  height: 60px;
+  margin: 1px;
+}
+
+.day{
+  width: 160px;
+  height: 60px;
+  border: solid 1px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+}
+
+.part_day{
+  display: flex;
+}
+
+.time{
+  width: 60px;
+  height: 100px;
+  border: solid 1px white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 1px;
+}
+
+.task{
+  background-color: white;
+  height: 100px;
+  width: 160px;
+  margin: 1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  border: solid 1px white;
+  overflow: auto;
+}
+
+.task::-webkit-scrollbar {
+  width:5px;
+  border-radius: 5px;
+}
+
+.task::-webkit-scrollbar-track {
+  background: whitesmoke;
+}
+
+.task::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: gainsboro;
+  border: none;
+}
+
+.button-schedule {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 10px; 
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius:  3px;
+  margin-left: 5px;
+  background-color: gainsboro;
+}
+
+.button-schedule:hover {  
+  background-color: rgb(168, 167, 167);
+  color: white;
+  cursor: pointer;
+
+}

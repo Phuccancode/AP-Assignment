@@ -17,26 +17,31 @@ const firebaseConfig = {
     messagingSenderId: "697812370469",
     appId: "1:697812370469:web:903ffc208ee68bd0912bcc",
     measurementId: "G-B7010FEL1S"
-  };
+};
 
-	  // Initialize Firebase
-	  const app = initializeApp(firebaseConfig);
-	  const analytics = getAnalytics(app);
-	  const auth = getAuth();
-	  const database = getDatabase(app);
-	  console.log(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+const database = getDatabase(app);
+console.log(app);
 
-	  document.getElementById("login").addEventListener("click", function() {
-		var email =  document.getElementById("email").value;
-		var password = document.getElementById("password").value;
-		if(email.includes("hospital.")==true||email=="admin@gmail.com"){
-			alert("Vui lòng đăng nhập với tài khoản bệnh nhân!!");
-			return;
-		}
-		signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-		    // Signed in 
-		    const user = userCredential.user;
+var check_page = 0;
+
+document.getElementById("login").addEventListener("click", function() {
+var email =  document.getElementById("email").value;
+var password = document.getElementById("password").value;
+if(email.includes("hospital.")==true||email=="admin@gmail.com"){
+	alert("Vui lòng đăng nhập với tài khoản bệnh nhân!!");
+	return;
+}
+signInWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+		if (check_page == 1) {}
+		else {
+			// Signed in
+			check_page = 1; 
+			const user = userCredential.user;
 			console.log(user);
 			alert("Đăng nhập thành công!!");
 
@@ -136,6 +141,7 @@ const firebaseConfig = {
 						}
 						check_history=1;
 					});
+
 				}
 				else {
 					document.getElementById("message").innerHTML = "Vui lòng cập nhật thông tin cá nhân";
@@ -242,6 +248,7 @@ const firebaseConfig = {
 								document.getElementById("xrayres").style.display = "none";
 							}
 						});
+
 					}
 					if (table.innerHTML == "") {
 						document.getElementById("get_history").innerHTML = "Không có";	
@@ -250,8 +257,8 @@ const firebaseConfig = {
 						document.getElementById("history-header").style.borderBottom = "0.5px solid #8b5f00";
 						document.getElementById("get_history").innerHTML = "Thu gọn";
 					}
-				  });
-				  check_history=1;
+					});
+					check_history=1;
 				}	
 			});			
 
@@ -279,7 +286,7 @@ const firebaseConfig = {
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
 				document.getElementById('khambenh-container').style.display = 'block';				
-		  	});
+			});
 			document.getElementById('tracuutaikhoan').addEventListener("click", function() {
 				document.getElementById('khambenh-container').style.display = 'none';
 				document.getElementById('form-container').style.display = 'none';
@@ -326,9 +333,9 @@ const firebaseConfig = {
 					address: address,
 					gender: gender,
 					dateofbirth: dateofbirth
-				  });
-			  alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
-			  document.getElementById("form-container").style.display = "none";
+					});
+				alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
+				document.getElementById("form-container").style.display = "none";
 			});
 
 			document.getElementById("register").addEventListener("click", function() {
@@ -355,30 +362,30 @@ const firebaseConfig = {
 						}
 					}
 				})
-			  alert("Đăng ký lịch khám bệnh thành công!!");
-			  document.getElementById('schedule-container').style.display = 'none';
-			  });
-
-		  })
-		  .catch((error) => {
-		    const errorCode = error.code;
-		    const errorMessage = error.message;
-		    console.log(errorMessage);
-		    alert(error);
-		  });
-	  });
-	  document.getElementById("logout").addEventListener("click", function() {
-
-		signOut(auth).then(() => {
-			alert("Đăng xuất thành công!!");
-		});
-		location.reload();
-
+				alert("Đăng ký lịch khám bệnh thành công!!");
+				document.getElementById('schedule-container').style.display = 'none';
+			});
+		}
+	})
+	.catch((error) => {
+		const errorCode = error.code;
+		const errorMessage = error.message;
+		console.log(errorMessage);
+		alert(error);
 	});
+});
+document.getElementById("logout").addEventListener("click", function() {
+
+signOut(auth).then(() => {
+	alert("Đăng xuất thành công!!");
+});
+location.reload();
+
+});
 
 
-	
-		
 
 
-	  //----- End
+
+
+//----- End

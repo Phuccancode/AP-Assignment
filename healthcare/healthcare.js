@@ -18,36 +18,41 @@ const firebaseConfig = {
     messagingSenderId: "697812370469",
     appId: "1:697812370469:web:903ffc208ee68bd0912bcc",
     measurementId: "G-B7010FEL1S"
-  };
+};
 
-	  // Initialize Firebase
-	  const app = initializeApp(firebaseConfig);
-	  const analytics = getAnalytics(app);
-	  const auth = getAuth();
-	  const database = getDatabase(app);
-	  console.log(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+const database = getDatabase(app);
+console.log(app);
 
-	  document.getElementById('content').style.background = '#010824';
-	
-	  //----- New Registration code start	  
-	  document.getElementById("login").addEventListener("click", function() {
-		var email =  document.getElementById("email").value;
-		var password = document.getElementById("password").value;
-		if(email.includes("hospital.")==false){
-			alert("Vui lòng đăng nhập với tài khoản nhân viên y tế!!!");
-			return;
-		}
-		else{
-		  signInWithEmailAndPassword(auth, email, password)
-		  .then((userCredential) => {
-		    // Signed in 
-		    const user = userCredential.user;
+document.getElementById('content').style.background = '#010824';
+
+var check_page = 0;
+
+//----- New Registration code start	  
+document.getElementById("login").addEventListener("click", function() {
+var email =  document.getElementById("email").value;
+var password = document.getElementById("password").value;
+if(email.includes("hospital.")==false){
+	alert("Vui lòng đăng nhập với tài khoản nhân viên y tế!!!");
+	return;
+}
+else{
+	signInWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+		if(check_page == 1) {}
+		else {
+			// Signed in
+			check_page = 1;
+			const user = userCredential.user;
 			console.log(user);
 			alert("Đăng nhập thành công!!");
 			get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {
-				  document.getElementById("message").innerHTML = "Xin chào " +  snapshot.val().name;
-				  document.getElementById("welcome").innerHTML = "Welcome you, " + snapshot.val().name;
+					document.getElementById("message").innerHTML = "Xin chào " +  snapshot.val().name;
+					document.getElementById("welcome").innerHTML = "Welcome you, " + snapshot.val().name;
 				}
 				else{
 					alert("Vui lòng cập nhật thông tin cá nhân!!");
@@ -270,8 +275,7 @@ const firebaseConfig = {
 								})
 								
 								
-							});
-							
+							});	
 						}
 					}
 				});
@@ -306,17 +310,60 @@ const firebaseConfig = {
 				document.getElementById('content').style.padding = '40px';
 				get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
-					  document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
-					  document.getElementById("chuyenmon_tracuu").innerHTML = snapshot.val().chuyenmon;
-					  document.getElementById("hocvi_tracuu").innerHTML = snapshot.val().hocvi;
-					  document.getElementById("address_tracuu").innerHTML= snapshot.val().address;
-					  document.getElementById("phone_tracuu").innerHTML = snapshot.val().phone;
-					  document.getElementById("gender_tracuu").innerHTML = snapshot.val().gender;
-					  document.getElementById("dateofbirth_tracuu").innerHTML = snapshot.val().dateofbirth;
-					  document.getElementById("specialization_tracuu").innerHTML = snapshot.val().specialization;
+						document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
+						document.getElementById("chuyenmon_tracuu").innerHTML = snapshot.val().chuyenmon;
+						document.getElementById("hocvi_tracuu").innerHTML = snapshot.val().hocvi;
+						document.getElementById("address_tracuu").innerHTML= snapshot.val().address;
+						document.getElementById("phone_tracuu").innerHTML = snapshot.val().phone;
+						document.getElementById("gender_tracuu").innerHTML = snapshot.val().gender;
+						document.getElementById("dateofbirth_tracuu").innerHTML = snapshot.val().dateofbirth;
+						document.getElementById("specialization_tracuu").innerHTML = snapshot.val().specialization;
 					}
 				})
 			});
+			function gettask(date,name) {
+				var string_task = "";
+				for(var i=1; i<=28; i++) {
+					if(document.getElementById('task'+i).innerHTML.valueOf() == name&&i%7==date) {
+						string_task+="task"+i+" ";
+					}
+				}
+				return string_task;
+			}
+			document.getElementById("schedule").addEventListener("click", function() {
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById("listpatient").style.display = "none";
+				document.getElementById("patient-container").style.display = "none";
+				document.getElementById("xetnghiem_xquang-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
+				document.getElementById('schedule_healthcare').style.display = 'block';
+				get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
+					var name = snapshot.val().name;
+					get(ref(database, 'schedule/')).then((snapshot) => {
+						var data = snapshot.val();
+						for(var key in data) {
+							if(data[key] == "") continue;
+							if(data[key].includes(name)){
+								if(data[key]!=name) {
+									document.getElementById(key).innerHTML=name;
+								}
+								else {
+								document.getElementById(key).innerHTML = data[key];
+								}
+							}
+						}
+					});
+					document.getElementById('schedule_healthcare').addEventListener('click', function(){
+						update(ref(database, 'healthcares/' + user.uid), {
+							schedule: gettask(1,name)+gettask(2,name)+gettask(3,name)+gettask(4,name)+gettask(5,name)+gettask(6,name)
+						})
+						alert("Đã áp dụng lịch làm việc");
+					});
+					
+				});
+			})
 
 			document.getElementById("update").addEventListener("click", function() {
 				var name = document.getElementById("name").value;
@@ -337,9 +384,9 @@ const firebaseConfig = {
 					chuyenmon: chuyenmon,
 					hocvi: hocvi,
 					specialization: specialization
-				  });
-			  alert("Cập nhật thông tin thành công!!");
-			  document.getElementById("form-container").style.display = "none";
+					});
+				alert("Cập nhật thông tin thành công!!");
+				document.getElementById("form-container").style.display = "none";
 			});
 
 			document.getElementById("show-hide").addEventListener("click", function() {
@@ -406,23 +453,22 @@ const firebaseConfig = {
 											document.getElementById('userid').innerHTML= id;
 											
 											if(check_vaitro==1){
-                                                document.getElementById("patient-container").style.display = "block";
-                                                document.getElementById("name_patient").innerHTML = snapshot.val().name;
-                                                document.getElementById("phone_patient").innerHTML = snapshot.val().phone;
-                                                document.getElementById("dateofbirth_patient").innerHTML = snapshot.val().dateofbirth;
-                                                document.getElementById("gender_patient").innerHTML = snapshot.val().gender;
-                                                document.getElementById("date_patient").innerHTML = snapshot.val().date;
-                                                document.getElementById("time_patient").innerHTML = snapshot.val().time;
-                                                document.getElementById("specialization_patient").innerHTML = snapshot.val().specialization;
-                                                document.getElementById("status_patient").innerHTML = snapshot.val().status;
-                                                document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
-                                                document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
-                                                document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
+												document.getElementById("patient-container").style.display = "block";
+												document.getElementById("name_patient").innerHTML = snapshot.val().name;
+												document.getElementById("phone_patient").innerHTML = snapshot.val().phone;
+												document.getElementById("dateofbirth_patient").innerHTML = snapshot.val().dateofbirth;
+												document.getElementById("gender_patient").innerHTML = snapshot.val().gender;
+												document.getElementById("date_patient").innerHTML = snapshot.val().date;
+												document.getElementById("time_patient").innerHTML = snapshot.val().time;
+												document.getElementById("specialization_patient").innerHTML = snapshot.val().specialization;
+												document.getElementById("status_patient").innerHTML = snapshot.val().status;
+												document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
+												document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
+												document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
 												document.getElementById("xraydate").innerHTML = snapshot.val().date;
-                                                //create button
-                                                document.getElementById('capnhat_input').style.display = 'block';
-                                                document.getElementById('lichsubenhan').style.display = 'block';
-												
+												//create button
+												document.getElementById('capnhat_input').style.display = 'block';
+												document.getElementById('lichsubenhan').style.display = 'block';
 												var table = document.getElementById("table_history");
 												table.innerHTML = "";
 												var getid = document.getElementById('userid').innerHTML.valueOf();
@@ -562,7 +608,6 @@ const firebaseConfig = {
 											}
 										
 										}
-										
 									});	
 									
 								});		
@@ -772,29 +817,29 @@ const firebaseConfig = {
 			// 	message.innerHTML = "";
 			// 	check--;
 			// })
-			
+	
 
-			  
-
-		  })
-		  .catch((error) => {
-		    const errorCode = error.code;
-		    const errorMessage = error.message;
-		    console.log(errorMessage);
-		    alert(error);
-		  });
 		}
-	  });
-
-	  document.getElementById("logout").addEventListener("click", function() {
-		signOut(auth).then(() => {
-			alert("Đăng xuất thành công!!");
-		});
-		location.reload();
-	  });
-	
-	
 		
+	})
+	.catch((error) => {
+	const errorCode = error.code;
+	const errorMessage = error.message;
+	console.log(errorMessage);
+	alert(error);
+	});
+}
+});
+
+document.getElementById("logout").addEventListener("click", function() {
+signOut(auth).then(() => {
+	alert("Đăng xuất thành công!!");
+});
+location.reload();
+});
 
 
-	  //----- End
+
+
+
+//----- End

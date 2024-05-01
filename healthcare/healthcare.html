@@ -15,6 +15,7 @@
             <li id="updateaccount">Cập nhật thông tin tài khoản</li>
             <li id="tracuutaikhoan">Tra cứu thông tin</li>
             <li id="mypatient">Tra cứu bệnh nhân của bạn</li>
+            <li id="schedule">Xem lịch làm việc</li>
             <li id="logout">Đăng xuất</li>
         </ul>
     </nav>
@@ -516,6 +517,83 @@
                 </div>
                 <button type="button" id="updatexray" name="uxr">Cập nhật</button>
             </form>
+        </div>
+
+        <div class = "container" id="schedule_healthcare" style="display:none">
+            <div class="schedule_container">
+                <h1>Lịch làm việc tuần 17 (Từ ngày 22/04/2024 đến 28/04/2024) </h1>
+                <div class="days_container">
+                    <span class="corner"></span>
+                    <div class="day">Monday</div>
+                    <div class="day">Tuesday</div>
+                    <div class="day">Wednesday</div>
+                    <div class="day">Thursday</div>
+                    <div class="day">Friday</div>
+                    <div class="day">Saturday</div>
+                    <div class="day">Sunday</div>
+                </div>
+                <div class="part_day">
+                    <span class="time" id ="time1">8am <br>-<br> 10am</span>
+                    <div class="task" id="task1"></div>
+                    <div class="task" id="task2"></div>
+                    <div class="task" id="task3"></div>
+                    <div class="task" id="task4"></div>
+                    <div class="task" id="task5"></div>
+                    <div class="task" id="task6"></div>
+                    <div class="task" id="task7"></div>
+                </div>
+                <div class="part_day">
+                    <span class="time" id ="time2">10am <br>-<br> 12pm</span>
+                    <div class="task" id="task8"></div>
+                    <div class="task" id="task9"></div>
+                    <div class="task" id="task10"></div>
+                    <div class="task" id="task11"></div>
+                    <div class="task" id="task12"></div>
+                    <div class="task" id="task13"></div>
+                    <div class="task" id="task14"></div>
+                </div>
+                <div class="part_day">
+                    <span class="time" id ="time3">2pm <br>-<br> 4pm</span>
+                    <div class="task" id="task15"></div>
+                    <div class="task" id="task16"></div>
+                    <div class="task" id="task17"></div>
+                    <div class="task" id="task18"></div>
+                    <div class="task" id="task19"></div>
+                    <div class="task" id="task20"></div>
+                    <div class="task" id="task21"></div>
+                </div>
+                <div class="part_day">
+                    <span class="time" id ="time4">4pm <br>-<br> 6pm</span>
+                    <div class="task" id="task22"></div>
+                    <div class="task" id="task23"></div>
+                    <div class="task" id="task24"></div>
+                    <div class="task" id="task25"></div>
+                    <div class="task" id="task26"></div>
+                    <div class="task" id="task27"></div>
+                    <div class="task" id="task28"></div>
+                </div>
+            </div>
+            <div id="idtask" style="display:none"></div>
+            <div class="container-button">
+                <button class = "button-schedule" id ="schedule_healthcare">Áp dụng</button>
+            </div>
+        </div>
+
+        <div class="form_container" id="xem_schedule"  style="display:none">
+            <div class="close_but">&times;</div>
+                <div>
+                    <label>
+                        <span class="email">Email:</span>
+                        <input type="text" id="email_schedule" required>
+                    </label>
+                    <div>
+                        <label>
+                            <span class="email">Mật khẩu:</span>
+                            <input type="password" id="password_schedule" required>
+                        </label>
+                    </div>
+                </div>
+            <button type="button" id="Done">Xác nhận</button>
         </div>
 
     </div>
