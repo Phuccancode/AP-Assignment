@@ -190,9 +190,9 @@ const firebaseConfig = {
 															//Reload data in table
 															var l = 1;
     														while(document.getElementById("xetnghiemmau"+l)) {
-        													document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
-        													l++;
-    }
+        														document.getElementById("xetnghiemmau"+l).innerHTML = "Đang chờ";
+        														l++;
+                                                            }
 														}
 												});
 											}
@@ -243,22 +243,24 @@ const firebaseConfig = {
 									});
 								}
 								get(ref(database, 'users/' + getid)).then((snapshot) => {
-									update(ref(database, 'users/' + getid+ '/history/'+snapshot.val().date), {
+									alert("HIHI");
+									update(ref(database, 'users/' + getid+ '/history/'+ snapshot.val().date), {
 										date: snapshot.val().date,
 										time: snapshot.val().time,
 										specialization: snapshot.val().specialization,
 										yourhealthcare: snapshot.val().yourhealthcare_name,
-										status: trangthai,
+										status: snapshot.val().status,
 										xetnghiem_mau: snapshot.val().xetnghiem_mau,
 										chup_xquang: snapshot.val().chup_xquang,
 										chandoan: chandoan,
 										dieutri: dieutri
 									});
 								})
-								alert("Cập nhật thành công!!");
-								document.getElementById("chandoan_input").value = "";
-								document.getElementById("dieutri_input").value = "";
-								document.getElementById("patient-container").style.display = "none";
+								// alert(trangthai);
+								// alert("Cập nhật thành công!!");
+								// document.getElementById("chandoan_input").value = "";
+								// document.getElementById("dieutri_input").value = "";
+								// document.getElementById("patient-container").style.display = "none";
 							})
 
 
@@ -547,22 +549,24 @@ const firebaseConfig = {
 									});
 								}
 								get(ref(database, 'users/' + getid)).then((snapshot) => {
-									update(ref(database, 'users/' + getid+ '/history/'+snapshot.val().date), {
+									alert("HIHI");
+									update(ref(database, 'users/' + getid + '/history/'+snapshot.val().date), {
 										date: snapshot.val().date,
 										time: snapshot.val().time,
 										specialization: snapshot.val().specialization,
 										yourhealthcare: snapshot.val().yourhealthcare_name,
-										status: trangthai,
+										status: snapshot.val().status,
 										xetnghiem_mau: snapshot.val().xetnghiem_mau,
 										chup_xquang: snapshot.val().chup_xquang,
 										chandoan: chandoan,
-										dieutri: dieutri
+										dieutri: "hihi"
 									});
 								})
-								alert("Cập nhật thành công!!");
-								document.getElementById("chandoan_input").value = "";
-								document.getElementById("dieutri_input").value = "";
-								document.getElementById("patient-container").style.display = "none";
+								// alert("Cập nhật thành công!!");
+								// document.getElementById("chandoan_input").value = "";
+								// document.getElementById("dieutri_input").value = "";
+								// alert(trangthai);
+								// document.getElementById("patient-container").style.display = "none";
 							})
 							document.getElementById("option_xetnghiem_button").addEventListener("click", function() {
 								if(document.getElementById("optionxetnghiem").value=="optionxetnghiemmau"){
