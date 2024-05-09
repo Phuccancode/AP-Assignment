@@ -18,7 +18,7 @@
             <li id="logout">Đăng xuất</li>
         </ul>
     </nav>
-
+    <div id="schedule_inner" style="display:none"></div>
     <div id="content">
         <div class="menu-trigger" style="display: none;"></div>
         <div id="banner" style="display:none">
@@ -167,7 +167,7 @@
                         <th>Trạng thái</th>
                         <th style="width: 7em;">Chẩn đoán</th>
                         <th style="width: 7.4em;">Phương pháp điều trị</th>
-                        <th style="width: 6em;">Loại xét nghiệm</th>
+                        <th style="width: 6em;">Xét nghiệm</th>
                         <th>Kết quả</th>
                     </tr>
                 </thead>
@@ -175,11 +175,8 @@
                 </tbody>
             </table>
             </div>
-            <div class="container-button">
-                <button type="button" id="get_history" name="get_history">Xem</button>
-            </div>
         </div>
-        <form id="ketquaxetnghiem" style="display:none">
+        <form id="ketquaxetnghiem" style="display: none;">
             <h1>Kết quả xét nghiệm máu</h1>
             <div class="info-line">
                 <label for="dieutri">Ngày xét nghiệm: </label>
@@ -350,7 +347,7 @@
             </form>
         </div>
     </div>
-    
+    <div id="schedule_inner" style="display:none"></div>  
 </body>
 <script>
     (function() {
