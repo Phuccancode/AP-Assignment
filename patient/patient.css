@@ -64,7 +64,8 @@
 
 #banner{
   height: 100%;  
-  background: url(/img/Home-Page-Banner.png) no-repeat center center;
+  background: url(../img/Home-Page-Banner.png) no-repeat center center;
+
 }
 #banner h1{
   color: #fff;
@@ -396,7 +397,7 @@ input:focus {
 
 #khambenh-container {
   max-width: 56em;
-  padding: 1em 3em 5em 3em;
+  padding: 1em 3em 2em 3em;
   margin: 2em auto;
   background-color: #fff;
   border-radius: 4.2px;
@@ -434,6 +435,21 @@ input:focus {
 /* style cells */
 #lichsubenhan table td {
   padding: 10px 0px 10px 0px;
+}
+
+/* xem button in lichsubenhan */
+#lichsubenhan td:last-child button {
+  background: none;
+  border: none;
+  color: rgb(124, 56, 0);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#lichsubenhan td:last-child button:hover {
+  color: rgb(51, 24, 3);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #lichsubenhan table tbody tr:nth-child(odd) {
