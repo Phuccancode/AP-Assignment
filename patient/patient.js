@@ -370,9 +370,3 @@ location.reload();
 
 });
 
-
-
-
-
-
-//----- End

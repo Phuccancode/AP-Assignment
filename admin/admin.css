@@ -1,7 +1,6 @@
 table, th, td {
   border: none;
-}
-
+  
 .table-form table,
 .table-form th,
 .table-form td {
@@ -298,8 +297,9 @@ div#content {
 }
 
 #banner{
-  height: 100%;  
+  height: 100%; 
   background: url(../img/Home-Page-Banner.png) no-repeat center center;
+
 }
 #banner h1{
   color: #fff;
@@ -643,8 +643,6 @@ input:focus {
 
 /* *Thiet_bi end */
 
-/* *Khothuoc end */
-
 
 /* *Phan cong lich truc */
 *{
@@ -880,3 +878,4 @@ input:focus {
   cursor: pointer;
 
 }
+

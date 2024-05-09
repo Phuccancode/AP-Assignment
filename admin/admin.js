@@ -63,6 +63,7 @@ if(email=="admin@gmail.com"){
 			if(snapshot.val()) {
 				var data = snapshot.val();
 				var table = document.getElementById("listhealthcaretable");
+
 				var i = 0;
 				for(var key in data) {
 					var row = table.insertRow(i);
@@ -95,6 +96,7 @@ if(email=="admin@gmail.com"){
 			if(snapshot.val()) {
 				var data = snapshot.val();
 				var table = document.getElementById("listpatienttable");
+
 				var i = 0;
 				for(var key in data) {
 					var row = table.insertRow(i);
@@ -556,7 +558,7 @@ if(email=="admin@gmail.com"){
 					var table = document.getElementById("tablemed");
 					table.innerHTML = "";
 					var i = 0;
-					for(var key in data) {
+					for (var key in data) {
 						var row = table.insertRow(i);
 						var cell1 = row.insertCell(0);
 						var cell2 = row.insertCell(1);
@@ -565,13 +567,17 @@ if(email=="admin@gmail.com"){
 						var cell5 = row.insertCell(4);
 						var cell6 = row.insertCell(5);
 						var cell7 = row.insertCell(6);
-						cell1.innerHTML = i+1;
-						cell2.innerHTML = key;
-						cell3.innerHTML = data[key].name;
-						cell4.innerHTML = data[key].quantity;
-						cell5.innerHTML = data[key].type;
-						cell6.innerHTML = data[key].shelf;
-						getExpire(data[key].expiry,cell7);
+						var cell8 = row.insertCell(7);
+						var cell9 = row.insertCell(8);
+						cell1.innerHTML = data[key].date;
+						cell2.innerHTML = data[key].time;
+						cell3.innerHTML = data[key].specialization;
+						cell4.innerHTML = data[key].yourhealthcare;
+						cell5.innerHTML = data[key].status;
+						cell6.innerHTML = data[key].xetnghiem_mau;
+						cell7.innerHTML = data[key].chup_xquang;
+						cell8.innerHTML = data[key].chandoan;
+						cell9.innerHTML = data[key].dieutri;
 						i++;
 					}
 					document.getElementById("getMed").innerHTML = "Thu gọn";
@@ -588,11 +594,11 @@ if(email=="admin@gmail.com"){
 							set(ref(database, 'Medicines/' + key), null);
 							alert("Xóa thành công");
 							return;
+
 						}
 					}
 					alert("Không tìm thấy ID thuốc, vui lòng nhập lại");
 				}
-
 			});
 			});
 
