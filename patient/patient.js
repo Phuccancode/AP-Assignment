@@ -47,6 +47,9 @@ signInWithEmailAndPassword(auth, email, password)
 
 			var check_history = 0;
 
+
+			var check_history = 0;
+
 			get(ref(database, 'users/' + user.uid)).then((snapshot) => {
 				if (snapshot.exists()) {
 					document.getElementById("message").innerHTML = "Xin chào " + snapshot.val().name;
