@@ -85,6 +85,7 @@ else{
 				document.getElementById("xetnghiem_xquang-container").style.display = "none";
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
+
 				var table = document.getElementById("listpatienttable");
 				table.innerHTML = "";
 				check=0;
@@ -191,7 +192,7 @@ else{
 										check_history=1;
 											}
 											else if(check_vaitro==2) {
-												document.getElementById("luachon_xetnghiem").style.display = "block";
+												document.getElementById("xetnghiem_xquang-container").style.display = "block";
 												document.getElementById("name_xetnghiem").innerHTML = snapshot.val().name;
 											};
 											if(snapshot.val().xetnghiem_mau=="Có" && check_vaitro==1) {
