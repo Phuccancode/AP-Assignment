@@ -156,7 +156,6 @@ cursor: pointer;
   #banner{
     height: 100%;  
     background: url(../img/Home-Page-Banner.png) no-repeat center center;
-
   }
   #banner h1{
     color: #fff;
@@ -517,7 +516,6 @@ input:focus {
   height: 46.5px;
 }
 
-
 /* xem button in lichsubenhan */
 #lichsubenhan td:last-child button {
   background: none;
@@ -532,6 +530,7 @@ input:focus {
   text-decoration: underline;
   cursor: pointer;
 }
+
 #lichsubenhan table tbody tr:nth-child(odd) {
   background-color: #eeca7c;  
 }
@@ -875,4 +874,3 @@ input:focus {
   cursor: pointer;
 
 }
-

@@ -63,7 +63,6 @@ if(email=="admin@gmail.com"){
 			if(snapshot.val()) {
 				var data = snapshot.val();
 				var table = document.getElementById("listhealthcaretable");
-
 				var i = 0;
 				for(var key in data) {
 					var row = table.insertRow(i);
@@ -96,7 +95,6 @@ if(email=="admin@gmail.com"){
 			if(snapshot.val()) {
 				var data = snapshot.val();
 				var table = document.getElementById("listpatienttable");
-
 				var i = 0;
 				for(var key in data) {
 					var row = table.insertRow(i);
@@ -203,7 +201,7 @@ if(email=="admin@gmail.com"){
 			}
 			if (table.innerHTML == "") document.getElementById("getMed").innerHTML = "Kho trống";
 			else {
-				document.getElementById("getMed").innerHTML = "Thu gọn";
+				document.getElementById("getMed").innerHTML = "Tải lại danh sách";
 				document.getElementById("thuoc-header").style.borderBottom = "0.5px solid #8b5f00";
 			}
 		});
@@ -231,7 +229,7 @@ if(email=="admin@gmail.com"){
 			}
 			if (table.innerHTML == "") document.getElementById("getMachine").innerHTML = "Kho trống";
 			else {
-				document.getElementById("getMachine").innerHTML = "Thu gọn";
+				document.getElementById("getMachine").innerHTML = "Tải lại danh sách";
 				document.getElementById("thietbi-header").style.borderBottom = "0.5px solid #8b5f00";
 			}
 		});
@@ -245,6 +243,8 @@ if(email=="admin@gmail.com"){
 			document.getElementById('banner').style.display = 'none';
 			document.getElementById('content').style.overflow = 'hidden';
 			document.getElementById('content').style.background = '#010824';
+			document.getElementById('schedule_admin').style.display = 'none';
+			document.getElementById('search_healthcare').style.display = 'none';
 			
 		});
 		document.getElementById("listhealthcare").addEventListener("click", function() {
@@ -256,6 +256,8 @@ if(email=="admin@gmail.com"){
 			document.getElementById('banner').style.display = 'none';
 			document.getElementById('content').style.padding = '40px';
 			document.getElementById('content').style.overflow = 'scroll';
+			document.getElementById('schedule_admin').style.display = 'none';
+			document.getElementById('search_healthcare').style.display = 'none';
 		});
 		document.getElementById("listpatient").addEventListener("click", function() {
 			document.getElementById('registerhealthcare').style.display = 'none';
@@ -266,6 +268,8 @@ if(email=="admin@gmail.com"){
 			document.getElementById('banner').style.display = 'none';
 			document.getElementById('content').style.padding = '40px';
 			document.getElementById('content').style.overflow = 'scroll';
+			document.getElementById('schedule_admin').style.display = 'none';
+			document.getElementById('search_healthcare').style.display = 'none';
 		});
 		document.getElementById("manager_med").addEventListener("click", function() {
 			document.getElementById('registerhealthcare').style.display = 'none';
@@ -278,6 +282,8 @@ if(email=="admin@gmail.com"){
 			document.getElementById('content').style.overflow = 'scroll';
 			document.getElementById('thuoc-container').style.display = 'block';
 			document.getElementById('thietbi-container').style.display = 'none';
+			document.getElementById('schedule_admin').style.display = 'none';
+			document.getElementById('search_healthcare').style.display = 'none';
 		});
 
 		document.getElementById("option_kho_button").addEventListener("click", function() {
@@ -290,7 +296,7 @@ if(email=="admin@gmail.com"){
 				document.getElementById('thietbi-container').style.display = 'block';
 			}
 		});
-
+		
 		document.getElementById("schedule").addEventListener("click", function() {
 			document.getElementById('registerhealthcare').style.display = 'none';
 			document.getElementById('list_healthcare').style.display = 'none';
@@ -303,6 +309,13 @@ if(email=="admin@gmail.com"){
 			document.getElementById('thuoc-container').style.display = 'none';
 			document.getElementById('thietbi-container').style.display = 'none';
 			document.getElementById('schedule_admin').style.display = 'block';
+			var curr = new Date;
+			var first = curr.getDate() - curr.getDay()+1
+			var last = first + 6;
+			var firstday = new Date(curr.setDate(first)).toLocaleDateString('vi-VN');
+			var lastday = new Date(curr.setDate(last)).toLocaleDateString('vi-VN');
+			document.getElementById('showdateofweek').innerHTML = "Lịch làm việc từ " + firstday + " đến " + lastday;
+			document.getElementById('search_healthcare').style.display = 'none';
 		});
 
 
@@ -547,42 +560,36 @@ if(email=="admin@gmail.com"){
 				if (document.getElementById("getMed").innerHTML == "Kho trống") {return;}
 				var table = document.getElementById("tablemed");
 				table.innerHTML = "";
-				document.getElementById("getMed").innerHTML = "Hiện";
+				document.getElementById("getMed").innerHTML = "Tải lại danh sách";
 				document.getElementById("thuoc-header").style.borderBottom = "none";
 				check_med = 0;
 			}
-			else {
-				get(ref(database, 'Medicines/')).then((snapshot) => {
-					check_med = 1;
-					var data = snapshot.val();
-					var table = document.getElementById("tablemed");
-					table.innerHTML = "";
-					var i = 0;
-					for (var key in data) {
-						var row = table.insertRow(i);
-						var cell1 = row.insertCell(0);
-						var cell2 = row.insertCell(1);
-						var cell3 = row.insertCell(2);
-						var cell4 = row.insertCell(3);
-						var cell5 = row.insertCell(4);
-						var cell6 = row.insertCell(5);
-						var cell7 = row.insertCell(6);
-						var cell8 = row.insertCell(7);
-						var cell9 = row.insertCell(8);
-						cell1.innerHTML = data[key].date;
-						cell2.innerHTML = data[key].time;
-						cell3.innerHTML = data[key].specialization;
-						cell4.innerHTML = data[key].yourhealthcare;
-						cell5.innerHTML = data[key].status;
-						cell6.innerHTML = data[key].xetnghiem_mau;
-						cell7.innerHTML = data[key].chup_xquang;
-						cell8.innerHTML = data[key].chandoan;
-						cell9.innerHTML = data[key].dieutri;
-						i++;
-					}
-					document.getElementById("getMed").innerHTML = "Thu gọn";
-				}); 
-			}		
+			get(ref(database, 'Medicines/')).then((snapshot) => {
+				check_med = 1;
+				var data = snapshot.val();
+				var table = document.getElementById("tablemed");
+				table.innerHTML = "";
+				var i = 0;
+				for(var key in data) {
+					var row = table.insertRow(i);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					var cell6 = row.insertCell(5);
+					var cell7 = row.insertCell(6);
+					cell1.innerHTML = i+1;
+					cell2.innerHTML = key;
+					cell3.innerHTML = data[key].name;
+					cell4.innerHTML = data[key].quantity;
+					cell5.innerHTML = data[key].type;
+					cell6.innerHTML = data[key].shelf;
+					getExpire(data[key].expiry,cell7);
+					i++;
+				}
+				document.getElementById("getMed").innerHTML = "Tải lại danh sách";
+			}); 	
 		});
 
 			document.getElementById("delMed").addEventListener("click", function() {
@@ -594,11 +601,11 @@ if(email=="admin@gmail.com"){
 							set(ref(database, 'Medicines/' + key), null);
 							alert("Xóa thành công");
 							return;
-
 						}
 					}
 					alert("Không tìm thấy ID thuốc, vui lòng nhập lại");
 				}
+
 			});
 			});
 
@@ -618,7 +625,7 @@ if(email=="admin@gmail.com"){
 				if (document.getElementById("getMachine").innerHTML == "Kho trống") {return;}
 				var table = document.getElementById("tablemachine");
 				table.innerHTML = "";
-				document.getElementById("getMachine").innerHTML = "Hiện";
+				document.getElementById("getMachine").innerHTML = "Tải lại danh sách";
 				document.getElementById("thietbi-header").style.borderBottom = "none";
 				check_machine = 0;
 			}
@@ -643,7 +650,7 @@ if(email=="admin@gmail.com"){
 					getExpire(data[key].expiry,cell6);
 					i++;
 				}
-				document.getElementById("getMachine").innerHTML = "Thu gọn";
+				document.getElementById("getMachine").innerHTML = "Tải lại danh sách";
 			}); 
 		});
 
@@ -678,6 +685,9 @@ if(email=="admin@gmail.com"){
 				}
 			});
 		});
+
+		
+
 		document.querySelector('.schedule_container').addEventListener('click', function(e){
 			document.querySelector('.form_container').style.display = "block";
 			var option = document.createElement('option');
