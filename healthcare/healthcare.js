@@ -85,7 +85,6 @@ else{
 				document.getElementById("xetnghiem_xquang-container").style.display = "none";
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
-
 				var table = document.getElementById("listpatienttable");
 				table.innerHTML = "";
 				var header = document.getElementById("listpatientheader");
@@ -194,8 +193,6 @@ else{
 											document.getElementById("status_patient").innerHTML = snapshot.val().status;
 											document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
 											document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
-											document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
-											document.getElementById("xraydate").innerHTML = snapshot.val().date;
 											//create button
 											document.getElementById('capnhat_input').style.display = 'block';
 											document.getElementById('lichsubenhan').style.display = 'block';
