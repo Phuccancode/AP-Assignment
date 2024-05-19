@@ -125,16 +125,9 @@ else{
 							}
 							else if(check_vaitro==2) {
 								header.style.height = "56.5px";
-								head0.style.width = "3em";
-								head1.style.width = "13.6em";
-								head2.style.width = "8.4em";
-								head3.style.width = "7em";
-								head4.style.width = "8.4em";
 								var head5 = hrow.insertCell(5);
-								head5.style.width = "9.6em";
 								head5.innerHTML = "Loại xét nghiệm";
 								var head6 = hrow.insertCell(6);
-								head6.style.width = "11.6em";
 								head6.innerHTML = "Cập nhật xét nghiệm";
 							}
 							var data = snapshot.val();
