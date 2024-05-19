@@ -24,6 +24,7 @@ background: #684a80;
 
 /* Style the table cells */
 .table-form thead td {
+  padding: 10px;
   font-weight: bold;
   text-align: center;
 }
