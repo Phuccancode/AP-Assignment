@@ -148,7 +148,6 @@ else{
 									var cell3 = row.insertCell(3);
 									var cell4 = row.insertCell(4);
 									var cell5 = row.insertCell(5);
-									var cell6 = row.insertCell(6);
 									cell0.innerHTML = i+1;
 									cell1.innerHTML = data[key].name;
 									cell2.innerHTML = data[key].phone;
@@ -165,6 +164,7 @@ else{
 										else if(data[key].xetnghiem_mau=="Có") cell5.innerHTML = "Xét nghiệm máu";
 										else if(data[key].chup_xquang=="Có") cell5.innerHTML = "Chụp x-quang";
 										button.innerHTML = "Cập nhật xét nghiệm";
+										var cell6 = row.insertCell(6);
 										cell6.appendChild(button);
 									}
 									button.type="button";
