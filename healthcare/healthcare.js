@@ -85,7 +85,6 @@ else{
 				document.getElementById("xetnghiem_xquang-container").style.display = "none";
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
-
 				var table = document.getElementById("listpatienttable");
 				table.innerHTML = "";
 				var header = document.getElementById("listpatientheader");
