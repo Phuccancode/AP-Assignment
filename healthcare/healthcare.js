@@ -76,31 +76,7 @@ else{
 			// document.getElementById('tracuutaikhoan').style.display = 'block';
 
 			
-			document.getElementById("updateaccount").addEventListener("click", function() {
-				document.getElementById('schedule_healthcare').style.display = 'none';
-				document.getElementById('form-container').style.display = 'block';
-				document.getElementById('info-container').style.display = 'none';
-				document.getElementById("listpatient").style.display = "none";
-				document.getElementById("patient-container").style.display = "none";
-				document.getElementById("xetnghiem_xquang-container").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
-				var table = document.getElementById("listpatienttable");
-				table.innerHTML = "";
-				var header = document.getElementById("listpatientheader");
-				header.innerHTML = "";
-				check=0;
-			});
-			document.getElementById("mypatient").addEventListener("click", function() {
-				document.getElementById('schedule_healthcare').style.display = 'none';
-				document.getElementById('form-container').style.display = 'none';
-				document.getElementById('info-container').style.display = 'none';
-				document.getElementById("listpatient").style.display = "block";
-				document.getElementById("patient-container").style.display = "none";
-				document.getElementById("xetnghiem_xquang-container").style.display = "none";
-				document.getElementById('banner').style.display = 'none';
-				document.getElementById('content').style.padding = '40px';
-				if(check==1) return;
+			if(check==0) {
 				var header = document.getElementById("listpatientheader");
 				var table = document.getElementById("listpatienttable");
 					get(ref(database, 'users/')).then((snapshot) => {
@@ -370,8 +346,29 @@ else{
 							check_update=0;
 						}
 					});
-					check=1;
+				check=1;
+			}
 				
+			
+			document.getElementById("updateaccount").addEventListener("click", function() {
+				document.getElementById('schedule_healthcare').style.display = 'none';
+				document.getElementById('form-container').style.display = 'block';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById("listpatient").style.display = "none";
+				document.getElementById("patient-container").style.display = "none";
+				document.getElementById("xetnghiem_xquang-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
+			});
+			document.getElementById("mypatient").addEventListener("click", function() {
+				document.getElementById('schedule_healthcare').style.display = 'none';
+				document.getElementById('form-container').style.display = 'none';
+				document.getElementById('info-container').style.display = 'none';
+				document.getElementById("listpatient").style.display = "block";
+				document.getElementById("patient-container").style.display = "none";
+				document.getElementById("xetnghiem_xquang-container").style.display = "none";
+				document.getElementById('banner').style.display = 'none';
+				document.getElementById('content').style.padding = '40px';
 			});
 			document.getElementById("tracuutaikhoan").addEventListener("click", function() {
 				document.getElementById('schedule_healthcare').style.display = 'none';
@@ -382,11 +379,6 @@ else{
 				document.getElementById("xetnghiem_xquang-container").style.display = "none";
 				document.getElementById('banner').style.display = 'none';
 				document.getElementById('content').style.padding = '40px';
-				var table = document.getElementById("listpatienttable");
-				table.innerHTML = "";
-				var header = document.getElementById("listpatientheader");
-				header.innerHTML = "";
-				check=0;
 				get(ref(database, 'healthcares/' + user.uid)).then((snapshot) => {
 					if (snapshot.exists()) {
 						document.getElementById("name_tracuu").innerHTML = snapshot.val().name;
@@ -410,11 +402,6 @@ else{
 				return string_task;
 			}
 			document.getElementById("schedule").addEventListener("click", function() {
-				var table = document.getElementById("listpatienttable");
-				table.innerHTML = "";
-				var header = document.getElementById("listpatientheader");
-				header.innerHTML = "";
-				check=0;
 				var curr = new Date;
 				var first = curr.getDate() - curr.getDay()+1
 				var last = first + 6;
