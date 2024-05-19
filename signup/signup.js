@@ -41,7 +41,7 @@ const firebaseConfig = {
 		    const user = userCredential.user;
 		    console.log(user);
 		    alert("Đăng ký thành công, vui lòng cập nhật thông tin!!");
-			window.location.href = "/patient/patient.html";
+			window.location.href = "../patient/patient.html";
 		  })
 		  .catch((error) => {
 		    const errorCode = error.code;
