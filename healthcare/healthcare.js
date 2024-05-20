@@ -476,7 +476,7 @@ else{
 					hocvi: hocvi,
 					specialization: specialization
 					});
-				alert("Cập nhật thông tin thành công!!");
+				alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
 				document.getElementById("form-container").style.display = "none";
 				location.reload();
 			});
