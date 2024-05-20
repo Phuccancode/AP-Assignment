@@ -119,15 +119,22 @@ else{
 							head3.innerHTML = "Ngày sinh";
 							head4.innerHTML = "Ngày khám bệnh";
 							if(check_vaitro==1) {
-								header.style.height = "56.5px";
+								header.style.height = "50.5px";
 								var head5 = hrow.insertCell(5);
 								head5.innerHTML = "Chi tiết";
 							}
 							else if(check_vaitro==2) {
 								header.style.height = "56.5px";
+								head0.style.width = "3em";
+								head1.style.width = "13.6em";
+								head2.style.width = "8.4em";
+								head3.style.width = "7em";
+								head4.style.width = "8.4em";
 								var head5 = hrow.insertCell(5);
+								head5.style.width = "9.6em";
 								head5.innerHTML = "Loại xét nghiệm";
 								var head6 = hrow.insertCell(6);
+								head6.style.width = "11.6em";
 								head6.innerHTML = "Cập nhật xét nghiệm";
 							}
 							var data = snapshot.val();
@@ -141,6 +148,7 @@ else{
 									var cell3 = row.insertCell(3);
 									var cell4 = row.insertCell(4);
 									var cell5 = row.insertCell(5);
+									var cell6 = row.insertCell(6);
 									cell0.innerHTML = i+1;
 									cell1.innerHTML = data[key].name;
 									cell2.innerHTML = data[key].phone;
@@ -157,7 +165,6 @@ else{
 										else if(data[key].xetnghiem_mau=="Có") cell5.innerHTML = "Xét nghiệm máu";
 										else if(data[key].chup_xquang=="Có") cell5.innerHTML = "Chụp x-quang";
 										button.innerHTML = "Cập nhật xét nghiệm";
-										var cell6 = row.insertCell(6);
 										cell6.appendChild(button);
 									}
 									button.type="button";
@@ -186,8 +193,6 @@ else{
 											document.getElementById("status_patient").innerHTML = snapshot.val().status;
 											document.getElementById("chandoan_patient").innerHTML = snapshot.val().chandoan;
 											document.getElementById("dieutri_patient").innerHTML = snapshot.val().dieutri;
-											// document.getElementById("ngayxetnghiem").innerHTML = snapshot.val().date;
-											// document.getElementById("xraydate").innerHTML = snapshot.val().date;
 											//create button
 											document.getElementById('capnhat_input').style.display = 'block';
 											document.getElementById('lichsubenhan').style.display = 'block';
@@ -448,7 +453,7 @@ else{
 					});
 					document.getElementById('apply_schedule').addEventListener('click', function(){
 						update(ref(database, 'healthcares/' + user.uid), {
-							schedule: gettask(1,name)+gettask(2,name)+gettask(3,name)+gettask(4,name)+gettask(5,name)+gettask(6,name)
+							schedule: gettask(0,name)+gettask(1,name)+gettask(2,name)+gettask(3,name)+gettask(4,name)+gettask(5,name)+gettask(6,name)
 						})
 						alert("Đã áp dụng lịch làm việc");
 					});
@@ -476,8 +481,9 @@ else{
 					hocvi: hocvi,
 					specialization: specialization
 					});
-				alert("Cập nhật thông tin thành công!!");
+				alert("Cập nhật thông tin thành công, vui lòng đăng nhập lại!!");
 				document.getElementById("form-container").style.display = "none";
+				location.reload();
 			});
 			
 
